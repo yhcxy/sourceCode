@@ -1,0 +1,19 @@
+spring:
+    druid:
+        datasource:
+            master:
+                driver-class-name: com.mysql.jdbc.Driver
+                jdbc-url: jdbc:mysql://192.168.80.143:8066/mycat_testdb
+                password: root
+                username: root
+            #2.0版本多数据源必须是使用jdbc-url 不能使用url，否则报错 jdbcUrl is required with driverClassName
+            migration:
+                driver-class-name: com.mysql.jdbc.Driver
+                jdbc-url: jdbc:mysql://192.168.80.143:8066/mycat_testdb
+                password: root
+                username: root
+            slave:
+                driver-class-name: com.mysql.jdbc.Driver
+                jdbc-url: jdbc:mysql://192.168.80.143:8066/mycat_testdb
+                password: root
+                username: root
