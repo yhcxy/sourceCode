@@ -1,0 +1,5 @@
+com\antmeite\mapper\StockMapper.class
+com\antmeite\api\stock\impl\TxManagerHttpRequestServiceImpl.class
+com\antmeite\api\stock\impl\TxManagerTxUrlServiceImpl.class
+com\antmeite\api\stock\impl\StockServiceImpl.class
+com\antmeite\AppStock.class

@@ -1,0 +1,4 @@
+com\antmeite\mapper\OrderMapper.class
+com\antmeite\api\order\impl\IOrderServiceImpl.class
+com\antmeite\feign\StockFeign.class
+com\antmeite\AppOrder.class

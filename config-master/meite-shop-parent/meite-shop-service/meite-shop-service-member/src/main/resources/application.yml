@@ -1,0 +1,13 @@
+###服务启动端口号
+server:
+  port: 8000
+###服务名称(服务注册到eureka名称)  
+spring:
+    application:
+        name: antmeite-member
+###服务注册到eureka地址
+eureka:
+  client:
+    service-url:
+           defaultZone: http://localhost:8080/eureka
+###
