@@ -1,0 +1,766 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.midea.isc.attachment.mapper.AttachmentListMapper">
+	<resultMap id="resultMap"
+		type="com.midea.isc.attachment.model.AttachmentList">
+				<result column="attachment_id" property="attachmentId" />
+				<result column="reference_table" property="referenceTable" />
+				<result column="reference_id" property="referenceId" />
+				<result column="application" property="application" />
+				<result column="display_name" property="displayName" />
+				<result column="file_name" property="fileName" />
+				<result column="file_directory" property="fileDirectory" />
+				<result column="file_size" property="fileSize" />
+				<result column="file_type" property="fileType" />
+				<result column="attribute1" property="attribute1" />
+				<result column="attribute2" property="attribute2" />
+				<result column="attribute3" property="attribute3" />
+				<result column="attribute4" property="attribute4" />
+				<result column="attribute5" property="attribute5" />
+				<result column="creation_date" property="creationDate" />
+				<result column="created_by" property="createdBy" />
+				<result column="last_update_date" property="lastUpdateDate" />
+				<result column="last_updated_by" property="lastUpdatedBy" />
+					</resultMap>
+
+	<sql id="orderClause">
+		<if test="orderFields == null or orderFields.size == 0">
+			order by t.attachment_id desc
+		</if>
+		<if test="orderFields != null and orderFields.size > 0">
+			order by
+			<foreach collection="orderFields" separator="," index="field"
+				item="direction">
+								<if test="field == 'attachmentId'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attachment_id asc
+						</when>
+						<otherwise>
+							t.attachment_id desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'referenceTable'">
+					<choose>
+						<when test="direction =='asc'">
+							t.reference_table asc
+						</when>
+						<otherwise>
+							t.reference_table desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'referenceId'">
+					<choose>
+						<when test="direction =='asc'">
+							t.reference_id asc
+						</when>
+						<otherwise>
+							t.reference_id desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'application'">
+					<choose>
+						<when test="direction =='asc'">
+							t.application asc
+						</when>
+						<otherwise>
+							t.application desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'displayName'">
+					<choose>
+						<when test="direction =='asc'">
+							t.display_name asc
+						</when>
+						<otherwise>
+							t.display_name desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'fileName'">
+					<choose>
+						<when test="direction =='asc'">
+							t.file_name asc
+						</when>
+						<otherwise>
+							t.file_name desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'fileDirectory'">
+					<choose>
+						<when test="direction =='asc'">
+							t.file_directory asc
+						</when>
+						<otherwise>
+							t.file_directory desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'fileSize'">
+					<choose>
+						<when test="direction =='asc'">
+							t.file_size asc
+						</when>
+						<otherwise>
+							t.file_size desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'fileType'">
+					<choose>
+						<when test="direction =='asc'">
+							t.file_type asc
+						</when>
+						<otherwise>
+							t.file_type desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'attribute1'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attribute1 asc
+						</when>
+						<otherwise>
+							t.attribute1 desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'attribute2'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attribute2 asc
+						</when>
+						<otherwise>
+							t.attribute2 desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'attribute3'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attribute3 asc
+						</when>
+						<otherwise>
+							t.attribute3 desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'attribute4'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attribute4 asc
+						</when>
+						<otherwise>
+							t.attribute4 desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'attribute5'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attribute5 asc
+						</when>
+						<otherwise>
+							t.attribute5 desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'creationDate'">
+					<choose>
+						<when test="direction =='asc'">
+							t.creation_date asc
+						</when>
+						<otherwise>
+							t.creation_date desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'createdBy'">
+					<choose>
+						<when test="direction =='asc'">
+							t.created_by asc
+						</when>
+						<otherwise>
+							t.created_by desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'lastUpdateDate'">
+					<choose>
+						<when test="direction =='asc'">
+							t.last_update_date asc
+						</when>
+						<otherwise>
+							t.last_update_date desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'lastUpdatedBy'">
+					<choose>
+						<when test="direction =='asc'">
+							t.last_updated_by asc
+						</when>
+						<otherwise>
+							t.last_updated_by desc
+						</otherwise>
+					</choose>
+				</if>
+											</foreach>
+		</if>
+	</sql>
+
+	<sql id="defaultWhereClause">
+		where 1=1 
+						<if test="attachmentId != null">and t.attachment_id = #{attachmentId}</if>
+								<if test="referenceTable != null and referenceTable != ''">and t.reference_table = #{referenceTable}</if>
+								<if test="referenceId != null and referenceId != ''">and t.reference_id = #{referenceId}</if>
+								<if test="application != null and application != ''">and t.application = #{application}</if>
+								<if test="displayName != null and displayName != ''">and t.display_name = #{displayName}</if>
+								<if test="fileName != null and fileName != ''">and t.file_name = #{fileName}</if>
+								<if test="fileDirectory != null and fileDirectory != ''">and t.file_directory = #{fileDirectory}</if>
+						<if test="fileSize != null">and t.file_size = #{fileSize}</if>
+								<if test="fileType != null and fileType != ''">and t.file_type = #{fileType}</if>
+								<if test="attribute1 != null and attribute1 != ''">and t.attribute1 = #{attribute1}</if>
+								<if test="attribute2 != null and attribute2 != ''">and t.attribute2 = #{attribute2}</if>
+								<if test="attribute3 != null and attribute3 != ''">and t.attribute3 = #{attribute3}</if>
+								<if test="attribute4 != null and attribute4 != ''">and t.attribute4 = #{attribute4}</if>
+								<if test="attribute5 != null and attribute5 != ''">and t.attribute5 = #{attribute5}</if>
+						<if test="creationDate != null">and t.creation_date = #{creationDate}</if>
+								<if test="createdBy != null and createdBy != ''">and t.created_by = #{createdBy}</if>
+						<if test="lastUpdateDate != null">and t.last_update_date = #{lastUpdateDate}</if>
+								<if test="lastUpdatedBy != null and lastUpdatedBy != ''">and t.last_updated_by = #{lastUpdatedBy}</if>
+					</sql>
+
+	<sql id="advancedWhereClause">
+		where 1=1 
+								<if test="attachmentIdCond != null and attachmentIdCond != '' and attachmentId != null">
+						<if test="attachmentIdCond == 'eq'">AND t.attachment_id = #{attachmentId}</if>
+			<if test="attachmentIdCond == 'ne'">AND t.attachment_id != #{attachmentId}
+			</if>
+			<if test="attachmentIdCond == 'lt'">AND t.attachment_id &lt; #{attachmentId}
+			</if>
+			<if test="attachmentIdCond == 'le'">AND t.attachment_id &lt;= #{attachmentId}
+			</if>
+			<if test="attachmentIdCond == 'gt'">AND t.attachment_id &gt; #{attachmentId}
+			</if>
+			<if test="attachmentIdCond == 'ge'">AND t.attachment_id &gt;= #{attachmentId}
+			</if>
+					</if>
+		<if test="attachmentIdCond == null and attachmentId != null">
+			AND t.attachment_id = #{attachmentId}
+		</if>
+												<if test="referenceTableCond != null and referenceTableCond != '' and referenceTable != null and referenceTable != ''">
+						<if test="referenceTableCond == 'eq'">AND t.reference_table =
+				#{referenceTable}
+			</if>
+			<if test="referenceTableCond == 'ne'">AND t.reference_table !=
+				#{referenceTable}
+			</if>
+			<if test="referenceTableCond == 'me'">
+				AND t.reference_table in (
+				<foreach collection="referenceTable.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="referenceTableCond == 'cn'">AND t.reference_table LIKE
+				CONCAT('%',#{referenceTable},'%')</if>
+			<if test="referenceTableCond == 'bw'">AND t.reference_table LIKE
+				CONCAT(#{referenceTable},'%')</if>
+			<if test="referenceTableCond == 'ew'">AND t.reference_table LIKE
+				CONCAT('%',#{referenceTable})</if>
+					</if>
+		<if test="referenceTableCond == null and referenceTable != null
+		and referenceTable != ''">
+			AND t.reference_table = #{referenceTable}
+		</if>
+												<if test="referenceIdCond != null and referenceIdCond != '' and referenceId != null and referenceId != ''">
+						<if test="referenceIdCond == 'eq'">AND t.reference_id =
+				#{referenceId}
+			</if>
+			<if test="referenceIdCond == 'ne'">AND t.reference_id !=
+				#{referenceId}
+			</if>
+			<if test="referenceIdCond == 'me'">
+				AND t.reference_id in (
+				<foreach collection="referenceId.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="referenceIdCond == 'cn'">AND t.reference_id LIKE
+				CONCAT('%',#{referenceId},'%')</if>
+			<if test="referenceIdCond == 'bw'">AND t.reference_id LIKE
+				CONCAT(#{referenceId},'%')</if>
+			<if test="referenceIdCond == 'ew'">AND t.reference_id LIKE
+				CONCAT('%',#{referenceId})</if>
+					</if>
+		<if test="referenceIdCond == null and referenceId != null
+		and referenceId != ''">
+			AND t.reference_id = #{referenceId}
+		</if>
+												<if test="applicationCond != null and applicationCond != '' and application != null and application != ''">
+						<if test="applicationCond == 'eq'">AND t.application =
+				#{application}
+			</if>
+			<if test="applicationCond == 'ne'">AND t.application !=
+				#{application}
+			</if>
+			<if test="applicationCond == 'me'">
+				AND t.application in (
+				<foreach collection="application.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="applicationCond == 'cn'">AND t.application LIKE
+				CONCAT('%',#{application},'%')</if>
+			<if test="applicationCond == 'bw'">AND t.application LIKE
+				CONCAT(#{application},'%')</if>
+			<if test="applicationCond == 'ew'">AND t.application LIKE
+				CONCAT('%',#{application})</if>
+					</if>
+		<if test="applicationCond == null and application != null
+		and application != ''">
+			AND t.application = #{application}
+		</if>
+												<if test="displayNameCond != null and displayNameCond != '' and displayName != null and displayName != ''">
+						<if test="displayNameCond == 'eq'">AND t.display_name =
+				#{displayName}
+			</if>
+			<if test="displayNameCond == 'ne'">AND t.display_name !=
+				#{displayName}
+			</if>
+			<if test="displayNameCond == 'me'">
+				AND t.display_name in (
+				<foreach collection="displayName.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="displayNameCond == 'cn'">AND t.display_name LIKE
+				CONCAT('%',#{displayName},'%')</if>
+			<if test="displayNameCond == 'bw'">AND t.display_name LIKE
+				CONCAT(#{displayName},'%')</if>
+			<if test="displayNameCond == 'ew'">AND t.display_name LIKE
+				CONCAT('%',#{displayName})</if>
+					</if>
+		<if test="displayNameCond == null and displayName != null
+		and displayName != ''">
+			AND t.display_name = #{displayName}
+		</if>
+												<if test="fileNameCond != null and fileNameCond != '' and fileName != null and fileName != ''">
+						<if test="fileNameCond == 'eq'">AND t.file_name =
+				#{fileName}
+			</if>
+			<if test="fileNameCond == 'ne'">AND t.file_name !=
+				#{fileName}
+			</if>
+			<if test="fileNameCond == 'me'">
+				AND t.file_name in (
+				<foreach collection="fileName.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="fileNameCond == 'cn'">AND t.file_name LIKE
+				CONCAT('%',#{fileName},'%')</if>
+			<if test="fileNameCond == 'bw'">AND t.file_name LIKE
+				CONCAT(#{fileName},'%')</if>
+			<if test="fileNameCond == 'ew'">AND t.file_name LIKE
+				CONCAT('%',#{fileName})</if>
+					</if>
+		<if test="fileNameCond == null and fileName != null
+		and fileName != ''">
+			AND t.file_name = #{fileName}
+		</if>
+												<if test="fileDirectoryCond != null and fileDirectoryCond != '' and fileDirectory != null and fileDirectory != ''">
+						<if test="fileDirectoryCond == 'eq'">AND t.file_directory =
+				#{fileDirectory}
+			</if>
+			<if test="fileDirectoryCond == 'ne'">AND t.file_directory !=
+				#{fileDirectory}
+			</if>
+			<if test="fileDirectoryCond == 'me'">
+				AND t.file_directory in (
+				<foreach collection="fileDirectory.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="fileDirectoryCond == 'cn'">AND t.file_directory LIKE
+				CONCAT('%',#{fileDirectory},'%')</if>
+			<if test="fileDirectoryCond == 'bw'">AND t.file_directory LIKE
+				CONCAT(#{fileDirectory},'%')</if>
+			<if test="fileDirectoryCond == 'ew'">AND t.file_directory LIKE
+				CONCAT('%',#{fileDirectory})</if>
+					</if>
+		<if test="fileDirectoryCond == null and fileDirectory != null
+		and fileDirectory != ''">
+			AND t.file_directory = #{fileDirectory}
+		</if>
+										<if test="fileSizeCond != null and fileSizeCond != '' and fileSize != null">
+						<if test="fileSizeCond == 'eq'">AND t.file_size = #{fileSize}</if>
+			<if test="fileSizeCond == 'ne'">AND t.file_size != #{fileSize}
+			</if>
+			<if test="fileSizeCond == 'lt'">AND t.file_size &lt; #{fileSize}
+			</if>
+			<if test="fileSizeCond == 'le'">AND t.file_size &lt;= #{fileSize}
+			</if>
+			<if test="fileSizeCond == 'gt'">AND t.file_size &gt; #{fileSize}
+			</if>
+			<if test="fileSizeCond == 'ge'">AND t.file_size &gt;= #{fileSize}
+			</if>
+					</if>
+		<if test="fileSizeCond == null and fileSize != null">
+			AND t.file_size = #{fileSize}
+		</if>
+												<if test="fileTypeCond != null and fileTypeCond != '' and fileType != null and fileType != ''">
+						<if test="fileTypeCond == 'eq'">AND t.file_type =
+				#{fileType}
+			</if>
+			<if test="fileTypeCond == 'ne'">AND t.file_type !=
+				#{fileType}
+			</if>
+			<if test="fileTypeCond == 'me'">
+				AND t.file_type in (
+				<foreach collection="fileType.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="fileTypeCond == 'cn'">AND t.file_type LIKE
+				CONCAT('%',#{fileType},'%')</if>
+			<if test="fileTypeCond == 'bw'">AND t.file_type LIKE
+				CONCAT(#{fileType},'%')</if>
+			<if test="fileTypeCond == 'ew'">AND t.file_type LIKE
+				CONCAT('%',#{fileType})</if>
+					</if>
+		<if test="fileTypeCond == null and fileType != null
+		and fileType != ''">
+			AND t.file_type = #{fileType}
+		</if>
+												<if test="attribute1Cond != null and attribute1Cond != '' and attribute1 != null and attribute1 != ''">
+						<if test="attribute1Cond == 'eq'">AND t.attribute1 =
+				#{attribute1}
+			</if>
+			<if test="attribute1Cond == 'ne'">AND t.attribute1 !=
+				#{attribute1}
+			</if>
+			<if test="attribute1Cond == 'me'">
+				AND t.attribute1 in (
+				<foreach collection="attribute1.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="attribute1Cond == 'cn'">AND t.attribute1 LIKE
+				CONCAT('%',#{attribute1},'%')</if>
+			<if test="attribute1Cond == 'bw'">AND t.attribute1 LIKE
+				CONCAT(#{attribute1},'%')</if>
+			<if test="attribute1Cond == 'ew'">AND t.attribute1 LIKE
+				CONCAT('%',#{attribute1})</if>
+					</if>
+		<if test="attribute1Cond == null and attribute1 != null
+		and attribute1 != ''">
+			AND t.attribute1 = #{attribute1}
+		</if>
+												<if test="attribute2Cond != null and attribute2Cond != '' and attribute2 != null and attribute2 != ''">
+						<if test="attribute2Cond == 'eq'">AND t.attribute2 =
+				#{attribute2}
+			</if>
+			<if test="attribute2Cond == 'ne'">AND t.attribute2 !=
+				#{attribute2}
+			</if>
+			<if test="attribute2Cond == 'me'">
+				AND t.attribute2 in (
+				<foreach collection="attribute2.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="attribute2Cond == 'cn'">AND t.attribute2 LIKE
+				CONCAT('%',#{attribute2},'%')</if>
+			<if test="attribute2Cond == 'bw'">AND t.attribute2 LIKE
+				CONCAT(#{attribute2},'%')</if>
+			<if test="attribute2Cond == 'ew'">AND t.attribute2 LIKE
+				CONCAT('%',#{attribute2})</if>
+					</if>
+		<if test="attribute2Cond == null and attribute2 != null
+		and attribute2 != ''">
+			AND t.attribute2 = #{attribute2}
+		</if>
+												<if test="attribute3Cond != null and attribute3Cond != '' and attribute3 != null and attribute3 != ''">
+						<if test="attribute3Cond == 'eq'">AND t.attribute3 =
+				#{attribute3}
+			</if>
+			<if test="attribute3Cond == 'ne'">AND t.attribute3 !=
+				#{attribute3}
+			</if>
+			<if test="attribute3Cond == 'me'">
+				AND t.attribute3 in (
+				<foreach collection="attribute3.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="attribute3Cond == 'cn'">AND t.attribute3 LIKE
+				CONCAT('%',#{attribute3},'%')</if>
+			<if test="attribute3Cond == 'bw'">AND t.attribute3 LIKE
+				CONCAT(#{attribute3},'%')</if>
+			<if test="attribute3Cond == 'ew'">AND t.attribute3 LIKE
+				CONCAT('%',#{attribute3})</if>
+					</if>
+		<if test="attribute3Cond == null and attribute3 != null
+		and attribute3 != ''">
+			AND t.attribute3 = #{attribute3}
+		</if>
+												<if test="attribute4Cond != null and attribute4Cond != '' and attribute4 != null and attribute4 != ''">
+						<if test="attribute4Cond == 'eq'">AND t.attribute4 =
+				#{attribute4}
+			</if>
+			<if test="attribute4Cond == 'ne'">AND t.attribute4 !=
+				#{attribute4}
+			</if>
+			<if test="attribute4Cond == 'me'">
+				AND t.attribute4 in (
+				<foreach collection="attribute4.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="attribute4Cond == 'cn'">AND t.attribute4 LIKE
+				CONCAT('%',#{attribute4},'%')</if>
+			<if test="attribute4Cond == 'bw'">AND t.attribute4 LIKE
+				CONCAT(#{attribute4},'%')</if>
+			<if test="attribute4Cond == 'ew'">AND t.attribute4 LIKE
+				CONCAT('%',#{attribute4})</if>
+					</if>
+		<if test="attribute4Cond == null and attribute4 != null
+		and attribute4 != ''">
+			AND t.attribute4 = #{attribute4}
+		</if>
+												<if test="attribute5Cond != null and attribute5Cond != '' and attribute5 != null and attribute5 != ''">
+						<if test="attribute5Cond == 'eq'">AND t.attribute5 =
+				#{attribute5}
+			</if>
+			<if test="attribute5Cond == 'ne'">AND t.attribute5 !=
+				#{attribute5}
+			</if>
+			<if test="attribute5Cond == 'me'">
+				AND t.attribute5 in (
+				<foreach collection="attribute5.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="attribute5Cond == 'cn'">AND t.attribute5 LIKE
+				CONCAT('%',#{attribute5},'%')</if>
+			<if test="attribute5Cond == 'bw'">AND t.attribute5 LIKE
+				CONCAT(#{attribute5},'%')</if>
+			<if test="attribute5Cond == 'ew'">AND t.attribute5 LIKE
+				CONCAT('%',#{attribute5})</if>
+					</if>
+		<if test="attribute5Cond == null and attribute5 != null
+		and attribute5 != ''">
+			AND t.attribute5 = #{attribute5}
+		</if>
+								<if test="creationDateFrom != null and creationDateTo == null">
+			AND t.creation_date &gt;= #{creationDateFrom}
+		</if>
+		<if test="creationDateFrom == null and creationDateTo != null">
+			AND t.creation_date &lt;= #{creationDateTo}
+		</if>
+		<if test="creationDateFrom != null and creationDateTo != null">
+			AND t.creation_date &gt;= #{creationDateFrom} AND
+			t.creation_date &lt;= #{creationDateTo}
+		</if>
+												<if test="createdByCond != null and createdByCond != '' and createdBy != null and createdBy != ''">
+						<if test="createdByCond == 'eq'">AND t.created_by =
+				#{createdBy}
+			</if>
+			<if test="createdByCond == 'ne'">AND t.created_by !=
+				#{createdBy}
+			</if>
+			<if test="createdByCond == 'me'">
+				AND t.created_by in (
+				<foreach collection="createdBy.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="createdByCond == 'cn'">AND t.created_by LIKE
+				CONCAT('%',#{createdBy},'%')</if>
+			<if test="createdByCond == 'bw'">AND t.created_by LIKE
+				CONCAT(#{createdBy},'%')</if>
+			<if test="createdByCond == 'ew'">AND t.created_by LIKE
+				CONCAT('%',#{createdBy})</if>
+					</if>
+		<if test="createdByCond == null and createdBy != null
+		and createdBy != ''">
+			AND t.created_by = #{createdBy}
+		</if>
+								<if test="lastUpdateDateFrom != null and lastUpdateDateTo == null">
+			AND t.last_update_date &gt;= #{lastUpdateDateFrom}
+		</if>
+		<if test="lastUpdateDateFrom == null and lastUpdateDateTo != null">
+			AND t.last_update_date &lt;= #{lastUpdateDateTo}
+		</if>
+		<if test="lastUpdateDateFrom != null and lastUpdateDateTo != null">
+			AND t.last_update_date &gt;= #{lastUpdateDateFrom} AND
+			t.last_update_date &lt;= #{lastUpdateDateTo}
+		</if>
+												<if test="lastUpdatedByCond != null and lastUpdatedByCond != '' and lastUpdatedBy != null and lastUpdatedBy != ''">
+						<if test="lastUpdatedByCond == 'eq'">AND t.last_updated_by =
+				#{lastUpdatedBy}
+			</if>
+			<if test="lastUpdatedByCond == 'ne'">AND t.last_updated_by !=
+				#{lastUpdatedBy}
+			</if>
+			<if test="lastUpdatedByCond == 'me'">
+				AND t.last_updated_by in (
+				<foreach collection="lastUpdatedBy.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="lastUpdatedByCond == 'cn'">AND t.last_updated_by LIKE
+				CONCAT('%',#{lastUpdatedBy},'%')</if>
+			<if test="lastUpdatedByCond == 'bw'">AND t.last_updated_by LIKE
+				CONCAT(#{lastUpdatedBy},'%')</if>
+			<if test="lastUpdatedByCond == 'ew'">AND t.last_updated_by LIKE
+				CONCAT('%',#{lastUpdatedBy})</if>
+					</if>
+		<if test="lastUpdatedByCond == null and lastUpdatedBy != null
+		and lastUpdatedBy != ''">
+			AND t.last_updated_by = #{lastUpdatedBy}
+		</if>
+				
+			</sql>
+
+	<select id="selectOne" resultMap="resultMap"
+		parameterType="com.midea.isc.attachment.param.AttachmentListParam">
+		
+		select t.*
+				from app_attachment_list t
+				<include refid="defaultWhereClause" />
+		<include refid="orderClause" />
+		limit 1
+
+			</select>
+
+	<select id="selectList" resultMap="resultMap"
+		parameterType="com.midea.isc.attachment.param.AttachmentListParam">
+		
+		select t.*
+				from app_attachment_list t
+				<include refid="defaultWhereClause" />
+		<include refid="orderClause" />
+		<if test="limitClause != null and limitClause != ''">
+			${limitClause}
+		</if>
+
+			</select>
+
+	<select id="selectCount" resultType="java.lang.Integer"
+		parameterType="com.midea.isc.attachment.param.AttachmentListParam">
+		select count(1) from app_attachment_list t
+				<include refid="defaultWhereClause" />
+	</select>
+
+	<select id="find" resultMap="resultMap"
+		parameterType="com.midea.isc.attachment.param.AttachmentListParam">
+		
+		select t.*
+				from app_attachment_list t
+				<include refid="advancedWhereClause" />
+		<include refid="orderClause" />
+		<if test="limitClause != null and limitClause != ''">
+			${limitClause}
+		</if>
+
+			</select>
+
+	<select id="total" resultType="java.lang.Integer"
+		parameterType="com.midea.isc.attachment.param.AttachmentListParam">
+		select count(1) from app_attachment_list t
+				<include refid="advancedWhereClause" />
+	</select>
+
+	<insert id="insert" parameterType="com.midea.isc.attachment.model.AttachmentList"
+		useGeneratedKeys="true" keyProperty="attachmentId">
+		
+				insert into app_attachment_list(attachment_id,reference_table,reference_id,application,display_name,file_name,file_directory,file_size,file_type,attribute1,attribute2,attribute3,attribute4,attribute5,creation_date,created_by,last_update_date,last_updated_by)
+		 values(#{attachmentId},#{referenceTable},#{referenceId},#{application},#{displayName},#{fileName},#{fileDirectory},#{fileSize},#{fileType},#{attribute1},#{attribute2},#{attribute3},#{attribute4},#{attribute5},now(),#{createdBy},now(),#{lastUpdatedBy})
+	</insert>
+
+	<insert id="insertBulk" parameterType="java.util.List"
+		useGeneratedKeys="true" keyProperty="attachmentId">
+		insert into app_attachment_list(attachment_id,reference_table,reference_id,application,display_name,file_name,file_directory,file_size,file_type,attribute1,attribute2,attribute3,attribute4,attribute5,creation_date,created_by,last_update_date,last_updated_by)
+		 values 
+ <foreach collection="list" item="obj" separator=","> 
+ (#{obj.attachmentId},#{obj.referenceTable},#{obj.referenceId},#{obj.application},#{obj.displayName},#{obj.fileName},#{obj.fileDirectory},#{obj.fileSize},#{obj.fileType},#{obj.attribute1},#{obj.attribute2},#{obj.attribute3},#{obj.attribute4},#{obj.attribute5},now(),#{obj.createdBy},now(),#{obj.lastUpdatedBy}) 
+ </foreach>
+	</insert>
+
+	
+	
+	<update id="update" parameterType="com.midea.isc.attachment.model.AttachmentList">
+		update app_attachment_list t 		set t.reference_table=#{referenceTable}			,t.reference_id=#{referenceId}			,t.application=#{application}			,t.display_name=#{displayName}			,t.file_name=#{fileName}			,t.file_directory=#{fileDirectory}			,t.file_size=#{fileSize}			,t.file_type=#{fileType}			,t.attribute1=#{attribute1}			,t.attribute2=#{attribute2}			,t.attribute3=#{attribute3}			,t.attribute4=#{attribute4}			,t.attribute5=#{attribute5}			,t.last_update_date=now()			,t.last_updated_by=#{lastUpdatedBy}		 where t.attachment_id=#{attachmentId}
+	</update>
+
+	<update id="updateFields" parameterType="com.midea.isc.attachment.model.AttachmentList">
+		update app_attachment_list t 		set t.attachment_id=#{attachmentId}<if test="referenceTable != null">			,t.reference_table=#{referenceTable}</if><if test="referenceId != null">			,t.reference_id=#{referenceId}</if><if test="application != null">			,t.application=#{application}</if><if test="displayName != null">			,t.display_name=#{displayName}</if><if test="fileName != null">			,t.file_name=#{fileName}</if><if test="fileDirectory != null">			,t.file_directory=#{fileDirectory}</if><if test="fileSize != null">			,t.file_size=#{fileSize}</if><if test="fileType != null">			,t.file_type=#{fileType}</if><if test="attribute1 != null">			,t.attribute1=#{attribute1}</if><if test="attribute2 != null">			,t.attribute2=#{attribute2}</if><if test="attribute3 != null">			,t.attribute3=#{attribute3}</if><if test="attribute4 != null">			,t.attribute4=#{attribute4}</if><if test="attribute5 != null">			,t.attribute5=#{attribute5}</if>			,t.last_update_date=now()			,t.last_updated_by=#{lastUpdatedBy}		 where t.attachment_id=#{attachmentId}
+	</update>
+
+	<update id="updateByOtsLock" parameterType="com.midea.isc.attachment.model.AttachmentList">
+		update app_attachment_list t 		set t.reference_table=#{referenceTable}			,t.reference_id=#{referenceId}			,t.application=#{application}			,t.display_name=#{displayName}			,t.file_name=#{fileName}			,t.file_directory=#{fileDirectory}			,t.file_size=#{fileSize}			,t.file_type=#{fileType}			,t.attribute1=#{attribute1}			,t.attribute2=#{attribute2}			,t.attribute3=#{attribute3}			,t.attribute4=#{attribute4}			,t.attribute5=#{attribute5}			,t.last_update_date=now()			,t.last_updated_by=#{lastUpdatedBy}		 where t.attachment_id=#{attachmentId} and t.last_update_date = #{lastUpdateDate}
+	</update>
+
+	<update id="updateFieldsByOtsLock" parameterType="com.midea.isc.attachment.model.AttachmentList">
+		update app_attachment_list t 		set t.attachment_id=#{attachmentId}<if test="referenceTable != null">			,t.reference_table=#{referenceTable}</if><if test="referenceId != null">			,t.reference_id=#{referenceId}</if><if test="application != null">			,t.application=#{application}</if><if test="displayName != null">			,t.display_name=#{displayName}</if><if test="fileName != null">			,t.file_name=#{fileName}</if><if test="fileDirectory != null">			,t.file_directory=#{fileDirectory}</if><if test="fileSize != null">			,t.file_size=#{fileSize}</if><if test="fileType != null">			,t.file_type=#{fileType}</if><if test="attribute1 != null">			,t.attribute1=#{attribute1}</if><if test="attribute2 != null">			,t.attribute2=#{attribute2}</if><if test="attribute3 != null">			,t.attribute3=#{attribute3}</if><if test="attribute4 != null">			,t.attribute4=#{attribute4}</if><if test="attribute5 != null">			,t.attribute5=#{attribute5}</if>			,t.last_update_date=now()			,t.last_updated_by=#{lastUpdatedBy}		 where t.attachment_id=#{attachmentId} and t.last_update_date = #{lastUpdateDate}
+	</update>
+
+	<update id="updateBulk" parameterType="java.util.List">
+		<foreach collection="list" separator=";" item="obj"> 	update app_attachment_list t 		set t.reference_table=#{obj.referenceTable}			,t.reference_id=#{obj.referenceId}			,t.application=#{obj.application}			,t.display_name=#{obj.displayName}			,t.file_name=#{obj.fileName}			,t.file_directory=#{obj.fileDirectory}			,t.file_size=#{obj.fileSize}			,t.file_type=#{obj.fileType}			,t.attribute1=#{obj.attribute1}			,t.attribute2=#{obj.attribute2}			,t.attribute3=#{obj.attribute3}			,t.attribute4=#{obj.attribute4}			,t.attribute5=#{obj.attribute5}			,t.last_update_date=now()			,t.last_updated_by=#{obj.lastUpdatedBy}		 where t.attachment_id=#{obj.attachmentId} 	 </foreach>
+	</update>
+
+	<update id="updateFieldsBulk" parameterType="java.util.List">
+		<foreach collection="list" separator=";" item="obj"> 	update app_attachment_list t 		set t.attachment_id=#{obj.attachmentId}<if test="obj.referenceTable != null">			,t.reference_table=#{obj.referenceTable}</if><if test="obj.referenceId != null">			,t.reference_id=#{obj.referenceId}</if><if test="obj.application != null">			,t.application=#{obj.application}</if><if test="obj.displayName != null">			,t.display_name=#{obj.displayName}</if><if test="obj.fileName != null">			,t.file_name=#{obj.fileName}</if><if test="obj.fileDirectory != null">			,t.file_directory=#{obj.fileDirectory}</if><if test="obj.fileSize != null">			,t.file_size=#{obj.fileSize}</if><if test="obj.fileType != null">			,t.file_type=#{obj.fileType}</if><if test="obj.attribute1 != null">			,t.attribute1=#{obj.attribute1}</if><if test="obj.attribute2 != null">			,t.attribute2=#{obj.attribute2}</if><if test="obj.attribute3 != null">			,t.attribute3=#{obj.attribute3}</if><if test="obj.attribute4 != null">			,t.attribute4=#{obj.attribute4}</if><if test="obj.attribute5 != null">			,t.attribute5=#{obj.attribute5}</if>			,t.last_update_date=now()			,t.last_updated_by=#{obj.lastUpdatedBy}		 where t.attachment_id=#{obj.attachmentId} 	 </foreach>
+	</update>
+
+	
+	<delete id="delete" parameterType="com.midea.isc.attachment.model.AttachmentList">
+		delete t	 from app_attachment_list t 		
+		<include refid="defaultWhereClause" />
+	</delete>
+
+	<delete id="deleteBulk" parameterType="java.util.List">
+		<foreach collection="list" separator=";" item="obj"> 
+	delete t	 from app_attachment_list t 		where t.attachment_id=#{obj.attachmentId} 	 </foreach>
+	</delete>
+
+	
+</mapper>   
