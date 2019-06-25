@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.midea.isc</groupId>
+		<artifactId>com.midea.isc</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>admin</artifactId>
+	<name>admin</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!--生成出来adoc文件在什么目录下 -->
+		<asciidoctor.input.directory>${project.basedir}/docs/asciidoc/generated</asciidoctor.input.directory>
+		<!-- swagger的api-docs地址 -->
+		<swagger.path>http://127.0.0.1:9002/v2/api-docs</swagger.path>
+		<!--生成出来pdf文件在什么目录下 -->
+		<asciidoctor.pdf.output.directory>${project.basedir}/docs/asciidoc/pdf</asciidoctor.pdf.output.directory>
+		<!--生成出来的pdf的文件地址 all就是文件名 pdf后缀程序会自己补上 -->
+		<asciidoctor.file>${asciidoctor.input.directory}/all</asciidoctor.file>
+	</properties>
+	<dependencies>
+		<!-- 使用web启动器 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<!-- redis缓存 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
+			<version>1.1.10</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<!--增加eureka-server的依赖 -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.midea.isc</groupId>
+			<artifactId>common</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.midea.isc</groupId>
+			<artifactId>auth-client</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.midea.isc</groupId>
+			<artifactId>common-web</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<!-- feign远程调用 -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.midea.isc</groupId>
+			<artifactId>auth-common</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<!-- 断路器 -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+		</dependency>
+		<!-- 健康监控 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.midea.isc</groupId>
+				<artifactId>code-generator</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+				<configuration>
+					<application>admin</application><!-- 当前应用名称 -->
+					<sourceFolderPath>${basedir}</sourceFolderPath><!-- 当前应用根目录 -->
+					<driverName>com.mysql.jdbc.Driver</driverName><!-- 数据库驱动 -->
+					<dbUrl>jdbc:mysql://10.16.88.189:3306</dbUrl><!-- 数据库连接URL -->
+					<dbName>iadmin</dbName><!-- 数据库名 -->
+					<dbUser>iappsmgr</dbUser><!-- 用户名 -->
+					<dbPwd>Buyaotasu!b1an</dbPwd><!-- 密码 -->
+					<mode>update</mode><!-- 生成模式new/update -->
+					<tableNames><!-- MySQL表名规范为table,languagetable;Oracle规范为sequence,table,languagetable;languagetable可以没有 -->
+						<include>app_access</include>
+						<include>sys_application</include>
+						<include>auth_assigment</include>
+						<include>app_attachment_config</include>
+						<include>svc_client_service</include>
+						<include>sys_currency</include>
+						<include>sys_currency_format</include>
+						<include>svc_gate_client</include>
+						<include>sys_language</include>
+						<include>app_layout</include>
+						<include>app_layout_detail</include>
+						<include>app_locale</include>
+						<include>sys_login_log</include>
+						<include>app_lov_type</include>
+						<include>app_lov_value,app_lov_value_tl</include>
+						<include>auth_menu,auth_menu_tl</include>
+						<include>app_message,app_message_tl</include>
+						<include>app_module,app_module_tl</include>
+						<include>auth_operation</include>
+						<include>auth_opr_path</include>
+						<include>auth_privilege</include>
+						<include>auth_resource</include>
+						<include>auth_resource_role</include>
+						<include>auth_role</include>
+						<include>sys_service_log</include>
+						<include>sys_territory,sys_territory_tl</include>
+						<include>sys_timezone,sys_timezone_tl</include>
+						<include>auth_user</include>
+					</tableNames>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
