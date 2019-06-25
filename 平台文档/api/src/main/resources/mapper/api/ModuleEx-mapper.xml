@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.midea.isc.api.mapper.ModuleMapper">
+    <resultMap id="vo" type="com.midea.isc.api.vo.ModuleVo">
+        <id property="application" column="application"/>
+        <collection property="codes" ofType="String">
+            <result column="code"/>
+        </collection>
+    </resultMap>
+
+    <!--获取某人的可用app-->
+    <select id="getAccessibleModule" resultMap="vo"
+        parameterType="int">
+    select * from app_module where application in(
+        select t.application
+    from sys_application t
+    where exists(
+    select null
+    from app_access a
+    where a.access_type='A'
+    and a.enable_flag='Y'
+    and a.user_id=#{userId}
+
+    )
+     and t.relationship != 'independent')
+</select>
+
+</mapper>

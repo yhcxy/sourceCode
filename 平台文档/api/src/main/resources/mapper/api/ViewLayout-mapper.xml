@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.midea.isc.api.mapper.ViewLayoutMapper">
+	<resultMap id="resultMap"
+		type="com.midea.isc.api.model.ViewLayout">
+				<result column="layout_id" property="layoutId" />
+				<result column="view_id" property="viewId" />
+				<result column="column_name" property="columnName" />
+				<result column="filterable" property="filterable" />
+				<result column="sortable" property="sortable" />
+				<result column="fixed" property="fixed" />
+				<result column="column_width" property="columnWidth" />
+				<result column="seq" property="seq" />
+				<result column="created_by" property="createdBy" />
+				<result column="creation_date" property="creationDate" />
+				<result column="last_updated_by" property="lastUpdatedBy" />
+				<result column="last_update_date" property="lastUpdateDate" />
+					</resultMap>
+
+	<sql id="orderClause">
+		<if test="orderFields == null or orderFields.size == 0">
+			order by t.layout_id desc
+		</if>
+		<if test="orderFields != null and orderFields.size > 0">
+			order by
+			<foreach collection="orderFields" separator="," index="field"
+				item="direction">
+								<if test="field == 'layoutId'">
+					<choose>
+						<when test="direction =='asc'">
+							t.layout_id asc
+						</when>
+						<otherwise>
+							t.layout_id desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'viewId'">
+					<choose>
+						<when test="direction =='asc'">
+							t.view_id asc
+						</when>
+						<otherwise>
+							t.view_id desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'columnName'">
+					<choose>
+						<when test="direction =='asc'">
+							t.column_name asc
+						</when>
+						<otherwise>
+							t.column_name desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'filterable'">
+					<choose>
+						<when test="direction =='asc'">
+							t.filterable asc
+						</when>
+						<otherwise>
+							t.filterable desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'sortable'">
+					<choose>
+						<when test="direction =='asc'">
+							t.sortable asc
+						</when>
+						<otherwise>
+							t.sortable desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'fixed'">
+					<choose>
+						<when test="direction =='asc'">
+							t.fixed asc
+						</when>
+						<otherwise>
+							t.fixed desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'columnWidth'">
+					<choose>
+						<when test="direction =='asc'">
+							t.column_width asc
+						</when>
+						<otherwise>
+							t.column_width desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'seq'">
+					<choose>
+						<when test="direction =='asc'">
+							t.seq asc
+						</when>
+						<otherwise>
+							t.seq desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'createdBy'">
+					<choose>
+						<when test="direction =='asc'">
+							t.created_by asc
+						</when>
+						<otherwise>
+							t.created_by desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'creationDate'">
+					<choose>
+						<when test="direction =='asc'">
+							t.creation_date asc
+						</when>
+						<otherwise>
+							t.creation_date desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'lastUpdatedBy'">
+					<choose>
+						<when test="direction =='asc'">
+							t.last_updated_by asc
+						</when>
+						<otherwise>
+							t.last_updated_by desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'lastUpdateDate'">
+					<choose>
+						<when test="direction =='asc'">
+							t.last_update_date asc
+						</when>
+						<otherwise>
+							t.last_update_date desc
+						</otherwise>
+					</choose>
+				</if>
+											</foreach>
+		</if>
+	</sql>
+
+	<sql id="defaultWhereClause">
+		where 1=1 
+						<if test="layoutId != null">and t.layout_id = #{layoutId}</if>
+						<if test="viewId != null">and t.view_id = #{viewId}</if>
+								<if test="columnName != null and columnName != ''">and t.column_name = #{columnName}</if>
+								<if test="filterable != null and filterable != ''">and t.filterable = #{filterable}</if>
+								<if test="sortable != null and sortable != ''">and t.sortable = #{sortable}</if>
+								<if test="fixed != null and fixed != ''">and t.fixed = #{fixed}</if>
+						<if test="columnWidth != null">and t.column_width = #{columnWidth}</if>
+						<if test="seq != null">and t.seq = #{seq}</if>
+								<if test="createdBy != null and createdBy != ''">and t.created_by = #{createdBy}</if>
+						<if test="creationDate != null">and t.creation_date = #{creationDate}</if>
+								<if test="lastUpdatedBy != null and lastUpdatedBy != ''">and t.last_updated_by = #{lastUpdatedBy}</if>
+						<if test="lastUpdateDate != null">and t.last_update_date = #{lastUpdateDate}</if>
+					</sql>
+
+	<sql id="advancedWhereClause">
+		where 1=1 
+								<if test="layoutIdCond != null and layoutIdCond != '' and layoutId != null">
+						<if test="layoutIdCond == 'eq'">AND t.layout_id = #{layoutId}</if>
+			<if test="layoutIdCond == 'ne'">AND t.layout_id != #{layoutId}
+			</if>
+			<if test="layoutIdCond == 'lt'">AND t.layout_id &lt; #{layoutId}
+			</if>
+			<if test="layoutIdCond == 'le'">AND t.layout_id &lt;= #{layoutId}
+			</if>
+			<if test="layoutIdCond == 'gt'">AND t.layout_id &gt; #{layoutId}
+			</if>
+			<if test="layoutIdCond == 'ge'">AND t.layout_id &gt;= #{layoutId}
+			</if>
+					</if>
+		<if test="layoutIdCond == null and layoutId != null">
+			AND t.layout_id = #{layoutId}
+		</if>
+										<if test="viewIdCond != null and viewIdCond != '' and viewId != null">
+						<if test="viewIdCond == 'eq'">AND t.view_id = #{viewId}</if>
+			<if test="viewIdCond == 'ne'">AND t.view_id != #{viewId}
+			</if>
+			<if test="viewIdCond == 'lt'">AND t.view_id &lt; #{viewId}
+			</if>
+			<if test="viewIdCond == 'le'">AND t.view_id &lt;= #{viewId}
+			</if>
+			<if test="viewIdCond == 'gt'">AND t.view_id &gt; #{viewId}
+			</if>
+			<if test="viewIdCond == 'ge'">AND t.view_id &gt;= #{viewId}
+			</if>
+					</if>
+		<if test="viewIdCond == null and viewId != null">
+			AND t.view_id = #{viewId}
+		</if>
+												<if test="columnNameCond != null and columnNameCond != '' and columnName != null and columnName != ''">
+						<if test="columnNameCond == 'eq'">AND t.column_name =
+				#{columnName}
+			</if>
+			<if test="columnNameCond == 'ne'">AND t.column_name !=
+				#{columnName}
+			</if>
+			<if test="columnNameCond == 'me'">
+				AND t.column_name in (
+				<foreach collection="columnName.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="columnNameCond == 'cn'">AND t.column_name LIKE
+				CONCAT('%',#{columnName},'%')</if>
+			<if test="columnNameCond == 'bw'">AND t.column_name LIKE
+				CONCAT(#{columnName},'%')</if>
+			<if test="columnNameCond == 'ew'">AND t.column_name LIKE
+				CONCAT('%',#{columnName})</if>
+					</if>
+		<if test="columnNameCond == null and columnName != null
+		and columnName != ''">
+			AND t.column_name = #{columnName}
+		</if>
+												<if test="filterableCond != null and filterableCond != '' and filterable != null and filterable != ''">
+						<if test="filterableCond == 'eq'">AND t.filterable =
+				#{filterable}
+			</if>
+			<if test="filterableCond == 'ne'">AND t.filterable !=
+				#{filterable}
+			</if>
+			<if test="filterableCond == 'me'">
+				AND t.filterable in (
+				<foreach collection="filterable.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="filterableCond == 'cn'">AND t.filterable LIKE
+				CONCAT('%',#{filterable},'%')</if>
+			<if test="filterableCond == 'bw'">AND t.filterable LIKE
+				CONCAT(#{filterable},'%')</if>
+			<if test="filterableCond == 'ew'">AND t.filterable LIKE
+				CONCAT('%',#{filterable})</if>
+					</if>
+		<if test="filterableCond == null and filterable != null
+		and filterable != ''">
+			AND t.filterable = #{filterable}
+		</if>
+												<if test="sortableCond != null and sortableCond != '' and sortable != null and sortable != ''">
+						<if test="sortableCond == 'eq'">AND t.sortable =
+				#{sortable}
+			</if>
+			<if test="sortableCond == 'ne'">AND t.sortable !=
+				#{sortable}
+			</if>
+			<if test="sortableCond == 'me'">
+				AND t.sortable in (
+				<foreach collection="sortable.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="sortableCond == 'cn'">AND t.sortable LIKE
+				CONCAT('%',#{sortable},'%')</if>
+			<if test="sortableCond == 'bw'">AND t.sortable LIKE
+				CONCAT(#{sortable},'%')</if>
+			<if test="sortableCond == 'ew'">AND t.sortable LIKE
+				CONCAT('%',#{sortable})</if>
+					</if>
+		<if test="sortableCond == null and sortable != null
+		and sortable != ''">
+			AND t.sortable = #{sortable}
+		</if>
+												<if test="fixedCond != null and fixedCond != '' and fixed != null and fixed != ''">
+						<if test="fixedCond == 'eq'">AND t.fixed =
+				#{fixed}
+			</if>
+			<if test="fixedCond == 'ne'">AND t.fixed !=
+				#{fixed}
+			</if>
+			<if test="fixedCond == 'me'">
+				AND t.fixed in (
+				<foreach collection="fixed.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="fixedCond == 'cn'">AND t.fixed LIKE
+				CONCAT('%',#{fixed},'%')</if>
+			<if test="fixedCond == 'bw'">AND t.fixed LIKE
+				CONCAT(#{fixed},'%')</if>
+			<if test="fixedCond == 'ew'">AND t.fixed LIKE
+				CONCAT('%',#{fixed})</if>
+					</if>
+		<if test="fixedCond == null and fixed != null
+		and fixed != ''">
+			AND t.fixed = #{fixed}
+		</if>
+										<if test="columnWidthCond != null and columnWidthCond != '' and columnWidth != null">
+						<if test="columnWidthCond == 'eq'">AND t.column_width = #{columnWidth}</if>
+			<if test="columnWidthCond == 'ne'">AND t.column_width != #{columnWidth}
+			</if>
+			<if test="columnWidthCond == 'lt'">AND t.column_width &lt; #{columnWidth}
+			</if>
+			<if test="columnWidthCond == 'le'">AND t.column_width &lt;= #{columnWidth}
+			</if>
+			<if test="columnWidthCond == 'gt'">AND t.column_width &gt; #{columnWidth}
+			</if>
+			<if test="columnWidthCond == 'ge'">AND t.column_width &gt;= #{columnWidth}
+			</if>
+					</if>
+		<if test="columnWidthCond == null and columnWidth != null">
+			AND t.column_width = #{columnWidth}
+		</if>
+										<if test="seqCond != null and seqCond != '' and seq != null">
+						<if test="seqCond == 'eq'">AND t.seq = #{seq}</if>
+			<if test="seqCond == 'ne'">AND t.seq != #{seq}
+			</if>
+			<if test="seqCond == 'lt'">AND t.seq &lt; #{seq}
+			</if>
+			<if test="seqCond == 'le'">AND t.seq &lt;= #{seq}
+			</if>
+			<if test="seqCond == 'gt'">AND t.seq &gt; #{seq}
+			</if>
+			<if test="seqCond == 'ge'">AND t.seq &gt;= #{seq}
+			</if>
+					</if>
+		<if test="seqCond == null and seq != null">
+			AND t.seq = #{seq}
+		</if>
+												<if test="createdByCond != null and createdByCond != '' and createdBy != null and createdBy != ''">
+						<if test="createdByCond == 'eq'">AND t.created_by =
+				#{createdBy}
+			</if>
+			<if test="createdByCond == 'ne'">AND t.created_by !=
+				#{createdBy}
+			</if>
+			<if test="createdByCond == 'me'">
+				AND t.created_by in (
+				<foreach collection="createdBy.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="createdByCond == 'cn'">AND t.created_by LIKE
+				CONCAT('%',#{createdBy},'%')</if>
+			<if test="createdByCond == 'bw'">AND t.created_by LIKE
+				CONCAT(#{createdBy},'%')</if>
+			<if test="createdByCond == 'ew'">AND t.created_by LIKE
+				CONCAT('%',#{createdBy})</if>
+					</if>
+		<if test="createdByCond == null and createdBy != null
+		and createdBy != ''">
+			AND t.created_by = #{createdBy}
+		</if>
+								<if test="creationDateFrom != null and creationDateTo == null">
+			AND t.creation_date &gt;= #{creationDateFrom}
+		</if>
+		<if test="creationDateFrom == null and creationDateTo != null">
+			AND t.creation_date &lt;= #{creationDateTo}
+		</if>
+		<if test="creationDateFrom != null and creationDateTo != null">
+			AND t.creation_date &gt;= #{creationDateFrom} AND
+			t.creation_date &lt;= #{creationDateTo}
+		</if>
+												<if test="lastUpdatedByCond != null and lastUpdatedByCond != '' and lastUpdatedBy != null and lastUpdatedBy != ''">
+						<if test="lastUpdatedByCond == 'eq'">AND t.last_updated_by =
+				#{lastUpdatedBy}
+			</if>
+			<if test="lastUpdatedByCond == 'ne'">AND t.last_updated_by !=
+				#{lastUpdatedBy}
+			</if>
+			<if test="lastUpdatedByCond == 'me'">
+				AND t.last_updated_by in (
+				<foreach collection="lastUpdatedBy.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="lastUpdatedByCond == 'cn'">AND t.last_updated_by LIKE
+				CONCAT('%',#{lastUpdatedBy},'%')</if>
+			<if test="lastUpdatedByCond == 'bw'">AND t.last_updated_by LIKE
+				CONCAT(#{lastUpdatedBy},'%')</if>
+			<if test="lastUpdatedByCond == 'ew'">AND t.last_updated_by LIKE
+				CONCAT('%',#{lastUpdatedBy})</if>
+					</if>
+		<if test="lastUpdatedByCond == null and lastUpdatedBy != null
+		and lastUpdatedBy != ''">
+			AND t.last_updated_by = #{lastUpdatedBy}
+		</if>
+								<if test="lastUpdateDateFrom != null and lastUpdateDateTo == null">
+			AND t.last_update_date &gt;= #{lastUpdateDateFrom}
+		</if>
+		<if test="lastUpdateDateFrom == null and lastUpdateDateTo != null">
+			AND t.last_update_date &lt;= #{lastUpdateDateTo}
+		</if>
+		<if test="lastUpdateDateFrom != null and lastUpdateDateTo != null">
+			AND t.last_update_date &gt;= #{lastUpdateDateFrom} AND
+			t.last_update_date &lt;= #{lastUpdateDateTo}
+		</if>
+				
+			</sql>
+
+	<select id="selectOne" resultMap="resultMap"
+		parameterType="com.midea.isc.api.param.ViewLayoutParam">
+		
+		select t.*
+				from app_view_layout t
+				<include refid="defaultWhereClause" />
+		<include refid="orderClause" />
+		limit 1
+
+			</select>
+
+	<select id="selectList" resultMap="resultMap"
+		parameterType="com.midea.isc.api.param.ViewLayoutParam">
+		
+		select t.*
+				from app_view_layout t
+				<include refid="defaultWhereClause" />
+		<include refid="orderClause" />
+		<if test="limitClause != null and limitClause != ''">
+			${limitClause}
+		</if>
+
+			</select>
+
+	<select id="selectCount" resultType="java.lang.Integer"
+		parameterType="com.midea.isc.api.param.ViewLayoutParam">
+		select count(1) from app_view_layout t
+				<include refid="defaultWhereClause" />
+	</select>
+
+	<select id="find" resultMap="resultMap"
+		parameterType="com.midea.isc.api.param.ViewLayoutParam">
+		
+		select t.*
+				from app_view_layout t
+				<include refid="advancedWhereClause" />
+		<include refid="orderClause" />
+		<if test="limitClause != null and limitClause != ''">
+			${limitClause}
+		</if>
+
+			</select>
+
+	<select id="total" resultType="java.lang.Integer"
+		parameterType="com.midea.isc.api.param.ViewLayoutParam">
+		select count(1) from app_view_layout t
+				<include refid="advancedWhereClause" />
+	</select>
+
+	<insert id="insert" parameterType="com.midea.isc.api.model.ViewLayout"
+		useGeneratedKeys="true" keyProperty="layoutId">
+		
+				insert into app_view_layout(layout_id,view_id,column_name,filterable,sortable,fixed,column_width,seq,created_by,creation_date,last_updated_by,last_update_date)
+		 values(#{layoutId},#{viewId},#{columnName},#{filterable},#{sortable},#{fixed},#{columnWidth},#{seq},#{createdBy},now(),#{lastUpdatedBy},now())
+	</insert>
+
+	<insert id="insertBulk" parameterType="java.util.List"
+		useGeneratedKeys="true" keyProperty="layoutId">
+		insert into app_view_layout(layout_id,view_id,column_name,filterable,sortable,fixed,column_width,seq,created_by,creation_date,last_updated_by,last_update_date)
+		 values 
+ <foreach collection="list" item="obj" separator=","> 
+ (#{obj.layoutId},#{obj.viewId},#{obj.columnName},#{obj.filterable},#{obj.sortable},#{obj.fixed},#{obj.columnWidth},#{obj.seq},#{obj.createdBy},now(),#{obj.lastUpdatedBy},now()) 
+ </foreach>
+	</insert>
+
+	
+	
+	<update id="update" parameterType="com.midea.isc.api.model.ViewLayout">
+		update app_view_layout t 		set t.view_id=#{viewId}			,t.column_name=#{columnName}			,t.filterable=#{filterable}			,t.sortable=#{sortable}			,t.fixed=#{fixed}			,t.column_width=#{columnWidth}			,t.seq=#{seq}			,t.last_updated_by=#{lastUpdatedBy}			,t.last_update_date=now()		 where t.layout_id=#{layoutId}
+	</update>
+
+	<update id="updateFields" parameterType="com.midea.isc.api.model.ViewLayout">
+		update app_view_layout t 		set t.layout_id=#{layoutId}<if test="viewId != null">			,t.view_id=#{viewId}</if><if test="columnName != null">			,t.column_name=#{columnName}</if><if test="filterable != null">			,t.filterable=#{filterable}</if><if test="sortable != null">			,t.sortable=#{sortable}</if><if test="fixed != null">			,t.fixed=#{fixed}</if><if test="columnWidth != null">			,t.column_width=#{columnWidth}</if><if test="seq != null">			,t.seq=#{seq}</if>			,t.last_updated_by=#{lastUpdatedBy}			,t.last_update_date=now()		 where t.layout_id=#{layoutId}
+	</update>
+
+	<update id="updateByOtsLock" parameterType="com.midea.isc.api.model.ViewLayout">
+		update app_view_layout t 		set t.view_id=#{viewId}			,t.column_name=#{columnName}			,t.filterable=#{filterable}			,t.sortable=#{sortable}			,t.fixed=#{fixed}			,t.column_width=#{columnWidth}			,t.seq=#{seq}			,t.last_updated_by=#{lastUpdatedBy}			,t.last_update_date=now()		 where t.layout_id=#{layoutId} and t.last_update_date = #{lastUpdateDate}
+	</update>
+
+	<update id="updateFieldsByOtsLock" parameterType="com.midea.isc.api.model.ViewLayout">
+		update app_view_layout t 		set t.layout_id=#{layoutId}<if test="viewId != null">			,t.view_id=#{viewId}</if><if test="columnName != null">			,t.column_name=#{columnName}</if><if test="filterable != null">			,t.filterable=#{filterable}</if><if test="sortable != null">			,t.sortable=#{sortable}</if><if test="fixed != null">			,t.fixed=#{fixed}</if><if test="columnWidth != null">			,t.column_width=#{columnWidth}</if><if test="seq != null">			,t.seq=#{seq}</if>			,t.last_updated_by=#{lastUpdatedBy}			,t.last_update_date=now()		 where t.layout_id=#{layoutId} and t.last_update_date = #{lastUpdateDate}
+	</update>
+
+	<update id="updateBulk" parameterType="java.util.List">
+		<foreach collection="list" separator=";" item="obj"> 	update app_view_layout t 		set t.view_id=#{obj.viewId}			,t.column_name=#{obj.columnName}			,t.filterable=#{obj.filterable}			,t.sortable=#{obj.sortable}			,t.fixed=#{obj.fixed}			,t.column_width=#{obj.columnWidth}			,t.seq=#{obj.seq}			,t.last_updated_by=#{obj.lastUpdatedBy}			,t.last_update_date=now()		 where t.layout_id=#{obj.layoutId} 	 </foreach>
+	</update>
+
+	<update id="updateFieldsBulk" parameterType="java.util.List">
+		<foreach collection="list" separator=";" item="obj"> 	update app_view_layout t 		set t.layout_id=#{obj.layoutId}<if test="obj.viewId != null">			,t.view_id=#{obj.viewId}</if><if test="obj.columnName != null">			,t.column_name=#{obj.columnName}</if><if test="obj.filterable != null">			,t.filterable=#{obj.filterable}</if><if test="obj.sortable != null">			,t.sortable=#{obj.sortable}</if><if test="obj.fixed != null">			,t.fixed=#{obj.fixed}</if><if test="obj.columnWidth != null">			,t.column_width=#{obj.columnWidth}</if><if test="obj.seq != null">			,t.seq=#{obj.seq}</if>			,t.last_updated_by=#{obj.lastUpdatedBy}			,t.last_update_date=now()		 where t.layout_id=#{obj.layoutId} 	 </foreach>
+	</update>
+
+	
+	<delete id="delete" parameterType="com.midea.isc.api.model.ViewLayout">
+		delete t	 from app_view_layout t 		
+		<include refid="defaultWhereClause" />
+	</delete>
+
+	<delete id="deleteBulk" parameterType="java.util.List">
+		<foreach collection="list" separator=";" item="obj"> 
+	delete t	 from app_view_layout t 		where t.layout_id=#{obj.layoutId} 	 </foreach>
+	</delete>
+
+	
+</mapper>   

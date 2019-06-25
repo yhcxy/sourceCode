@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.midea.isc.api.mapper.CodeConfigcacheMapper">
+	<resultMap id="resultMap"
+		type="com.midea.isc.api.model.CodeConfigcache">
+				<result column="cache_id" property="cacheId" />
+				<result column="config_id" property="configId" />
+				<result column="config_code" property="configCode" />
+				<result column="expression" property="expression" />
+				<result column="sequence" property="sequence" />
+				<result column="created_by" property="createdBy" />
+				<result column="creation_date" property="creationDate" />
+				<result column="last_updated_by" property="lastUpdatedBy" />
+				<result column="last_update_date" property="lastUpdateDate" />
+				<result column="attribute1" property="attribute1" />
+				<result column="attribute2" property="attribute2" />
+				<result column="attribute3" property="attribute3" />
+				<result column="attribute4" property="attribute4" />
+				<result column="attribute5" property="attribute5" />
+					</resultMap>
+
+	<sql id="orderClause">
+		<if test="orderFields == null or orderFields.size == 0">
+			order by t.cache_id desc
+		</if>
+		<if test="orderFields != null and orderFields.size > 0">
+			order by
+			<foreach collection="orderFields" separator="," index="field"
+				item="direction">
+								<if test="field == 'cacheId'">
+					<choose>
+						<when test="direction =='asc'">
+							t.cache_id asc
+						</when>
+						<otherwise>
+							t.cache_id desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'configId'">
+					<choose>
+						<when test="direction =='asc'">
+							t.config_id asc
+						</when>
+						<otherwise>
+							t.config_id desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'configCode'">
+					<choose>
+						<when test="direction =='asc'">
+							t.config_code asc
+						</when>
+						<otherwise>
+							t.config_code desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'expression'">
+					<choose>
+						<when test="direction =='asc'">
+							t.expression asc
+						</when>
+						<otherwise>
+							t.expression desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'sequence'">
+					<choose>
+						<when test="direction =='asc'">
+							t.sequence asc
+						</when>
+						<otherwise>
+							t.sequence desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'createdBy'">
+					<choose>
+						<when test="direction =='asc'">
+							t.created_by asc
+						</when>
+						<otherwise>
+							t.created_by desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'creationDate'">
+					<choose>
+						<when test="direction =='asc'">
+							t.creation_date asc
+						</when>
+						<otherwise>
+							t.creation_date desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'lastUpdatedBy'">
+					<choose>
+						<when test="direction =='asc'">
+							t.last_updated_by asc
+						</when>
+						<otherwise>
+							t.last_updated_by desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'lastUpdateDate'">
+					<choose>
+						<when test="direction =='asc'">
+							t.last_update_date asc
+						</when>
+						<otherwise>
+							t.last_update_date desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'attribute1'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attribute1 asc
+						</when>
+						<otherwise>
+							t.attribute1 desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'attribute2'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attribute2 asc
+						</when>
+						<otherwise>
+							t.attribute2 desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'attribute3'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attribute3 asc
+						</when>
+						<otherwise>
+							t.attribute3 desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'attribute4'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attribute4 asc
+						</when>
+						<otherwise>
+							t.attribute4 desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'attribute5'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attribute5 asc
+						</when>
+						<otherwise>
+							t.attribute5 desc
+						</otherwise>
+					</choose>
+				</if>
+											</foreach>
+		</if>
+	</sql>
+
+	<sql id="defaultWhereClause">
+		<where>
+						<if test="cacheId != null">and t.cache_id = #{cacheId}</if>
+						<if test="configId != null">and t.config_id = #{configId}</if>
+								<if test="configCode != null and configCode != ''">and t.config_code = #{configCode}</if>
+								<if test="expression != null and expression != ''">and t.expression = #{expression}</if>
+						<if test="sequence != null">and t.sequence = #{sequence}</if>
+								<if test="createdBy != null and createdBy != ''">and t.created_by = #{createdBy}</if>
+						<if test="creationDate != null">and t.creation_date = #{creationDate}</if>
+								<if test="lastUpdatedBy != null and lastUpdatedBy != ''">and t.last_updated_by = #{lastUpdatedBy}</if>
+						<if test="lastUpdateDate != null">and t.last_update_date = #{lastUpdateDate}</if>
+								<if test="attribute1 != null and attribute1 != ''">and t.attribute1 = #{attribute1}</if>
+								<if test="attribute2 != null and attribute2 != ''">and t.attribute2 = #{attribute2}</if>
+								<if test="attribute3 != null and attribute3 != ''">and t.attribute3 = #{attribute3}</if>
+								<if test="attribute4 != null and attribute4 != ''">and t.attribute4 = #{attribute4}</if>
+								<if test="attribute5 != null and attribute5 != ''">and t.attribute5 = #{attribute5}</if>
+						</where>
+	</sql>
+
+	<sql id="advancedWhereClause">
+		<where>
+								<if test="cacheIdCond != null and cacheIdCond != '' and cacheId != null">
+						<if test="cacheIdCond == 'eq'">AND t.cache_id = #{cacheId}</if>
+			<if test="cacheIdCond == 'ne'">AND t.cache_id != #{cacheId}
+			</if>
+			<if test="cacheIdCond == 'lt'">AND t.cache_id &lt; #{cacheId}
+			</if>
+			<if test="cacheIdCond == 'le'">AND t.cache_id &lt;= #{cacheId}
+			</if>
+			<if test="cacheIdCond == 'gt'">AND t.cache_id &gt; #{cacheId}
+			</if>
+			<if test="cacheIdCond == 'ge'">AND t.cache_id &gt;= #{cacheId}
+			</if>
+					</if>
+		<if test="cacheIdCond == null and cacheId != null">
+			AND t.cache_id = #{cacheId}
+		</if>
+										<if test="configIdCond != null and configIdCond != '' and configId != null">
+						<if test="configIdCond == 'eq'">AND t.config_id = #{configId}</if>
+			<if test="configIdCond == 'ne'">AND t.config_id != #{configId}
+			</if>
+			<if test="configIdCond == 'lt'">AND t.config_id &lt; #{configId}
+			</if>
+			<if test="configIdCond == 'le'">AND t.config_id &lt;= #{configId}
+			</if>
+			<if test="configIdCond == 'gt'">AND t.config_id &gt; #{configId}
+			</if>
+			<if test="configIdCond == 'ge'">AND t.config_id &gt;= #{configId}
+			</if>
+					</if>
+		<if test="configIdCond == null and configId != null">
+			AND t.config_id = #{configId}
+		</if>
+												<if test="configCodeCond != null and configCodeCond != '' and configCode != null and configCode != ''">
+						<if test="configCodeCond == 'eq'">AND t.config_code =
+				#{configCode}
+			</if>
+			<if test="configCodeCond == 'ne'">AND t.config_code !=
+				#{configCode}
+			</if>
+			<if test="configCodeCond == 'me'">
+				AND t.config_code in (
+				<foreach collection="configCode.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="configCodeCond == 'cn'">AND t.config_code LIKE
+				CONCAT('%',#{configCode},'%')</if>
+			<if test="configCodeCond == 'bw'">AND t.config_code LIKE
+				CONCAT(#{configCode},'%')</if>
+			<if test="configCodeCond == 'ew'">AND t.config_code LIKE
+				CONCAT('%',#{configCode})</if>
+					</if>
+		<if test="configCodeCond == null and configCode != null
+		and configCode != ''">
+			AND t.config_code = #{configCode}
+		</if>
+												<if test="expressionCond != null and expressionCond != '' and expression != null and expression != ''">
+						<if test="expressionCond == 'eq'">AND t.expression =
+				#{expression}
+			</if>
+			<if test="expressionCond == 'ne'">AND t.expression !=
+				#{expression}
+			</if>
+			<if test="expressionCond == 'me'">
+				AND t.expression in (
+				<foreach collection="expression.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="expressionCond == 'cn'">AND t.expression LIKE
+				CONCAT('%',#{expression},'%')</if>
+			<if test="expressionCond == 'bw'">AND t.expression LIKE
+				CONCAT(#{expression},'%')</if>
+			<if test="expressionCond == 'ew'">AND t.expression LIKE
+				CONCAT('%',#{expression})</if>
+					</if>
+		<if test="expressionCond == null and expression != null
+		and expression != ''">
+			AND t.expression = #{expression}
+		</if>
+										<if test="sequenceCond != null and sequenceCond != '' and sequence != null">
+						<if test="sequenceCond == 'eq'">AND t.sequence = #{sequence}</if>
+			<if test="sequenceCond == 'ne'">AND t.sequence != #{sequence}
+			</if>
+			<if test="sequenceCond == 'lt'">AND t.sequence &lt; #{sequence}
+			</if>
+			<if test="sequenceCond == 'le'">AND t.sequence &lt;= #{sequence}
+			</if>
+			<if test="sequenceCond == 'gt'">AND t.sequence &gt; #{sequence}
+			</if>
+			<if test="sequenceCond == 'ge'">AND t.sequence &gt;= #{sequence}
+			</if>
+					</if>
+		<if test="sequenceCond == null and sequence != null">
+			AND t.sequence = #{sequence}
+		</if>
+												<if test="createdByCond != null and createdByCond != '' and createdBy != null and createdBy != ''">
+						<if test="createdByCond == 'eq'">AND t.created_by =
+				#{createdBy}
+			</if>
+			<if test="createdByCond == 'ne'">AND t.created_by !=
+				#{createdBy}
+			</if>
+			<if test="createdByCond == 'me'">
+				AND t.created_by in (
+				<foreach collection="createdBy.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="createdByCond == 'cn'">AND t.created_by LIKE
+				CONCAT('%',#{createdBy},'%')</if>
+			<if test="createdByCond == 'bw'">AND t.created_by LIKE
+				CONCAT(#{createdBy},'%')</if>
+			<if test="createdByCond == 'ew'">AND t.created_by LIKE
+				CONCAT('%',#{createdBy})</if>
+					</if>
+		<if test="createdByCond == null and createdBy != null
+		and createdBy != ''">
+			AND t.created_by = #{createdBy}
+		</if>
+								<if test="creationDateFrom != null and creationDateTo == null">
+			AND t.creation_date &gt;= #{creationDateFrom}
+		</if>
+		<if test="creationDateFrom == null and creationDateTo != null">
+			AND t.creation_date &lt;= #{creationDateTo}
+		</if>
+		<if test="creationDateFrom != null and creationDateTo != null">
+			AND t.creation_date &gt;= #{creationDateFrom} AND
+			t.creation_date &lt;= #{creationDateTo}
+		</if>
+												<if test="lastUpdatedByCond != null and lastUpdatedByCond != '' and lastUpdatedBy != null and lastUpdatedBy != ''">
+						<if test="lastUpdatedByCond == 'eq'">AND t.last_updated_by =
+				#{lastUpdatedBy}
+			</if>
+			<if test="lastUpdatedByCond == 'ne'">AND t.last_updated_by !=
+				#{lastUpdatedBy}
+			</if>
+			<if test="lastUpdatedByCond == 'me'">
+				AND t.last_updated_by in (
+				<foreach collection="lastUpdatedBy.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="lastUpdatedByCond == 'cn'">AND t.last_updated_by LIKE
+				CONCAT('%',#{lastUpdatedBy},'%')</if>
+			<if test="lastUpdatedByCond == 'bw'">AND t.last_updated_by LIKE
+				CONCAT(#{lastUpdatedBy},'%')</if>
+			<if test="lastUpdatedByCond == 'ew'">AND t.last_updated_by LIKE
+				CONCAT('%',#{lastUpdatedBy})</if>
+					</if>
+		<if test="lastUpdatedByCond == null and lastUpdatedBy != null
+		and lastUpdatedBy != ''">
+			AND t.last_updated_by = #{lastUpdatedBy}
+		</if>
+								<if test="lastUpdateDateFrom != null and lastUpdateDateTo == null">
+			AND t.last_update_date &gt;= #{lastUpdateDateFrom}
+		</if>
+		<if test="lastUpdateDateFrom == null and lastUpdateDateTo != null">
+			AND t.last_update_date &lt;= #{lastUpdateDateTo}
+		</if>
+		<if test="lastUpdateDateFrom != null and lastUpdateDateTo != null">
+			AND t.last_update_date &gt;= #{lastUpdateDateFrom} AND
+			t.last_update_date &lt;= #{lastUpdateDateTo}
+		</if>
+												<if test="attribute1Cond != null and attribute1Cond != '' and attribute1 != null and attribute1 != ''">
+						<if test="attribute1Cond == 'eq'">AND t.attribute1 =
+				#{attribute1}
+			</if>
+			<if test="attribute1Cond == 'ne'">AND t.attribute1 !=
+				#{attribute1}
+			</if>
+			<if test="attribute1Cond == 'me'">
+				AND t.attribute1 in (
+				<foreach collection="attribute1.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="attribute1Cond == 'cn'">AND t.attribute1 LIKE
+				CONCAT('%',#{attribute1},'%')</if>
+			<if test="attribute1Cond == 'bw'">AND t.attribute1 LIKE
+				CONCAT(#{attribute1},'%')</if>
+			<if test="attribute1Cond == 'ew'">AND t.attribute1 LIKE
+				CONCAT('%',#{attribute1})</if>
+					</if>
+		<if test="attribute1Cond == null and attribute1 != null
+		and attribute1 != ''">
+			AND t.attribute1 = #{attribute1}
+		</if>
+												<if test="attribute2Cond != null and attribute2Cond != '' and attribute2 != null and attribute2 != ''">
+						<if test="attribute2Cond == 'eq'">AND t.attribute2 =
+				#{attribute2}
+			</if>
+			<if test="attribute2Cond == 'ne'">AND t.attribute2 !=
+				#{attribute2}
+			</if>
+			<if test="attribute2Cond == 'me'">
+				AND t.attribute2 in (
+				<foreach collection="attribute2.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="attribute2Cond == 'cn'">AND t.attribute2 LIKE
+				CONCAT('%',#{attribute2},'%')</if>
+			<if test="attribute2Cond == 'bw'">AND t.attribute2 LIKE
+				CONCAT(#{attribute2},'%')</if>
+			<if test="attribute2Cond == 'ew'">AND t.attribute2 LIKE
+				CONCAT('%',#{attribute2})</if>
+					</if>
+		<if test="attribute2Cond == null and attribute2 != null
+		and attribute2 != ''">
+			AND t.attribute2 = #{attribute2}
+		</if>
+												<if test="attribute3Cond != null and attribute3Cond != '' and attribute3 != null and attribute3 != ''">
+						<if test="attribute3Cond == 'eq'">AND t.attribute3 =
+				#{attribute3}
+			</if>
+			<if test="attribute3Cond == 'ne'">AND t.attribute3 !=
+				#{attribute3}
+			</if>
+			<if test="attribute3Cond == 'me'">
+				AND t.attribute3 in (
+				<foreach collection="attribute3.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="attribute3Cond == 'cn'">AND t.attribute3 LIKE
+				CONCAT('%',#{attribute3},'%')</if>
+			<if test="attribute3Cond == 'bw'">AND t.attribute3 LIKE
+				CONCAT(#{attribute3},'%')</if>
+			<if test="attribute3Cond == 'ew'">AND t.attribute3 LIKE
+				CONCAT('%',#{attribute3})</if>
+					</if>
+		<if test="attribute3Cond == null and attribute3 != null
+		and attribute3 != ''">
+			AND t.attribute3 = #{attribute3}
+		</if>
+												<if test="attribute4Cond != null and attribute4Cond != '' and attribute4 != null and attribute4 != ''">
+						<if test="attribute4Cond == 'eq'">AND t.attribute4 =
+				#{attribute4}
+			</if>
+			<if test="attribute4Cond == 'ne'">AND t.attribute4 !=
+				#{attribute4}
+			</if>
+			<if test="attribute4Cond == 'me'">
+				AND t.attribute4 in (
+				<foreach collection="attribute4.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="attribute4Cond == 'cn'">AND t.attribute4 LIKE
+				CONCAT('%',#{attribute4},'%')</if>
+			<if test="attribute4Cond == 'bw'">AND t.attribute4 LIKE
+				CONCAT(#{attribute4},'%')</if>
+			<if test="attribute4Cond == 'ew'">AND t.attribute4 LIKE
+				CONCAT('%',#{attribute4})</if>
+					</if>
+		<if test="attribute4Cond == null and attribute4 != null
+		and attribute4 != ''">
+			AND t.attribute4 = #{attribute4}
+		</if>
+												<if test="attribute5Cond != null and attribute5Cond != '' and attribute5 != null and attribute5 != ''">
+						<if test="attribute5Cond == 'eq'">AND t.attribute5 =
+				#{attribute5}
+			</if>
+			<if test="attribute5Cond == 'ne'">AND t.attribute5 !=
+				#{attribute5}
+			</if>
+			<if test="attribute5Cond == 'me'">
+				AND t.attribute5 in (
+				<foreach collection="attribute5.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="attribute5Cond == 'cn'">AND t.attribute5 LIKE
+				CONCAT('%',#{attribute5},'%')</if>
+			<if test="attribute5Cond == 'bw'">AND t.attribute5 LIKE
+				CONCAT(#{attribute5},'%')</if>
+			<if test="attribute5Cond == 'ew'">AND t.attribute5 LIKE
+				CONCAT('%',#{attribute5})</if>
+					</if>
+		<if test="attribute5Cond == null and attribute5 != null
+		and attribute5 != ''">
+			AND t.attribute5 = #{attribute5}
+		</if>
+				
+				</where>
+	</sql>
+
+	<select id="selectOne" resultMap="resultMap"
+		parameterType="com.midea.isc.api.param.CodeConfigcacheParam">
+		
+		select t.*
+				from app_code_configcache t
+				<include refid="defaultWhereClause" />
+		<include refid="orderClause" />
+		limit 1
+
+			</select>
+
+	<select id="selectList" resultMap="resultMap"
+		parameterType="com.midea.isc.api.param.CodeConfigcacheParam">
+		
+		select t.*
+				from app_code_configcache t
+				<include refid="defaultWhereClause" />
+		<include refid="orderClause" />
+		<if test="limitClause != null and limitClause != ''">
+			${limitClause}
+		</if>
+
+			</select>
+
+	<select id="selectCount" resultType="java.lang.Integer"
+		parameterType="com.midea.isc.api.param.CodeConfigcacheParam">
+		select count(1) from app_code_configcache t
+				<include refid="defaultWhereClause" />
+	</select>
+
+	<select id="find" resultMap="resultMap"
+		parameterType="com.midea.isc.api.param.CodeConfigcacheParam">
+		
+		select t.*
+				from app_code_configcache t
+				<include refid="advancedWhereClause" />
+		<include refid="orderClause" />
+		<if test="limitClause != null and limitClause != ''">
+			${limitClause}
+		</if>
+
+			</select>
+
+	<select id="total" resultType="java.lang.Integer"
+		parameterType="com.midea.isc.api.param.CodeConfigcacheParam">
+		select count(1) from app_code_configcache t
+				<include refid="advancedWhereClause" />
+	</select>
+
+	<insert id="insert" parameterType="com.midea.isc.api.model.CodeConfigcache"
+		useGeneratedKeys="true" keyProperty="cacheId">
+		
+				insert into app_code_configcache(cache_id,config_id,config_code,expression,sequence,created_by,creation_date,last_updated_by,last_update_date,attribute1,attribute2,attribute3,attribute4,attribute5)
+		 values(#{cacheId},#{configId},#{configCode},#{expression},#{sequence},#{createdBy},now(),#{lastUpdatedBy},now(),#{attribute1},#{attribute2},#{attribute3},#{attribute4},#{attribute5})
+	</insert>
+
+	<insert id="insertBulk" parameterType="java.util.List"
+		useGeneratedKeys="true" keyProperty="cacheId">
+		insert into app_code_configcache(cache_id,config_id,config_code,expression,sequence,created_by,creation_date,last_updated_by,last_update_date,attribute1,attribute2,attribute3,attribute4,attribute5)
+		 values 
+ <foreach collection="list" item="obj" separator=","> 
+ (#{obj.cacheId},#{obj.configId},#{obj.configCode},#{obj.expression},#{obj.sequence},#{obj.createdBy},now(),#{obj.lastUpdatedBy},now(),#{obj.attribute1},#{obj.attribute2},#{obj.attribute3},#{obj.attribute4},#{obj.attribute5}) 
+ </foreach>
+	</insert>
+
+	
+	
+	<update id="update" parameterType="com.midea.isc.api.model.CodeConfigcache">
+		update app_code_configcache t 		set t.config_id=#{configId}			,t.config_code=#{configCode}			,t.expression=#{expression}			,t.sequence=#{sequence}			,t.last_updated_by=#{lastUpdatedBy}			,t.last_update_date=now()			,t.attribute1=#{attribute1}			,t.attribute2=#{attribute2}			,t.attribute3=#{attribute3}			,t.attribute4=#{attribute4}			,t.attribute5=#{attribute5}		 where t.cache_id=#{cacheId}
+	</update>
+
+	<update id="updateFields" parameterType="com.midea.isc.api.model.CodeConfigcache">
+		update app_code_configcache t 		set t.cache_id=#{cacheId}<if test="configId != null">			,t.config_id=#{configId}</if><if test="configCode != null">			,t.config_code=#{configCode}</if><if test="expression != null">			,t.expression=#{expression}</if><if test="sequence != null">			,t.sequence=#{sequence}</if>			,t.last_updated_by=#{lastUpdatedBy}			,t.last_update_date=now()<if test="attribute1 != null">			,t.attribute1=#{attribute1}</if><if test="attribute2 != null">			,t.attribute2=#{attribute2}</if><if test="attribute3 != null">			,t.attribute3=#{attribute3}</if><if test="attribute4 != null">			,t.attribute4=#{attribute4}</if><if test="attribute5 != null">			,t.attribute5=#{attribute5}</if>		 where t.cache_id=#{cacheId}
+	</update>
+
+	<update id="updateByOtsLock" parameterType="com.midea.isc.api.model.CodeConfigcache">
+		update app_code_configcache t 		set t.config_id=#{configId}			,t.config_code=#{configCode}			,t.expression=#{expression}			,t.sequence=#{sequence}			,t.last_updated_by=#{lastUpdatedBy}			,t.last_update_date=now()			,t.attribute1=#{attribute1}			,t.attribute2=#{attribute2}			,t.attribute3=#{attribute3}			,t.attribute4=#{attribute4}			,t.attribute5=#{attribute5}		 where t.cache_id=#{cacheId} and t.last_update_date = #{lastUpdateDate}
+	</update>
+
+	<update id="updateFieldsByOtsLock" parameterType="com.midea.isc.api.model.CodeConfigcache">
+		update app_code_configcache t 		set t.cache_id=#{cacheId}<if test="configId != null">			,t.config_id=#{configId}</if><if test="configCode != null">			,t.config_code=#{configCode}</if><if test="expression != null">			,t.expression=#{expression}</if><if test="sequence != null">			,t.sequence=#{sequence}</if>			,t.last_updated_by=#{lastUpdatedBy}			,t.last_update_date=now()<if test="attribute1 != null">			,t.attribute1=#{attribute1}</if><if test="attribute2 != null">			,t.attribute2=#{attribute2}</if><if test="attribute3 != null">			,t.attribute3=#{attribute3}</if><if test="attribute4 != null">			,t.attribute4=#{attribute4}</if><if test="attribute5 != null">			,t.attribute5=#{attribute5}</if>		 where t.cache_id=#{cacheId} and t.last_update_date = #{lastUpdateDate}
+	</update>
+
+	<update id="updateBulk" parameterType="java.util.List">
+		<foreach collection="list" separator=";" item="obj"> 	update app_code_configcache t 		set t.config_id=#{obj.configId}			,t.config_code=#{obj.configCode}			,t.expression=#{obj.expression}			,t.sequence=#{obj.sequence}			,t.last_updated_by=#{obj.lastUpdatedBy}			,t.last_update_date=now()			,t.attribute1=#{obj.attribute1}			,t.attribute2=#{obj.attribute2}			,t.attribute3=#{obj.attribute3}			,t.attribute4=#{obj.attribute4}			,t.attribute5=#{obj.attribute5}		 where t.cache_id=#{obj.cacheId} 	 </foreach>
+	</update>
+
+	<update id="updateFieldsBulk" parameterType="java.util.List">
+		<foreach collection="list" separator=";" item="obj"> 	update app_code_configcache t 		set t.cache_id=#{obj.cacheId}<if test="obj.configId != null">			,t.config_id=#{obj.configId}</if><if test="obj.configCode != null">			,t.config_code=#{obj.configCode}</if><if test="obj.expression != null">			,t.expression=#{obj.expression}</if><if test="obj.sequence != null">			,t.sequence=#{obj.sequence}</if>			,t.last_updated_by=#{obj.lastUpdatedBy}			,t.last_update_date=now()<if test="obj.attribute1 != null">			,t.attribute1=#{obj.attribute1}</if><if test="obj.attribute2 != null">			,t.attribute2=#{obj.attribute2}</if><if test="obj.attribute3 != null">			,t.attribute3=#{obj.attribute3}</if><if test="obj.attribute4 != null">			,t.attribute4=#{obj.attribute4}</if><if test="obj.attribute5 != null">			,t.attribute5=#{obj.attribute5}</if>		 where t.cache_id=#{obj.cacheId} 	 </foreach>
+	</update>
+
+	
+	<delete id="delete" parameterType="com.midea.isc.api.model.CodeConfigcache">
+		delete t	 from app_code_configcache t 		
+		<include refid="defaultWhereClause" />
+	</delete>
+
+	<delete id="deleteBulk" parameterType="java.util.List">
+		<foreach collection="list" separator=";" item="obj"> 
+	delete t	 from app_code_configcache t 		where t.cache_id=#{obj.cacheId} 	 </foreach>
+	</delete>
+
+	
+</mapper>   

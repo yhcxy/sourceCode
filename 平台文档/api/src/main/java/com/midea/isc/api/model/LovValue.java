@@ -1,0 +1,11 @@
+package com.midea.isc.api.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.midea.isc.common.model.BasicModel;
+
+@JsonIgnoreProperties(value = {
+		"attribute1", "attribute2", "attribute3", "attribute4", "attribute5"} , ignoreUnknown = true)
+public class LovValue extends BasicModel {	
+		private java.lang.Integer valueId;   	private java.lang.Integer typeId;   	private java.lang.String typeCode;   	private java.lang.String value;   	private java.lang.String description;   	private java.lang.Integer parentId;   	private java.lang.String parentValue;   	private java.lang.Integer seq;   //排序  序号小的排在前面	private java.lang.String enable;   	private java.lang.String label;   	public java.lang.Integer getValueId() {	    return this.valueId;	}	public void setValueId(java.lang.Integer valueId) {	    this.valueId=valueId;	}	public java.lang.Integer getTypeId() {	    return this.typeId;	}	public void setTypeId(java.lang.Integer typeId) {	    this.typeId=typeId;	}	public java.lang.String getTypeCode() {	    return this.typeCode;	}	public void setTypeCode(java.lang.String typeCode) {	    this.typeCode=typeCode;	}	public java.lang.String getValue() {	    return this.value;	}	public void setValue(java.lang.String value) {	    this.value=value;	}	public java.lang.String getDescription() {	    return this.description;	}	public void setDescription(java.lang.String description) {	    this.description=description;	}	public java.lang.Integer getParentId() {	    return this.parentId;	}	public void setParentId(java.lang.Integer parentId) {	    this.parentId=parentId;	}	public java.lang.String getParentValue() {	    return this.parentValue;	}	public void setParentValue(java.lang.String parentValue) {	    this.parentValue=parentValue;	}	public java.lang.Integer getSeq() {	    return this.seq;	}	public void setSeq(java.lang.Integer seq) {	    this.seq=seq;	}	public java.lang.String getEnable() {	    return this.enable;	}	public void setEnable(java.lang.String enable) {	    this.enable=enable;	}	public java.lang.String getLabel() {	    return this.label;	}	public void setLabel(java.lang.String label) {	    this.label=label;	}
+}
+

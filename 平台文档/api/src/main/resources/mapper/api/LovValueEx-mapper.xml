@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.midea.isc.api.mapper.LovValueMapper">
+	<select id="selectByApp" resultMap="resultMap"
+			parameterType="com.midea.isc.api.vo.LovValueParamVo">
+		select t.*
+		,tl.label
+		from app_lov_value t
+		join
+			app_lov_type type
+		on t.type_id = type.type_id and type.application = #{application}
+		left join app_lov_value_tl tl on
+		t.value_id=tl.value_id
+		and
+		tl.language=#{profile.__language}
+		<include refid="advancedWhereClause" />
+
+		order by t.seq asc
+		<if test="limitClause != null and limitClause != ''">
+			${limitClause}
+		</if>
+	</select>
+
+	<insert id="insertTL4Synchronize"
+			parameterType="list">
+		<foreach item="i" collection="list" separator=";">
+			insert into app_lov_value_tl(value_id,label,language,source_lang,creation_date,created_by,created_by_name,last_update_date,last_updated_by,last_updated_by_name)
+			values
+
+			(#{i.valueId}#{i.label},#{i.lang},#{i.language},now(),#{i.createdBy},#{i.createdByName},now(),#{i.lastUpdatedBy},#{i.lastUpdatedByName})
+		</foreach>
+	</insert>
+</mapper>   

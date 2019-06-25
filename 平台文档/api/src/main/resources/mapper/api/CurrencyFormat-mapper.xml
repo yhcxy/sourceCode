@@ -1,0 +1,794 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.midea.isc.api.mapper.CurrencyFormatMapper">
+	<resultMap id="resultMap"
+		type="com.midea.isc.api.model.CurrencyFormat">
+				<result column="format_id" property="formatId" />
+				<result column="currency_code" property="currencyCode" />
+				<result column="currency_symbol" property="currencySymbol" />
+				<result column="territory_code" property="territoryCode" />
+				<result column="description" property="description" />
+				<result column="currency_precision" property="currencyPrecision" />
+				<result column="thousands_separator" property="thousandsSeparator" />
+				<result column="decimal_separator" property="decimalSeparator" />
+				<result column="calculated_precision" property="calculatedPrecision" />
+				<result column="enabled" property="enabled" />
+				<result column="created_by" property="createdBy" />
+				<result column="creation_date" property="creationDate" />
+				<result column="last_updated_by" property="lastUpdatedBy" />
+				<result column="last_update_date" property="lastUpdateDate" />
+				<result column="attribute1" property="attribute1" />
+				<result column="attribute2" property="attribute2" />
+				<result column="attribute3" property="attribute3" />
+				<result column="attribute4" property="attribute4" />
+				<result column="attribute5" property="attribute5" />
+					</resultMap>
+
+	<sql id="orderClause">
+		<if test="orderFields == null or orderFields.size == 0">
+			order by t.format_id desc
+		</if>
+		<if test="orderFields != null and orderFields.size > 0">
+			order by
+			<foreach collection="orderFields" separator="," index="field"
+				item="direction">
+								<if test="field == 'formatId'">
+					<choose>
+						<when test="direction =='asc'">
+							t.format_id asc
+						</when>
+						<otherwise>
+							t.format_id desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'currencyCode'">
+					<choose>
+						<when test="direction =='asc'">
+							t.currency_code asc
+						</when>
+						<otherwise>
+							t.currency_code desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'currencySymbol'">
+					<choose>
+						<when test="direction =='asc'">
+							t.currency_symbol asc
+						</when>
+						<otherwise>
+							t.currency_symbol desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'territoryCode'">
+					<choose>
+						<when test="direction =='asc'">
+							t.territory_code asc
+						</when>
+						<otherwise>
+							t.territory_code desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'description'">
+					<choose>
+						<when test="direction =='asc'">
+							t.description asc
+						</when>
+						<otherwise>
+							t.description desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'currencyPrecision'">
+					<choose>
+						<when test="direction =='asc'">
+							t.currency_precision asc
+						</when>
+						<otherwise>
+							t.currency_precision desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'thousandsSeparator'">
+					<choose>
+						<when test="direction =='asc'">
+							t.thousands_separator asc
+						</when>
+						<otherwise>
+							t.thousands_separator desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'decimalSeparator'">
+					<choose>
+						<when test="direction =='asc'">
+							t.decimal_separator asc
+						</when>
+						<otherwise>
+							t.decimal_separator desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'calculatedPrecision'">
+					<choose>
+						<when test="direction =='asc'">
+							t.calculated_precision asc
+						</when>
+						<otherwise>
+							t.calculated_precision desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'enabled'">
+					<choose>
+						<when test="direction =='asc'">
+							t.enabled asc
+						</when>
+						<otherwise>
+							t.enabled desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'createdBy'">
+					<choose>
+						<when test="direction =='asc'">
+							t.created_by asc
+						</when>
+						<otherwise>
+							t.created_by desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'creationDate'">
+					<choose>
+						<when test="direction =='asc'">
+							t.creation_date asc
+						</when>
+						<otherwise>
+							t.creation_date desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'lastUpdatedBy'">
+					<choose>
+						<when test="direction =='asc'">
+							t.last_updated_by asc
+						</when>
+						<otherwise>
+							t.last_updated_by desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'lastUpdateDate'">
+					<choose>
+						<when test="direction =='asc'">
+							t.last_update_date asc
+						</when>
+						<otherwise>
+							t.last_update_date desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'attribute1'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attribute1 asc
+						</when>
+						<otherwise>
+							t.attribute1 desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'attribute2'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attribute2 asc
+						</when>
+						<otherwise>
+							t.attribute2 desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'attribute3'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attribute3 asc
+						</when>
+						<otherwise>
+							t.attribute3 desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'attribute4'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attribute4 asc
+						</when>
+						<otherwise>
+							t.attribute4 desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'attribute5'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attribute5 asc
+						</when>
+						<otherwise>
+							t.attribute5 desc
+						</otherwise>
+					</choose>
+				</if>
+											</foreach>
+		</if>
+	</sql>
+
+	<sql id="defaultWhereClause">
+		where 1=1 
+						<if test="formatId != null">and t.format_id = #{formatId}</if>
+								<if test="currencyCode != null and currencyCode != ''">and t.currency_code = #{currencyCode}</if>
+								<if test="currencySymbol != null and currencySymbol != ''">and t.currency_symbol = #{currencySymbol}</if>
+								<if test="territoryCode != null and territoryCode != ''">and t.territory_code = #{territoryCode}</if>
+								<if test="description != null and description != ''">and t.description = #{description}</if>
+						<if test="currencyPrecision != null">and t.currency_precision = #{currencyPrecision}</if>
+								<if test="thousandsSeparator != null and thousandsSeparator != ''">and t.thousands_separator = #{thousandsSeparator}</if>
+								<if test="decimalSeparator != null and decimalSeparator != ''">and t.decimal_separator = #{decimalSeparator}</if>
+						<if test="calculatedPrecision != null">and t.calculated_precision = #{calculatedPrecision}</if>
+								<if test="enabled != null and enabled != ''">and t.enabled = #{enabled}</if>
+								<if test="createdBy != null and createdBy != ''">and t.created_by = #{createdBy}</if>
+						<if test="creationDate != null">and t.creation_date = #{creationDate}</if>
+								<if test="lastUpdatedBy != null and lastUpdatedBy != ''">and t.last_updated_by = #{lastUpdatedBy}</if>
+						<if test="lastUpdateDate != null">and t.last_update_date = #{lastUpdateDate}</if>
+								<if test="attribute1 != null and attribute1 != ''">and t.attribute1 = #{attribute1}</if>
+								<if test="attribute2 != null and attribute2 != ''">and t.attribute2 = #{attribute2}</if>
+								<if test="attribute3 != null and attribute3 != ''">and t.attribute3 = #{attribute3}</if>
+								<if test="attribute4 != null and attribute4 != ''">and t.attribute4 = #{attribute4}</if>
+								<if test="attribute5 != null and attribute5 != ''">and t.attribute5 = #{attribute5}</if>
+					</sql>
+
+	<sql id="advancedWhereClause">
+		where 1=1 
+								<if test="formatIdCond != null and formatIdCond != '' and formatId != null">
+						<if test="formatIdCond == 'eq'">AND t.format_id = #{formatId}</if>
+			<if test="formatIdCond == 'ne'">AND t.format_id != #{formatId}
+			</if>
+			<if test="formatIdCond == 'lt'">AND t.format_id &lt; #{formatId}
+			</if>
+			<if test="formatIdCond == 'le'">AND t.format_id &lt;= #{formatId}
+			</if>
+			<if test="formatIdCond == 'gt'">AND t.format_id &gt; #{formatId}
+			</if>
+			<if test="formatIdCond == 'ge'">AND t.format_id &gt;= #{formatId}
+			</if>
+					</if>
+		<if test="formatIdCond == null and formatId != null">
+			AND t.format_id = #{formatId}
+		</if>
+												<if test="currencyCodeCond != null and currencyCodeCond != '' and currencyCode != null and currencyCode != ''">
+						<if test="currencyCodeCond == 'eq'">AND t.currency_code =
+				#{currencyCode}
+			</if>
+			<if test="currencyCodeCond == 'ne'">AND t.currency_code !=
+				#{currencyCode}
+			</if>
+			<if test="currencyCodeCond == 'me'">
+				AND t.currency_code in (
+				<foreach collection="currencyCode.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="currencyCodeCond == 'cn'">AND t.currency_code LIKE
+				CONCAT('%',#{currencyCode},'%')</if>
+			<if test="currencyCodeCond == 'bw'">AND t.currency_code LIKE
+				CONCAT(#{currencyCode},'%')</if>
+			<if test="currencyCodeCond == 'ew'">AND t.currency_code LIKE
+				CONCAT('%',#{currencyCode})</if>
+					</if>
+		<if test="currencyCodeCond == null and currencyCode != null
+		and currencyCode != ''">
+			AND t.currency_code = #{currencyCode}
+		</if>
+												<if test="currencySymbolCond != null and currencySymbolCond != '' and currencySymbol != null and currencySymbol != ''">
+						<if test="currencySymbolCond == 'eq'">AND t.currency_symbol =
+				#{currencySymbol}
+			</if>
+			<if test="currencySymbolCond == 'ne'">AND t.currency_symbol !=
+				#{currencySymbol}
+			</if>
+			<if test="currencySymbolCond == 'me'">
+				AND t.currency_symbol in (
+				<foreach collection="currencySymbol.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="currencySymbolCond == 'cn'">AND t.currency_symbol LIKE
+				CONCAT('%',#{currencySymbol},'%')</if>
+			<if test="currencySymbolCond == 'bw'">AND t.currency_symbol LIKE
+				CONCAT(#{currencySymbol},'%')</if>
+			<if test="currencySymbolCond == 'ew'">AND t.currency_symbol LIKE
+				CONCAT('%',#{currencySymbol})</if>
+					</if>
+		<if test="currencySymbolCond == null and currencySymbol != null
+		and currencySymbol != ''">
+			AND t.currency_symbol = #{currencySymbol}
+		</if>
+												<if test="territoryCodeCond != null and territoryCodeCond != '' and territoryCode != null and territoryCode != ''">
+						<if test="territoryCodeCond == 'eq'">AND t.territory_code =
+				#{territoryCode}
+			</if>
+			<if test="territoryCodeCond == 'ne'">AND t.territory_code !=
+				#{territoryCode}
+			</if>
+			<if test="territoryCodeCond == 'me'">
+				AND t.territory_code in (
+				<foreach collection="territoryCode.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="territoryCodeCond == 'cn'">AND t.territory_code LIKE
+				CONCAT('%',#{territoryCode},'%')</if>
+			<if test="territoryCodeCond == 'bw'">AND t.territory_code LIKE
+				CONCAT(#{territoryCode},'%')</if>
+			<if test="territoryCodeCond == 'ew'">AND t.territory_code LIKE
+				CONCAT('%',#{territoryCode})</if>
+					</if>
+		<if test="territoryCodeCond == null and territoryCode != null
+		and territoryCode != ''">
+			AND t.territory_code = #{territoryCode}
+		</if>
+												<if test="descriptionCond != null and descriptionCond != '' and description != null and description != ''">
+						<if test="descriptionCond == 'eq'">AND t.description =
+				#{description}
+			</if>
+			<if test="descriptionCond == 'ne'">AND t.description !=
+				#{description}
+			</if>
+			<if test="descriptionCond == 'me'">
+				AND t.description in (
+				<foreach collection="description.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="descriptionCond == 'cn'">AND t.description LIKE
+				CONCAT('%',#{description},'%')</if>
+			<if test="descriptionCond == 'bw'">AND t.description LIKE
+				CONCAT(#{description},'%')</if>
+			<if test="descriptionCond == 'ew'">AND t.description LIKE
+				CONCAT('%',#{description})</if>
+					</if>
+		<if test="descriptionCond == null and description != null
+		and description != ''">
+			AND t.description = #{description}
+		</if>
+										<if test="currencyPrecisionCond != null and currencyPrecisionCond != '' and currencyPrecision != null">
+						<if test="currencyPrecisionCond == 'eq'">AND t.currency_precision = #{currencyPrecision}</if>
+			<if test="currencyPrecisionCond == 'ne'">AND t.currency_precision != #{currencyPrecision}
+			</if>
+			<if test="currencyPrecisionCond == 'lt'">AND t.currency_precision &lt; #{currencyPrecision}
+			</if>
+			<if test="currencyPrecisionCond == 'le'">AND t.currency_precision &lt;= #{currencyPrecision}
+			</if>
+			<if test="currencyPrecisionCond == 'gt'">AND t.currency_precision &gt; #{currencyPrecision}
+			</if>
+			<if test="currencyPrecisionCond == 'ge'">AND t.currency_precision &gt;= #{currencyPrecision}
+			</if>
+					</if>
+		<if test="currencyPrecisionCond == null and currencyPrecision != null">
+			AND t.currency_precision = #{currencyPrecision}
+		</if>
+												<if test="thousandsSeparatorCond != null and thousandsSeparatorCond != '' and thousandsSeparator != null and thousandsSeparator != ''">
+						<if test="thousandsSeparatorCond == 'eq'">AND t.thousands_separator =
+				#{thousandsSeparator}
+			</if>
+			<if test="thousandsSeparatorCond == 'ne'">AND t.thousands_separator !=
+				#{thousandsSeparator}
+			</if>
+			<if test="thousandsSeparatorCond == 'me'">
+				AND t.thousands_separator in (
+				<foreach collection="thousandsSeparator.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="thousandsSeparatorCond == 'cn'">AND t.thousands_separator LIKE
+				CONCAT('%',#{thousandsSeparator},'%')</if>
+			<if test="thousandsSeparatorCond == 'bw'">AND t.thousands_separator LIKE
+				CONCAT(#{thousandsSeparator},'%')</if>
+			<if test="thousandsSeparatorCond == 'ew'">AND t.thousands_separator LIKE
+				CONCAT('%',#{thousandsSeparator})</if>
+					</if>
+		<if test="thousandsSeparatorCond == null and thousandsSeparator != null
+		and thousandsSeparator != ''">
+			AND t.thousands_separator = #{thousandsSeparator}
+		</if>
+												<if test="decimalSeparatorCond != null and decimalSeparatorCond != '' and decimalSeparator != null and decimalSeparator != ''">
+						<if test="decimalSeparatorCond == 'eq'">AND t.decimal_separator =
+				#{decimalSeparator}
+			</if>
+			<if test="decimalSeparatorCond == 'ne'">AND t.decimal_separator !=
+				#{decimalSeparator}
+			</if>
+			<if test="decimalSeparatorCond == 'me'">
+				AND t.decimal_separator in (
+				<foreach collection="decimalSeparator.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="decimalSeparatorCond == 'cn'">AND t.decimal_separator LIKE
+				CONCAT('%',#{decimalSeparator},'%')</if>
+			<if test="decimalSeparatorCond == 'bw'">AND t.decimal_separator LIKE
+				CONCAT(#{decimalSeparator},'%')</if>
+			<if test="decimalSeparatorCond == 'ew'">AND t.decimal_separator LIKE
+				CONCAT('%',#{decimalSeparator})</if>
+					</if>
+		<if test="decimalSeparatorCond == null and decimalSeparator != null
+		and decimalSeparator != ''">
+			AND t.decimal_separator = #{decimalSeparator}
+		</if>
+										<if test="calculatedPrecisionCond != null and calculatedPrecisionCond != '' and calculatedPrecision != null">
+						<if test="calculatedPrecisionCond == 'eq'">AND t.calculated_precision = #{calculatedPrecision}</if>
+			<if test="calculatedPrecisionCond == 'ne'">AND t.calculated_precision != #{calculatedPrecision}
+			</if>
+			<if test="calculatedPrecisionCond == 'lt'">AND t.calculated_precision &lt; #{calculatedPrecision}
+			</if>
+			<if test="calculatedPrecisionCond == 'le'">AND t.calculated_precision &lt;= #{calculatedPrecision}
+			</if>
+			<if test="calculatedPrecisionCond == 'gt'">AND t.calculated_precision &gt; #{calculatedPrecision}
+			</if>
+			<if test="calculatedPrecisionCond == 'ge'">AND t.calculated_precision &gt;= #{calculatedPrecision}
+			</if>
+					</if>
+		<if test="calculatedPrecisionCond == null and calculatedPrecision != null">
+			AND t.calculated_precision = #{calculatedPrecision}
+		</if>
+												<if test="enabledCond != null and enabledCond != '' and enabled != null and enabled != ''">
+						<if test="enabledCond == 'eq'">AND t.enabled =
+				#{enabled}
+			</if>
+			<if test="enabledCond == 'ne'">AND t.enabled !=
+				#{enabled}
+			</if>
+			<if test="enabledCond == 'me'">
+				AND t.enabled in (
+				<foreach collection="enabled.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="enabledCond == 'cn'">AND t.enabled LIKE
+				CONCAT('%',#{enabled},'%')</if>
+			<if test="enabledCond == 'bw'">AND t.enabled LIKE
+				CONCAT(#{enabled},'%')</if>
+			<if test="enabledCond == 'ew'">AND t.enabled LIKE
+				CONCAT('%',#{enabled})</if>
+					</if>
+		<if test="enabledCond == null and enabled != null
+		and enabled != ''">
+			AND t.enabled = #{enabled}
+		</if>
+												<if test="createdByCond != null and createdByCond != '' and createdBy != null and createdBy != ''">
+						<if test="createdByCond == 'eq'">AND t.created_by =
+				#{createdBy}
+			</if>
+			<if test="createdByCond == 'ne'">AND t.created_by !=
+				#{createdBy}
+			</if>
+			<if test="createdByCond == 'me'">
+				AND t.created_by in (
+				<foreach collection="createdBy.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="createdByCond == 'cn'">AND t.created_by LIKE
+				CONCAT('%',#{createdBy},'%')</if>
+			<if test="createdByCond == 'bw'">AND t.created_by LIKE
+				CONCAT(#{createdBy},'%')</if>
+			<if test="createdByCond == 'ew'">AND t.created_by LIKE
+				CONCAT('%',#{createdBy})</if>
+					</if>
+		<if test="createdByCond == null and createdBy != null
+		and createdBy != ''">
+			AND t.created_by = #{createdBy}
+		</if>
+								<if test="creationDateFrom != null and creationDateTo == null">
+			AND t.creation_date &gt;= #{creationDateFrom}
+		</if>
+		<if test="creationDateFrom == null and creationDateTo != null">
+			AND t.creation_date &lt;= #{creationDateTo}
+		</if>
+		<if test="creationDateFrom != null and creationDateTo != null">
+			AND t.creation_date &gt;= #{creationDateFrom} AND
+			t.creation_date &lt;= #{creationDateTo}
+		</if>
+												<if test="lastUpdatedByCond != null and lastUpdatedByCond != '' and lastUpdatedBy != null and lastUpdatedBy != ''">
+						<if test="lastUpdatedByCond == 'eq'">AND t.last_updated_by =
+				#{lastUpdatedBy}
+			</if>
+			<if test="lastUpdatedByCond == 'ne'">AND t.last_updated_by !=
+				#{lastUpdatedBy}
+			</if>
+			<if test="lastUpdatedByCond == 'me'">
+				AND t.last_updated_by in (
+				<foreach collection="lastUpdatedBy.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="lastUpdatedByCond == 'cn'">AND t.last_updated_by LIKE
+				CONCAT('%',#{lastUpdatedBy},'%')</if>
+			<if test="lastUpdatedByCond == 'bw'">AND t.last_updated_by LIKE
+				CONCAT(#{lastUpdatedBy},'%')</if>
+			<if test="lastUpdatedByCond == 'ew'">AND t.last_updated_by LIKE
+				CONCAT('%',#{lastUpdatedBy})</if>
+					</if>
+		<if test="lastUpdatedByCond == null and lastUpdatedBy != null
+		and lastUpdatedBy != ''">
+			AND t.last_updated_by = #{lastUpdatedBy}
+		</if>
+								<if test="lastUpdateDateFrom != null and lastUpdateDateTo == null">
+			AND t.last_update_date &gt;= #{lastUpdateDateFrom}
+		</if>
+		<if test="lastUpdateDateFrom == null and lastUpdateDateTo != null">
+			AND t.last_update_date &lt;= #{lastUpdateDateTo}
+		</if>
+		<if test="lastUpdateDateFrom != null and lastUpdateDateTo != null">
+			AND t.last_update_date &gt;= #{lastUpdateDateFrom} AND
+			t.last_update_date &lt;= #{lastUpdateDateTo}
+		</if>
+												<if test="attribute1Cond != null and attribute1Cond != '' and attribute1 != null and attribute1 != ''">
+						<if test="attribute1Cond == 'eq'">AND t.attribute1 =
+				#{attribute1}
+			</if>
+			<if test="attribute1Cond == 'ne'">AND t.attribute1 !=
+				#{attribute1}
+			</if>
+			<if test="attribute1Cond == 'me'">
+				AND t.attribute1 in (
+				<foreach collection="attribute1.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="attribute1Cond == 'cn'">AND t.attribute1 LIKE
+				CONCAT('%',#{attribute1},'%')</if>
+			<if test="attribute1Cond == 'bw'">AND t.attribute1 LIKE
+				CONCAT(#{attribute1},'%')</if>
+			<if test="attribute1Cond == 'ew'">AND t.attribute1 LIKE
+				CONCAT('%',#{attribute1})</if>
+					</if>
+		<if test="attribute1Cond == null and attribute1 != null
+		and attribute1 != ''">
+			AND t.attribute1 = #{attribute1}
+		</if>
+												<if test="attribute2Cond != null and attribute2Cond != '' and attribute2 != null and attribute2 != ''">
+						<if test="attribute2Cond == 'eq'">AND t.attribute2 =
+				#{attribute2}
+			</if>
+			<if test="attribute2Cond == 'ne'">AND t.attribute2 !=
+				#{attribute2}
+			</if>
+			<if test="attribute2Cond == 'me'">
+				AND t.attribute2 in (
+				<foreach collection="attribute2.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="attribute2Cond == 'cn'">AND t.attribute2 LIKE
+				CONCAT('%',#{attribute2},'%')</if>
+			<if test="attribute2Cond == 'bw'">AND t.attribute2 LIKE
+				CONCAT(#{attribute2},'%')</if>
+			<if test="attribute2Cond == 'ew'">AND t.attribute2 LIKE
+				CONCAT('%',#{attribute2})</if>
+					</if>
+		<if test="attribute2Cond == null and attribute2 != null
+		and attribute2 != ''">
+			AND t.attribute2 = #{attribute2}
+		</if>
+												<if test="attribute3Cond != null and attribute3Cond != '' and attribute3 != null and attribute3 != ''">
+						<if test="attribute3Cond == 'eq'">AND t.attribute3 =
+				#{attribute3}
+			</if>
+			<if test="attribute3Cond == 'ne'">AND t.attribute3 !=
+				#{attribute3}
+			</if>
+			<if test="attribute3Cond == 'me'">
+				AND t.attribute3 in (
+				<foreach collection="attribute3.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="attribute3Cond == 'cn'">AND t.attribute3 LIKE
+				CONCAT('%',#{attribute3},'%')</if>
+			<if test="attribute3Cond == 'bw'">AND t.attribute3 LIKE
+				CONCAT(#{attribute3},'%')</if>
+			<if test="attribute3Cond == 'ew'">AND t.attribute3 LIKE
+				CONCAT('%',#{attribute3})</if>
+					</if>
+		<if test="attribute3Cond == null and attribute3 != null
+		and attribute3 != ''">
+			AND t.attribute3 = #{attribute3}
+		</if>
+												<if test="attribute4Cond != null and attribute4Cond != '' and attribute4 != null and attribute4 != ''">
+						<if test="attribute4Cond == 'eq'">AND t.attribute4 =
+				#{attribute4}
+			</if>
+			<if test="attribute4Cond == 'ne'">AND t.attribute4 !=
+				#{attribute4}
+			</if>
+			<if test="attribute4Cond == 'me'">
+				AND t.attribute4 in (
+				<foreach collection="attribute4.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="attribute4Cond == 'cn'">AND t.attribute4 LIKE
+				CONCAT('%',#{attribute4},'%')</if>
+			<if test="attribute4Cond == 'bw'">AND t.attribute4 LIKE
+				CONCAT(#{attribute4},'%')</if>
+			<if test="attribute4Cond == 'ew'">AND t.attribute4 LIKE
+				CONCAT('%',#{attribute4})</if>
+					</if>
+		<if test="attribute4Cond == null and attribute4 != null
+		and attribute4 != ''">
+			AND t.attribute4 = #{attribute4}
+		</if>
+												<if test="attribute5Cond != null and attribute5Cond != '' and attribute5 != null and attribute5 != ''">
+						<if test="attribute5Cond == 'eq'">AND t.attribute5 =
+				#{attribute5}
+			</if>
+			<if test="attribute5Cond == 'ne'">AND t.attribute5 !=
+				#{attribute5}
+			</if>
+			<if test="attribute5Cond == 'me'">
+				AND t.attribute5 in (
+				<foreach collection="attribute5.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="attribute5Cond == 'cn'">AND t.attribute5 LIKE
+				CONCAT('%',#{attribute5},'%')</if>
+			<if test="attribute5Cond == 'bw'">AND t.attribute5 LIKE
+				CONCAT(#{attribute5},'%')</if>
+			<if test="attribute5Cond == 'ew'">AND t.attribute5 LIKE
+				CONCAT('%',#{attribute5})</if>
+					</if>
+		<if test="attribute5Cond == null and attribute5 != null
+		and attribute5 != ''">
+			AND t.attribute5 = #{attribute5}
+		</if>
+				
+			</sql>
+
+	<select id="selectOne" resultMap="resultMap"
+		parameterType="com.midea.isc.api.param.CurrencyFormatParam">
+		
+		select t.*
+				from sys_currency_format t
+				<include refid="defaultWhereClause" />
+		<include refid="orderClause" />
+		limit 1
+
+			</select>
+
+	<select id="selectList" resultMap="resultMap"
+		parameterType="com.midea.isc.api.param.CurrencyFormatParam">
+		
+		select t.*
+				from sys_currency_format t
+				<include refid="defaultWhereClause" />
+		<include refid="orderClause" />
+		<if test="limitClause != null and limitClause != ''">
+			${limitClause}
+		</if>
+
+			</select>
+
+	<select id="selectCount" resultType="java.lang.Integer"
+		parameterType="com.midea.isc.api.param.CurrencyFormatParam">
+		select count(1) from sys_currency_format t
+				<include refid="defaultWhereClause" />
+	</select>
+
+	<select id="find" resultMap="resultMap"
+		parameterType="com.midea.isc.api.param.CurrencyFormatParam">
+		
+		select t.*
+				from sys_currency_format t
+				<include refid="advancedWhereClause" />
+		<include refid="orderClause" />
+		<if test="limitClause != null and limitClause != ''">
+			${limitClause}
+		</if>
+
+			</select>
+
+	<select id="total" resultType="java.lang.Integer"
+		parameterType="com.midea.isc.api.param.CurrencyFormatParam">
+		select count(1) from sys_currency_format t
+				<include refid="advancedWhereClause" />
+	</select>
+
+	<insert id="insert" parameterType="com.midea.isc.api.model.CurrencyFormat"
+		useGeneratedKeys="true" keyProperty="formatId">
+		
+				insert into sys_currency_format(format_id,currency_code,currency_symbol,territory_code,description,currency_precision,thousands_separator,decimal_separator,calculated_precision,enabled,created_by,creation_date,last_updated_by,last_update_date,attribute1,attribute2,attribute3,attribute4,attribute5)
+		 values(#{formatId},#{currencyCode},#{currencySymbol},#{territoryCode},#{description},#{currencyPrecision},#{thousandsSeparator},#{decimalSeparator},#{calculatedPrecision},#{enabled},#{createdBy},now(),#{lastUpdatedBy},now(),#{attribute1},#{attribute2},#{attribute3},#{attribute4},#{attribute5})
+	</insert>
+
+	<insert id="insertBulk" parameterType="java.util.List"
+		useGeneratedKeys="true" keyProperty="formatId">
+		insert into sys_currency_format(format_id,currency_code,currency_symbol,territory_code,description,currency_precision,thousands_separator,decimal_separator,calculated_precision,enabled,created_by,creation_date,last_updated_by,last_update_date,attribute1,attribute2,attribute3,attribute4,attribute5)
+		 values 
+ <foreach collection="list" item="obj" separator=","> 
+ (#{obj.formatId},#{obj.currencyCode},#{obj.currencySymbol},#{obj.territoryCode},#{obj.description},#{obj.currencyPrecision},#{obj.thousandsSeparator},#{obj.decimalSeparator},#{obj.calculatedPrecision},#{obj.enabled},#{obj.createdBy},now(),#{obj.lastUpdatedBy},now(),#{obj.attribute1},#{obj.attribute2},#{obj.attribute3},#{obj.attribute4},#{obj.attribute5}) 
+ </foreach>
+	</insert>
+
+	
+	
+	<update id="update" parameterType="com.midea.isc.api.model.CurrencyFormat">
+		update sys_currency_format t 		set t.currency_code=#{currencyCode}			,t.currency_symbol=#{currencySymbol}			,t.territory_code=#{territoryCode}			,t.description=#{description}			,t.currency_precision=#{currencyPrecision}			,t.thousands_separator=#{thousandsSeparator}			,t.decimal_separator=#{decimalSeparator}			,t.calculated_precision=#{calculatedPrecision}			,t.enabled=#{enabled}			,t.last_updated_by=#{lastUpdatedBy}			,t.last_update_date=now()			,t.attribute1=#{attribute1}			,t.attribute2=#{attribute2}			,t.attribute3=#{attribute3}			,t.attribute4=#{attribute4}			,t.attribute5=#{attribute5}		 where t.format_id=#{formatId}
+	</update>
+
+	<update id="updateFields" parameterType="com.midea.isc.api.model.CurrencyFormat">
+		update sys_currency_format t 		set t.format_id=#{formatId}<if test="currencyCode != null">			,t.currency_code=#{currencyCode}</if><if test="currencySymbol != null">			,t.currency_symbol=#{currencySymbol}</if><if test="territoryCode != null">			,t.territory_code=#{territoryCode}</if><if test="description != null">			,t.description=#{description}</if><if test="currencyPrecision != null">			,t.currency_precision=#{currencyPrecision}</if><if test="thousandsSeparator != null">			,t.thousands_separator=#{thousandsSeparator}</if><if test="decimalSeparator != null">			,t.decimal_separator=#{decimalSeparator}</if><if test="calculatedPrecision != null">			,t.calculated_precision=#{calculatedPrecision}</if><if test="enabled != null">			,t.enabled=#{enabled}</if>			,t.last_updated_by=#{lastUpdatedBy}			,t.last_update_date=now()<if test="attribute1 != null">			,t.attribute1=#{attribute1}</if><if test="attribute2 != null">			,t.attribute2=#{attribute2}</if><if test="attribute3 != null">			,t.attribute3=#{attribute3}</if><if test="attribute4 != null">			,t.attribute4=#{attribute4}</if><if test="attribute5 != null">			,t.attribute5=#{attribute5}</if>		 where t.format_id=#{formatId}
+	</update>
+
+	<update id="updateByOtsLock" parameterType="com.midea.isc.api.model.CurrencyFormat">
+		update sys_currency_format t 		set t.currency_code=#{currencyCode}			,t.currency_symbol=#{currencySymbol}			,t.territory_code=#{territoryCode}			,t.description=#{description}			,t.currency_precision=#{currencyPrecision}			,t.thousands_separator=#{thousandsSeparator}			,t.decimal_separator=#{decimalSeparator}			,t.calculated_precision=#{calculatedPrecision}			,t.enabled=#{enabled}			,t.last_updated_by=#{lastUpdatedBy}			,t.last_update_date=now()			,t.attribute1=#{attribute1}			,t.attribute2=#{attribute2}			,t.attribute3=#{attribute3}			,t.attribute4=#{attribute4}			,t.attribute5=#{attribute5}		 where t.format_id=#{formatId} and t.last_update_date = #{lastUpdateDate}
+	</update>
+
+	<update id="updateFieldsByOtsLock" parameterType="com.midea.isc.api.model.CurrencyFormat">
+		update sys_currency_format t 		set t.format_id=#{formatId}<if test="currencyCode != null">			,t.currency_code=#{currencyCode}</if><if test="currencySymbol != null">			,t.currency_symbol=#{currencySymbol}</if><if test="territoryCode != null">			,t.territory_code=#{territoryCode}</if><if test="description != null">			,t.description=#{description}</if><if test="currencyPrecision != null">			,t.currency_precision=#{currencyPrecision}</if><if test="thousandsSeparator != null">			,t.thousands_separator=#{thousandsSeparator}</if><if test="decimalSeparator != null">			,t.decimal_separator=#{decimalSeparator}</if><if test="calculatedPrecision != null">			,t.calculated_precision=#{calculatedPrecision}</if><if test="enabled != null">			,t.enabled=#{enabled}</if>			,t.last_updated_by=#{lastUpdatedBy}			,t.last_update_date=now()<if test="attribute1 != null">			,t.attribute1=#{attribute1}</if><if test="attribute2 != null">			,t.attribute2=#{attribute2}</if><if test="attribute3 != null">			,t.attribute3=#{attribute3}</if><if test="attribute4 != null">			,t.attribute4=#{attribute4}</if><if test="attribute5 != null">			,t.attribute5=#{attribute5}</if>		 where t.format_id=#{formatId} and t.last_update_date = #{lastUpdateDate}
+	</update>
+
+	<update id="updateBulk" parameterType="java.util.List">
+		<foreach collection="list" separator=";" item="obj"> 	update sys_currency_format t 		set t.currency_code=#{obj.currencyCode}			,t.currency_symbol=#{obj.currencySymbol}			,t.territory_code=#{obj.territoryCode}			,t.description=#{obj.description}			,t.currency_precision=#{obj.currencyPrecision}			,t.thousands_separator=#{obj.thousandsSeparator}			,t.decimal_separator=#{obj.decimalSeparator}			,t.calculated_precision=#{obj.calculatedPrecision}			,t.enabled=#{obj.enabled}			,t.last_updated_by=#{obj.lastUpdatedBy}			,t.last_update_date=now()			,t.attribute1=#{obj.attribute1}			,t.attribute2=#{obj.attribute2}			,t.attribute3=#{obj.attribute3}			,t.attribute4=#{obj.attribute4}			,t.attribute5=#{obj.attribute5}		 where t.format_id=#{obj.formatId} 	 </foreach>
+	</update>
+
+	<update id="updateFieldsBulk" parameterType="java.util.List">
+		<foreach collection="list" separator=";" item="obj"> 	update sys_currency_format t 		set t.format_id=#{obj.formatId}<if test="obj.currencyCode != null">			,t.currency_code=#{obj.currencyCode}</if><if test="obj.currencySymbol != null">			,t.currency_symbol=#{obj.currencySymbol}</if><if test="obj.territoryCode != null">			,t.territory_code=#{obj.territoryCode}</if><if test="obj.description != null">			,t.description=#{obj.description}</if><if test="obj.currencyPrecision != null">			,t.currency_precision=#{obj.currencyPrecision}</if><if test="obj.thousandsSeparator != null">			,t.thousands_separator=#{obj.thousandsSeparator}</if><if test="obj.decimalSeparator != null">			,t.decimal_separator=#{obj.decimalSeparator}</if><if test="obj.calculatedPrecision != null">			,t.calculated_precision=#{obj.calculatedPrecision}</if><if test="obj.enabled != null">			,t.enabled=#{obj.enabled}</if>			,t.last_updated_by=#{obj.lastUpdatedBy}			,t.last_update_date=now()<if test="obj.attribute1 != null">			,t.attribute1=#{obj.attribute1}</if><if test="obj.attribute2 != null">			,t.attribute2=#{obj.attribute2}</if><if test="obj.attribute3 != null">			,t.attribute3=#{obj.attribute3}</if><if test="obj.attribute4 != null">			,t.attribute4=#{obj.attribute4}</if><if test="obj.attribute5 != null">			,t.attribute5=#{obj.attribute5}</if>		 where t.format_id=#{obj.formatId} 	 </foreach>
+	</update>
+
+	
+	<delete id="delete" parameterType="com.midea.isc.api.model.CurrencyFormat">
+		delete t	 from sys_currency_format t 		
+		<include refid="defaultWhereClause" />
+	</delete>
+
+	<delete id="deleteBulk" parameterType="java.util.List">
+		<foreach collection="list" separator=";" item="obj"> 
+	delete t	 from sys_currency_format t 		where t.format_id=#{obj.formatId} 	 </foreach>
+	</delete>
+
+	
+</mapper>   

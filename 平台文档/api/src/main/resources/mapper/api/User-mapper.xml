@@ -1,0 +1,1266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.midea.isc.api.mapper.UserMapper">
+	<resultMap id="resultMap"
+		type="com.midea.isc.api.model.User">
+				<result column="user_id" property="userId" />
+				<result column="user_name" property="userName" />
+				<result column="password" property="password" />
+				<result column="disable_date" property="disableDate" />
+				<result column="full_name" property="fullName" />
+				<result column="gender" property="gender" />
+				<result column="email_address" property="emailAddress" />
+				<result column="mobile" property="mobile" />
+				<result column="nickname" property="nickname" />
+				<result column="email_alias" property="emailAlias" />
+				<result column="timezone" property="timezone" />
+				<result column="country" property="country" />
+				<result column="language" property="language" />
+				<result column="attribute1" property="attribute1" />
+				<result column="attribute2" property="attribute2" />
+				<result column="attribute3" property="attribute3" />
+				<result column="attribute4" property="attribute4" />
+				<result column="attribute5" property="attribute5" />
+				<result column="created_by" property="createdBy" />
+				<result column="creation_date" property="creationDate" />
+				<result column="last_updated_by" property="lastUpdatedBy" />
+				<result column="last_update_date" property="lastUpdateDate" />
+				<result column="ldap_id" property="ldapId" />
+				<result column="ldap_sync_flag" property="ldapSyncFlag" />
+				<result column="ldap_sync_dt" property="ldapSyncDt" />
+				<result column="extenal_user_flag" property="extenalUserFlag" />
+				<result column="user_type" property="userType" />
+				<result column="emp_status" property="empStatus" />
+				<result column="emp_num" property="empNum" />
+				<result column="org_code" property="orgCode" />
+				<result column="enu_name" property="enuName" />
+				<result column="primary_position_id" property="primaryPositionId" />
+					</resultMap>
+
+	<sql id="orderClause">
+		<if test="orderFields == null or orderFields.size == 0">
+			order by t.user_id desc
+		</if>
+		<if test="orderFields != null and orderFields.size > 0">
+			order by
+			<foreach collection="orderFields" separator="," index="field"
+				item="direction">
+								<if test="field == 'userId'">
+					<choose>
+						<when test="direction =='asc'">
+							t.user_id asc
+						</when>
+						<otherwise>
+							t.user_id desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'userName'">
+					<choose>
+						<when test="direction =='asc'">
+							t.user_name asc
+						</when>
+						<otherwise>
+							t.user_name desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'password'">
+					<choose>
+						<when test="direction =='asc'">
+							t.password asc
+						</when>
+						<otherwise>
+							t.password desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'disableDate'">
+					<choose>
+						<when test="direction =='asc'">
+							t.disable_date asc
+						</when>
+						<otherwise>
+							t.disable_date desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'fullName'">
+					<choose>
+						<when test="direction =='asc'">
+							t.full_name asc
+						</when>
+						<otherwise>
+							t.full_name desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'gender'">
+					<choose>
+						<when test="direction =='asc'">
+							t.gender asc
+						</when>
+						<otherwise>
+							t.gender desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'emailAddress'">
+					<choose>
+						<when test="direction =='asc'">
+							t.email_address asc
+						</when>
+						<otherwise>
+							t.email_address desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'mobile'">
+					<choose>
+						<when test="direction =='asc'">
+							t.mobile asc
+						</when>
+						<otherwise>
+							t.mobile desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'nickname'">
+					<choose>
+						<when test="direction =='asc'">
+							t.nickname asc
+						</when>
+						<otherwise>
+							t.nickname desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'emailAlias'">
+					<choose>
+						<when test="direction =='asc'">
+							t.email_alias asc
+						</when>
+						<otherwise>
+							t.email_alias desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'timezone'">
+					<choose>
+						<when test="direction =='asc'">
+							t.timezone asc
+						</when>
+						<otherwise>
+							t.timezone desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'country'">
+					<choose>
+						<when test="direction =='asc'">
+							t.country asc
+						</when>
+						<otherwise>
+							t.country desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'language'">
+					<choose>
+						<when test="direction =='asc'">
+							t.language asc
+						</when>
+						<otherwise>
+							t.language desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'attribute1'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attribute1 asc
+						</when>
+						<otherwise>
+							t.attribute1 desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'attribute2'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attribute2 asc
+						</when>
+						<otherwise>
+							t.attribute2 desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'attribute3'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attribute3 asc
+						</when>
+						<otherwise>
+							t.attribute3 desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'attribute4'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attribute4 asc
+						</when>
+						<otherwise>
+							t.attribute4 desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'attribute5'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attribute5 asc
+						</when>
+						<otherwise>
+							t.attribute5 desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'createdBy'">
+					<choose>
+						<when test="direction =='asc'">
+							t.created_by asc
+						</when>
+						<otherwise>
+							t.created_by desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'creationDate'">
+					<choose>
+						<when test="direction =='asc'">
+							t.creation_date asc
+						</when>
+						<otherwise>
+							t.creation_date desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'lastUpdatedBy'">
+					<choose>
+						<when test="direction =='asc'">
+							t.last_updated_by asc
+						</when>
+						<otherwise>
+							t.last_updated_by desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'lastUpdateDate'">
+					<choose>
+						<when test="direction =='asc'">
+							t.last_update_date asc
+						</when>
+						<otherwise>
+							t.last_update_date desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'ldapId'">
+					<choose>
+						<when test="direction =='asc'">
+							t.ldap_id asc
+						</when>
+						<otherwise>
+							t.ldap_id desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'ldapSyncFlag'">
+					<choose>
+						<when test="direction =='asc'">
+							t.ldap_sync_flag asc
+						</when>
+						<otherwise>
+							t.ldap_sync_flag desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'ldapSyncDt'">
+					<choose>
+						<when test="direction =='asc'">
+							t.ldap_sync_dt asc
+						</when>
+						<otherwise>
+							t.ldap_sync_dt desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'extenalUserFlag'">
+					<choose>
+						<when test="direction =='asc'">
+							t.extenal_user_flag asc
+						</when>
+						<otherwise>
+							t.extenal_user_flag desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'userType'">
+					<choose>
+						<when test="direction =='asc'">
+							t.user_type asc
+						</when>
+						<otherwise>
+							t.user_type desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'empStatus'">
+					<choose>
+						<when test="direction =='asc'">
+							t.emp_status asc
+						</when>
+						<otherwise>
+							t.emp_status desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'empNum'">
+					<choose>
+						<when test="direction =='asc'">
+							t.emp_num asc
+						</when>
+						<otherwise>
+							t.emp_num desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'orgCode'">
+					<choose>
+						<when test="direction =='asc'">
+							t.org_code asc
+						</when>
+						<otherwise>
+							t.org_code desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'enuName'">
+					<choose>
+						<when test="direction =='asc'">
+							t.enu_name asc
+						</when>
+						<otherwise>
+							t.enu_name desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'primaryPositionId'">
+					<choose>
+						<when test="direction =='asc'">
+							t.primary_position_id asc
+						</when>
+						<otherwise>
+							t.primary_position_id desc
+						</otherwise>
+					</choose>
+				</if>
+											</foreach>
+		</if>
+	</sql>
+
+	<sql id="defaultWhereClause">
+		where 1=1 
+						<if test="userId != null">and t.user_id = #{userId}</if>
+								<if test="userName != null and userName != ''">and t.user_name = #{userName}</if>
+								<if test="password != null and password != ''">and t.password = #{password}</if>
+						<if test="disableDate != null">and t.disable_date = #{disableDate}</if>
+								<if test="fullName != null and fullName != ''">and t.full_name = #{fullName}</if>
+								<if test="gender != null and gender != ''">and t.gender = #{gender}</if>
+								<if test="emailAddress != null and emailAddress != ''">and t.email_address = #{emailAddress}</if>
+								<if test="mobile != null and mobile != ''">and t.mobile = #{mobile}</if>
+								<if test="nickname != null and nickname != ''">and t.nickname = #{nickname}</if>
+								<if test="emailAlias != null and emailAlias != ''">and t.email_alias = #{emailAlias}</if>
+								<if test="timezone != null and timezone != ''">and t.timezone = #{timezone}</if>
+								<if test="country != null and country != ''">and t.country = #{country}</if>
+								<if test="language != null and language != ''">and t.language = #{language}</if>
+								<if test="attribute1 != null and attribute1 != ''">and t.attribute1 = #{attribute1}</if>
+								<if test="attribute2 != null and attribute2 != ''">and t.attribute2 = #{attribute2}</if>
+								<if test="attribute3 != null and attribute3 != ''">and t.attribute3 = #{attribute3}</if>
+								<if test="attribute4 != null and attribute4 != ''">and t.attribute4 = #{attribute4}</if>
+								<if test="attribute5 != null and attribute5 != ''">and t.attribute5 = #{attribute5}</if>
+								<if test="createdBy != null and createdBy != ''">and t.created_by = #{createdBy}</if>
+						<if test="creationDate != null">and t.creation_date = #{creationDate}</if>
+								<if test="lastUpdatedBy != null and lastUpdatedBy != ''">and t.last_updated_by = #{lastUpdatedBy}</if>
+						<if test="lastUpdateDate != null">and t.last_update_date = #{lastUpdateDate}</if>
+								<if test="ldapId != null and ldapId != ''">and t.ldap_id = #{ldapId}</if>
+								<if test="ldapSyncFlag != null and ldapSyncFlag != ''">and t.ldap_sync_flag = #{ldapSyncFlag}</if>
+						<if test="ldapSyncDt != null">and t.ldap_sync_dt = #{ldapSyncDt}</if>
+								<if test="extenalUserFlag != null and extenalUserFlag != ''">and t.extenal_user_flag = #{extenalUserFlag}</if>
+								<if test="userType != null and userType != ''">and t.user_type = #{userType}</if>
+								<if test="empStatus != null and empStatus != ''">and t.emp_status = #{empStatus}</if>
+								<if test="empNum != null and empNum != ''">and t.emp_num = #{empNum}</if>
+								<if test="orgCode != null and orgCode != ''">and t.org_code = #{orgCode}</if>
+								<if test="enuName != null and enuName != ''">and t.enu_name = #{enuName}</if>
+						<if test="primaryPositionId != null">and t.primary_position_id = #{primaryPositionId}</if>
+					</sql>
+
+	<sql id="advancedWhereClause">
+		where 1=1 
+								<if test="userIdCond != null and userIdCond != '' and userId != null">
+						<if test="userIdCond == 'eq'">AND t.user_id = #{userId}</if>
+			<if test="userIdCond == 'ne'">AND t.user_id != #{userId}
+			</if>
+			<if test="userIdCond == 'lt'">AND t.user_id &lt; #{userId}
+			</if>
+			<if test="userIdCond == 'le'">AND t.user_id &lt;= #{userId}
+			</if>
+			<if test="userIdCond == 'gt'">AND t.user_id &gt; #{userId}
+			</if>
+			<if test="userIdCond == 'ge'">AND t.user_id &gt;= #{userId}
+			</if>
+					</if>
+		<if test="userIdCond == null and userId != null">
+			AND t.user_id = #{userId}
+		</if>
+												<if test="userNameCond != null and userNameCond != '' and userName != null and userName != ''">
+						<if test="userNameCond == 'eq'">AND t.user_name =
+				#{userName}
+			</if>
+			<if test="userNameCond == 'ne'">AND t.user_name !=
+				#{userName}
+			</if>
+			<if test="userNameCond == 'me'">
+				AND t.user_name in (
+				<foreach collection="userName.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="userNameCond == 'cn'">AND t.user_name LIKE
+				CONCAT('%',#{userName},'%')</if>
+			<if test="userNameCond == 'bw'">AND t.user_name LIKE
+				CONCAT(#{userName},'%')</if>
+			<if test="userNameCond == 'ew'">AND t.user_name LIKE
+				CONCAT('%',#{userName})</if>
+					</if>
+		<if test="userNameCond == null and userName != null
+		and userName != ''">
+			AND t.user_name = #{userName}
+		</if>
+												<if test="passwordCond != null and passwordCond != '' and password != null and password != ''">
+						<if test="passwordCond == 'eq'">AND t.password =
+				#{password}
+			</if>
+			<if test="passwordCond == 'ne'">AND t.password !=
+				#{password}
+			</if>
+			<if test="passwordCond == 'me'">
+				AND t.password in (
+				<foreach collection="password.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="passwordCond == 'cn'">AND t.password LIKE
+				CONCAT('%',#{password},'%')</if>
+			<if test="passwordCond == 'bw'">AND t.password LIKE
+				CONCAT(#{password},'%')</if>
+			<if test="passwordCond == 'ew'">AND t.password LIKE
+				CONCAT('%',#{password})</if>
+					</if>
+		<if test="passwordCond == null and password != null
+		and password != ''">
+			AND t.password = #{password}
+		</if>
+								<if test="disableDateFrom != null and disableDateTo == null">
+			AND t.disable_date &gt;= #{disableDateFrom}
+		</if>
+		<if test="disableDateFrom == null and disableDateTo != null">
+			AND t.disable_date &lt;= #{disableDateTo}
+		</if>
+		<if test="disableDateFrom != null and disableDateTo != null">
+			AND t.disable_date &gt;= #{disableDateFrom} AND
+			t.disable_date &lt;= #{disableDateTo}
+		</if>
+												<if test="fullNameCond != null and fullNameCond != '' and fullName != null and fullName != ''">
+						<if test="fullNameCond == 'eq'">AND t.full_name =
+				#{fullName}
+			</if>
+			<if test="fullNameCond == 'ne'">AND t.full_name !=
+				#{fullName}
+			</if>
+			<if test="fullNameCond == 'me'">
+				AND t.full_name in (
+				<foreach collection="fullName.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="fullNameCond == 'cn'">AND t.full_name LIKE
+				CONCAT('%',#{fullName},'%')</if>
+			<if test="fullNameCond == 'bw'">AND t.full_name LIKE
+				CONCAT(#{fullName},'%')</if>
+			<if test="fullNameCond == 'ew'">AND t.full_name LIKE
+				CONCAT('%',#{fullName})</if>
+					</if>
+		<if test="fullNameCond == null and fullName != null
+		and fullName != ''">
+			AND t.full_name = #{fullName}
+		</if>
+												<if test="genderCond != null and genderCond != '' and gender != null and gender != ''">
+						<if test="genderCond == 'eq'">AND t.gender =
+				#{gender}
+			</if>
+			<if test="genderCond == 'ne'">AND t.gender !=
+				#{gender}
+			</if>
+			<if test="genderCond == 'me'">
+				AND t.gender in (
+				<foreach collection="gender.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="genderCond == 'cn'">AND t.gender LIKE
+				CONCAT('%',#{gender},'%')</if>
+			<if test="genderCond == 'bw'">AND t.gender LIKE
+				CONCAT(#{gender},'%')</if>
+			<if test="genderCond == 'ew'">AND t.gender LIKE
+				CONCAT('%',#{gender})</if>
+					</if>
+		<if test="genderCond == null and gender != null
+		and gender != ''">
+			AND t.gender = #{gender}
+		</if>
+												<if test="emailAddressCond != null and emailAddressCond != '' and emailAddress != null and emailAddress != ''">
+						<if test="emailAddressCond == 'eq'">AND t.email_address =
+				#{emailAddress}
+			</if>
+			<if test="emailAddressCond == 'ne'">AND t.email_address !=
+				#{emailAddress}
+			</if>
+			<if test="emailAddressCond == 'me'">
+				AND t.email_address in (
+				<foreach collection="emailAddress.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="emailAddressCond == 'cn'">AND t.email_address LIKE
+				CONCAT('%',#{emailAddress},'%')</if>
+			<if test="emailAddressCond == 'bw'">AND t.email_address LIKE
+				CONCAT(#{emailAddress},'%')</if>
+			<if test="emailAddressCond == 'ew'">AND t.email_address LIKE
+				CONCAT('%',#{emailAddress})</if>
+					</if>
+		<if test="emailAddressCond == null and emailAddress != null
+		and emailAddress != ''">
+			AND t.email_address = #{emailAddress}
+		</if>
+												<if test="mobileCond != null and mobileCond != '' and mobile != null and mobile != ''">
+						<if test="mobileCond == 'eq'">AND t.mobile =
+				#{mobile}
+			</if>
+			<if test="mobileCond == 'ne'">AND t.mobile !=
+				#{mobile}
+			</if>
+			<if test="mobileCond == 'me'">
+				AND t.mobile in (
+				<foreach collection="mobile.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="mobileCond == 'cn'">AND t.mobile LIKE
+				CONCAT('%',#{mobile},'%')</if>
+			<if test="mobileCond == 'bw'">AND t.mobile LIKE
+				CONCAT(#{mobile},'%')</if>
+			<if test="mobileCond == 'ew'">AND t.mobile LIKE
+				CONCAT('%',#{mobile})</if>
+					</if>
+		<if test="mobileCond == null and mobile != null
+		and mobile != ''">
+			AND t.mobile = #{mobile}
+		</if>
+												<if test="nicknameCond != null and nicknameCond != '' and nickname != null and nickname != ''">
+						<if test="nicknameCond == 'eq'">AND t.nickname =
+				#{nickname}
+			</if>
+			<if test="nicknameCond == 'ne'">AND t.nickname !=
+				#{nickname}
+			</if>
+			<if test="nicknameCond == 'me'">
+				AND t.nickname in (
+				<foreach collection="nickname.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="nicknameCond == 'cn'">AND t.nickname LIKE
+				CONCAT('%',#{nickname},'%')</if>
+			<if test="nicknameCond == 'bw'">AND t.nickname LIKE
+				CONCAT(#{nickname},'%')</if>
+			<if test="nicknameCond == 'ew'">AND t.nickname LIKE
+				CONCAT('%',#{nickname})</if>
+					</if>
+		<if test="nicknameCond == null and nickname != null
+		and nickname != ''">
+			AND t.nickname = #{nickname}
+		</if>
+												<if test="emailAliasCond != null and emailAliasCond != '' and emailAlias != null and emailAlias != ''">
+						<if test="emailAliasCond == 'eq'">AND t.email_alias =
+				#{emailAlias}
+			</if>
+			<if test="emailAliasCond == 'ne'">AND t.email_alias !=
+				#{emailAlias}
+			</if>
+			<if test="emailAliasCond == 'me'">
+				AND t.email_alias in (
+				<foreach collection="emailAlias.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="emailAliasCond == 'cn'">AND t.email_alias LIKE
+				CONCAT('%',#{emailAlias},'%')</if>
+			<if test="emailAliasCond == 'bw'">AND t.email_alias LIKE
+				CONCAT(#{emailAlias},'%')</if>
+			<if test="emailAliasCond == 'ew'">AND t.email_alias LIKE
+				CONCAT('%',#{emailAlias})</if>
+					</if>
+		<if test="emailAliasCond == null and emailAlias != null
+		and emailAlias != ''">
+			AND t.email_alias = #{emailAlias}
+		</if>
+												<if test="timezoneCond != null and timezoneCond != '' and timezone != null and timezone != ''">
+						<if test="timezoneCond == 'eq'">AND t.timezone =
+				#{timezone}
+			</if>
+			<if test="timezoneCond == 'ne'">AND t.timezone !=
+				#{timezone}
+			</if>
+			<if test="timezoneCond == 'me'">
+				AND t.timezone in (
+				<foreach collection="timezone.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="timezoneCond == 'cn'">AND t.timezone LIKE
+				CONCAT('%',#{timezone},'%')</if>
+			<if test="timezoneCond == 'bw'">AND t.timezone LIKE
+				CONCAT(#{timezone},'%')</if>
+			<if test="timezoneCond == 'ew'">AND t.timezone LIKE
+				CONCAT('%',#{timezone})</if>
+					</if>
+		<if test="timezoneCond == null and timezone != null
+		and timezone != ''">
+			AND t.timezone = #{timezone}
+		</if>
+												<if test="countryCond != null and countryCond != '' and country != null and country != ''">
+						<if test="countryCond == 'eq'">AND t.country =
+				#{country}
+			</if>
+			<if test="countryCond == 'ne'">AND t.country !=
+				#{country}
+			</if>
+			<if test="countryCond == 'me'">
+				AND t.country in (
+				<foreach collection="country.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="countryCond == 'cn'">AND t.country LIKE
+				CONCAT('%',#{country},'%')</if>
+			<if test="countryCond == 'bw'">AND t.country LIKE
+				CONCAT(#{country},'%')</if>
+			<if test="countryCond == 'ew'">AND t.country LIKE
+				CONCAT('%',#{country})</if>
+					</if>
+		<if test="countryCond == null and country != null
+		and country != ''">
+			AND t.country = #{country}
+		</if>
+												<if test="languageCond != null and languageCond != '' and language != null and language != ''">
+						<if test="languageCond == 'eq'">AND t.language =
+				#{language}
+			</if>
+			<if test="languageCond == 'ne'">AND t.language !=
+				#{language}
+			</if>
+			<if test="languageCond == 'me'">
+				AND t.language in (
+				<foreach collection="language.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="languageCond == 'cn'">AND t.language LIKE
+				CONCAT('%',#{language},'%')</if>
+			<if test="languageCond == 'bw'">AND t.language LIKE
+				CONCAT(#{language},'%')</if>
+			<if test="languageCond == 'ew'">AND t.language LIKE
+				CONCAT('%',#{language})</if>
+					</if>
+		<if test="languageCond == null and language != null
+		and language != ''">
+			AND t.language = #{language}
+		</if>
+												<if test="attribute1Cond != null and attribute1Cond != '' and attribute1 != null and attribute1 != ''">
+						<if test="attribute1Cond == 'eq'">AND t.attribute1 =
+				#{attribute1}
+			</if>
+			<if test="attribute1Cond == 'ne'">AND t.attribute1 !=
+				#{attribute1}
+			</if>
+			<if test="attribute1Cond == 'me'">
+				AND t.attribute1 in (
+				<foreach collection="attribute1.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="attribute1Cond == 'cn'">AND t.attribute1 LIKE
+				CONCAT('%',#{attribute1},'%')</if>
+			<if test="attribute1Cond == 'bw'">AND t.attribute1 LIKE
+				CONCAT(#{attribute1},'%')</if>
+			<if test="attribute1Cond == 'ew'">AND t.attribute1 LIKE
+				CONCAT('%',#{attribute1})</if>
+					</if>
+		<if test="attribute1Cond == null and attribute1 != null
+		and attribute1 != ''">
+			AND t.attribute1 = #{attribute1}
+		</if>
+												<if test="attribute2Cond != null and attribute2Cond != '' and attribute2 != null and attribute2 != ''">
+						<if test="attribute2Cond == 'eq'">AND t.attribute2 =
+				#{attribute2}
+			</if>
+			<if test="attribute2Cond == 'ne'">AND t.attribute2 !=
+				#{attribute2}
+			</if>
+			<if test="attribute2Cond == 'me'">
+				AND t.attribute2 in (
+				<foreach collection="attribute2.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="attribute2Cond == 'cn'">AND t.attribute2 LIKE
+				CONCAT('%',#{attribute2},'%')</if>
+			<if test="attribute2Cond == 'bw'">AND t.attribute2 LIKE
+				CONCAT(#{attribute2},'%')</if>
+			<if test="attribute2Cond == 'ew'">AND t.attribute2 LIKE
+				CONCAT('%',#{attribute2})</if>
+					</if>
+		<if test="attribute2Cond == null and attribute2 != null
+		and attribute2 != ''">
+			AND t.attribute2 = #{attribute2}
+		</if>
+												<if test="attribute3Cond != null and attribute3Cond != '' and attribute3 != null and attribute3 != ''">
+						<if test="attribute3Cond == 'eq'">AND t.attribute3 =
+				#{attribute3}
+			</if>
+			<if test="attribute3Cond == 'ne'">AND t.attribute3 !=
+				#{attribute3}
+			</if>
+			<if test="attribute3Cond == 'me'">
+				AND t.attribute3 in (
+				<foreach collection="attribute3.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="attribute3Cond == 'cn'">AND t.attribute3 LIKE
+				CONCAT('%',#{attribute3},'%')</if>
+			<if test="attribute3Cond == 'bw'">AND t.attribute3 LIKE
+				CONCAT(#{attribute3},'%')</if>
+			<if test="attribute3Cond == 'ew'">AND t.attribute3 LIKE
+				CONCAT('%',#{attribute3})</if>
+					</if>
+		<if test="attribute3Cond == null and attribute3 != null
+		and attribute3 != ''">
+			AND t.attribute3 = #{attribute3}
+		</if>
+												<if test="attribute4Cond != null and attribute4Cond != '' and attribute4 != null and attribute4 != ''">
+						<if test="attribute4Cond == 'eq'">AND t.attribute4 =
+				#{attribute4}
+			</if>
+			<if test="attribute4Cond == 'ne'">AND t.attribute4 !=
+				#{attribute4}
+			</if>
+			<if test="attribute4Cond == 'me'">
+				AND t.attribute4 in (
+				<foreach collection="attribute4.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="attribute4Cond == 'cn'">AND t.attribute4 LIKE
+				CONCAT('%',#{attribute4},'%')</if>
+			<if test="attribute4Cond == 'bw'">AND t.attribute4 LIKE
+				CONCAT(#{attribute4},'%')</if>
+			<if test="attribute4Cond == 'ew'">AND t.attribute4 LIKE
+				CONCAT('%',#{attribute4})</if>
+					</if>
+		<if test="attribute4Cond == null and attribute4 != null
+		and attribute4 != ''">
+			AND t.attribute4 = #{attribute4}
+		</if>
+												<if test="attribute5Cond != null and attribute5Cond != '' and attribute5 != null and attribute5 != ''">
+						<if test="attribute5Cond == 'eq'">AND t.attribute5 =
+				#{attribute5}
+			</if>
+			<if test="attribute5Cond == 'ne'">AND t.attribute5 !=
+				#{attribute5}
+			</if>
+			<if test="attribute5Cond == 'me'">
+				AND t.attribute5 in (
+				<foreach collection="attribute5.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="attribute5Cond == 'cn'">AND t.attribute5 LIKE
+				CONCAT('%',#{attribute5},'%')</if>
+			<if test="attribute5Cond == 'bw'">AND t.attribute5 LIKE
+				CONCAT(#{attribute5},'%')</if>
+			<if test="attribute5Cond == 'ew'">AND t.attribute5 LIKE
+				CONCAT('%',#{attribute5})</if>
+					</if>
+		<if test="attribute5Cond == null and attribute5 != null
+		and attribute5 != ''">
+			AND t.attribute5 = #{attribute5}
+		</if>
+												<if test="createdByCond != null and createdByCond != '' and createdBy != null and createdBy != ''">
+						<if test="createdByCond == 'eq'">AND t.created_by =
+				#{createdBy}
+			</if>
+			<if test="createdByCond == 'ne'">AND t.created_by !=
+				#{createdBy}
+			</if>
+			<if test="createdByCond == 'me'">
+				AND t.created_by in (
+				<foreach collection="createdBy.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="createdByCond == 'cn'">AND t.created_by LIKE
+				CONCAT('%',#{createdBy},'%')</if>
+			<if test="createdByCond == 'bw'">AND t.created_by LIKE
+				CONCAT(#{createdBy},'%')</if>
+			<if test="createdByCond == 'ew'">AND t.created_by LIKE
+				CONCAT('%',#{createdBy})</if>
+					</if>
+		<if test="createdByCond == null and createdBy != null
+		and createdBy != ''">
+			AND t.created_by = #{createdBy}
+		</if>
+								<if test="creationDateFrom != null and creationDateTo == null">
+			AND t.creation_date &gt;= #{creationDateFrom}
+		</if>
+		<if test="creationDateFrom == null and creationDateTo != null">
+			AND t.creation_date &lt;= #{creationDateTo}
+		</if>
+		<if test="creationDateFrom != null and creationDateTo != null">
+			AND t.creation_date &gt;= #{creationDateFrom} AND
+			t.creation_date &lt;= #{creationDateTo}
+		</if>
+												<if test="lastUpdatedByCond != null and lastUpdatedByCond != '' and lastUpdatedBy != null and lastUpdatedBy != ''">
+						<if test="lastUpdatedByCond == 'eq'">AND t.last_updated_by =
+				#{lastUpdatedBy}
+			</if>
+			<if test="lastUpdatedByCond == 'ne'">AND t.last_updated_by !=
+				#{lastUpdatedBy}
+			</if>
+			<if test="lastUpdatedByCond == 'me'">
+				AND t.last_updated_by in (
+				<foreach collection="lastUpdatedBy.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="lastUpdatedByCond == 'cn'">AND t.last_updated_by LIKE
+				CONCAT('%',#{lastUpdatedBy},'%')</if>
+			<if test="lastUpdatedByCond == 'bw'">AND t.last_updated_by LIKE
+				CONCAT(#{lastUpdatedBy},'%')</if>
+			<if test="lastUpdatedByCond == 'ew'">AND t.last_updated_by LIKE
+				CONCAT('%',#{lastUpdatedBy})</if>
+					</if>
+		<if test="lastUpdatedByCond == null and lastUpdatedBy != null
+		and lastUpdatedBy != ''">
+			AND t.last_updated_by = #{lastUpdatedBy}
+		</if>
+								<if test="lastUpdateDateFrom != null and lastUpdateDateTo == null">
+			AND t.last_update_date &gt;= #{lastUpdateDateFrom}
+		</if>
+		<if test="lastUpdateDateFrom == null and lastUpdateDateTo != null">
+			AND t.last_update_date &lt;= #{lastUpdateDateTo}
+		</if>
+		<if test="lastUpdateDateFrom != null and lastUpdateDateTo != null">
+			AND t.last_update_date &gt;= #{lastUpdateDateFrom} AND
+			t.last_update_date &lt;= #{lastUpdateDateTo}
+		</if>
+												<if test="ldapIdCond != null and ldapIdCond != '' and ldapId != null and ldapId != ''">
+						<if test="ldapIdCond == 'eq'">AND t.ldap_id =
+				#{ldapId}
+			</if>
+			<if test="ldapIdCond == 'ne'">AND t.ldap_id !=
+				#{ldapId}
+			</if>
+			<if test="ldapIdCond == 'me'">
+				AND t.ldap_id in (
+				<foreach collection="ldapId.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="ldapIdCond == 'cn'">AND t.ldap_id LIKE
+				CONCAT('%',#{ldapId},'%')</if>
+			<if test="ldapIdCond == 'bw'">AND t.ldap_id LIKE
+				CONCAT(#{ldapId},'%')</if>
+			<if test="ldapIdCond == 'ew'">AND t.ldap_id LIKE
+				CONCAT('%',#{ldapId})</if>
+					</if>
+		<if test="ldapIdCond == null and ldapId != null
+		and ldapId != ''">
+			AND t.ldap_id = #{ldapId}
+		</if>
+												<if test="ldapSyncFlagCond != null and ldapSyncFlagCond != '' and ldapSyncFlag != null and ldapSyncFlag != ''">
+						<if test="ldapSyncFlagCond == 'eq'">AND t.ldap_sync_flag =
+				#{ldapSyncFlag}
+			</if>
+			<if test="ldapSyncFlagCond == 'ne'">AND t.ldap_sync_flag !=
+				#{ldapSyncFlag}
+			</if>
+			<if test="ldapSyncFlagCond == 'me'">
+				AND t.ldap_sync_flag in (
+				<foreach collection="ldapSyncFlag.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="ldapSyncFlagCond == 'cn'">AND t.ldap_sync_flag LIKE
+				CONCAT('%',#{ldapSyncFlag},'%')</if>
+			<if test="ldapSyncFlagCond == 'bw'">AND t.ldap_sync_flag LIKE
+				CONCAT(#{ldapSyncFlag},'%')</if>
+			<if test="ldapSyncFlagCond == 'ew'">AND t.ldap_sync_flag LIKE
+				CONCAT('%',#{ldapSyncFlag})</if>
+					</if>
+		<if test="ldapSyncFlagCond == null and ldapSyncFlag != null
+		and ldapSyncFlag != ''">
+			AND t.ldap_sync_flag = #{ldapSyncFlag}
+		</if>
+								<if test="ldapSyncDtFrom != null and ldapSyncDtTo == null">
+			AND t.ldap_sync_dt &gt;= #{ldapSyncDtFrom}
+		</if>
+		<if test="ldapSyncDtFrom == null and ldapSyncDtTo != null">
+			AND t.ldap_sync_dt &lt;= #{ldapSyncDtTo}
+		</if>
+		<if test="ldapSyncDtFrom != null and ldapSyncDtTo != null">
+			AND t.ldap_sync_dt &gt;= #{ldapSyncDtFrom} AND
+			t.ldap_sync_dt &lt;= #{ldapSyncDtTo}
+		</if>
+												<if test="extenalUserFlagCond != null and extenalUserFlagCond != '' and extenalUserFlag != null and extenalUserFlag != ''">
+						<if test="extenalUserFlagCond == 'eq'">AND t.extenal_user_flag =
+				#{extenalUserFlag}
+			</if>
+			<if test="extenalUserFlagCond == 'ne'">AND t.extenal_user_flag !=
+				#{extenalUserFlag}
+			</if>
+			<if test="extenalUserFlagCond == 'me'">
+				AND t.extenal_user_flag in (
+				<foreach collection="extenalUserFlag.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="extenalUserFlagCond == 'cn'">AND t.extenal_user_flag LIKE
+				CONCAT('%',#{extenalUserFlag},'%')</if>
+			<if test="extenalUserFlagCond == 'bw'">AND t.extenal_user_flag LIKE
+				CONCAT(#{extenalUserFlag},'%')</if>
+			<if test="extenalUserFlagCond == 'ew'">AND t.extenal_user_flag LIKE
+				CONCAT('%',#{extenalUserFlag})</if>
+					</if>
+		<if test="extenalUserFlagCond == null and extenalUserFlag != null
+		and extenalUserFlag != ''">
+			AND t.extenal_user_flag = #{extenalUserFlag}
+		</if>
+												<if test="userTypeCond != null and userTypeCond != '' and userType != null and userType != ''">
+						<if test="userTypeCond == 'eq'">AND t.user_type =
+				#{userType}
+			</if>
+			<if test="userTypeCond == 'ne'">AND t.user_type !=
+				#{userType}
+			</if>
+			<if test="userTypeCond == 'me'">
+				AND t.user_type in (
+				<foreach collection="userType.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="userTypeCond == 'cn'">AND t.user_type LIKE
+				CONCAT('%',#{userType},'%')</if>
+			<if test="userTypeCond == 'bw'">AND t.user_type LIKE
+				CONCAT(#{userType},'%')</if>
+			<if test="userTypeCond == 'ew'">AND t.user_type LIKE
+				CONCAT('%',#{userType})</if>
+					</if>
+		<if test="userTypeCond == null and userType != null
+		and userType != ''">
+			AND t.user_type = #{userType}
+		</if>
+												<if test="empStatusCond != null and empStatusCond != '' and empStatus != null and empStatus != ''">
+						<if test="empStatusCond == 'eq'">AND t.emp_status =
+				#{empStatus}
+			</if>
+			<if test="empStatusCond == 'ne'">AND t.emp_status !=
+				#{empStatus}
+			</if>
+			<if test="empStatusCond == 'me'">
+				AND t.emp_status in (
+				<foreach collection="empStatus.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="empStatusCond == 'cn'">AND t.emp_status LIKE
+				CONCAT('%',#{empStatus},'%')</if>
+			<if test="empStatusCond == 'bw'">AND t.emp_status LIKE
+				CONCAT(#{empStatus},'%')</if>
+			<if test="empStatusCond == 'ew'">AND t.emp_status LIKE
+				CONCAT('%',#{empStatus})</if>
+					</if>
+		<if test="empStatusCond == null and empStatus != null
+		and empStatus != ''">
+			AND t.emp_status = #{empStatus}
+		</if>
+												<if test="empNumCond != null and empNumCond != '' and empNum != null and empNum != ''">
+						<if test="empNumCond == 'eq'">AND t.emp_num =
+				#{empNum}
+			</if>
+			<if test="empNumCond == 'ne'">AND t.emp_num !=
+				#{empNum}
+			</if>
+			<if test="empNumCond == 'me'">
+				AND t.emp_num in (
+				<foreach collection="empNum.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="empNumCond == 'cn'">AND t.emp_num LIKE
+				CONCAT('%',#{empNum},'%')</if>
+			<if test="empNumCond == 'bw'">AND t.emp_num LIKE
+				CONCAT(#{empNum},'%')</if>
+			<if test="empNumCond == 'ew'">AND t.emp_num LIKE
+				CONCAT('%',#{empNum})</if>
+					</if>
+		<if test="empNumCond == null and empNum != null
+		and empNum != ''">
+			AND t.emp_num = #{empNum}
+		</if>
+												<if test="orgCodeCond != null and orgCodeCond != '' and orgCode != null and orgCode != ''">
+						<if test="orgCodeCond == 'eq'">AND t.org_code =
+				#{orgCode}
+			</if>
+			<if test="orgCodeCond == 'ne'">AND t.org_code !=
+				#{orgCode}
+			</if>
+			<if test="orgCodeCond == 'me'">
+				AND t.org_code in (
+				<foreach collection="orgCode.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="orgCodeCond == 'cn'">AND t.org_code LIKE
+				CONCAT('%',#{orgCode},'%')</if>
+			<if test="orgCodeCond == 'bw'">AND t.org_code LIKE
+				CONCAT(#{orgCode},'%')</if>
+			<if test="orgCodeCond == 'ew'">AND t.org_code LIKE
+				CONCAT('%',#{orgCode})</if>
+					</if>
+		<if test="orgCodeCond == null and orgCode != null
+		and orgCode != ''">
+			AND t.org_code = #{orgCode}
+		</if>
+												<if test="enuNameCond != null and enuNameCond != '' and enuName != null and enuName != ''">
+						<if test="enuNameCond == 'eq'">AND t.enu_name =
+				#{enuName}
+			</if>
+			<if test="enuNameCond == 'ne'">AND t.enu_name !=
+				#{enuName}
+			</if>
+			<if test="enuNameCond == 'me'">
+				AND t.enu_name in (
+				<foreach collection="enuName.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="enuNameCond == 'cn'">AND t.enu_name LIKE
+				CONCAT('%',#{enuName},'%')</if>
+			<if test="enuNameCond == 'bw'">AND t.enu_name LIKE
+				CONCAT(#{enuName},'%')</if>
+			<if test="enuNameCond == 'ew'">AND t.enu_name LIKE
+				CONCAT('%',#{enuName})</if>
+					</if>
+		<if test="enuNameCond == null and enuName != null
+		and enuName != ''">
+			AND t.enu_name = #{enuName}
+		</if>
+										<if test="primaryPositionIdCond != null and primaryPositionIdCond != '' and primaryPositionId != null">
+						<if test="primaryPositionIdCond == 'eq'">AND t.primary_position_id = #{primaryPositionId}</if>
+			<if test="primaryPositionIdCond == 'ne'">AND t.primary_position_id != #{primaryPositionId}
+			</if>
+			<if test="primaryPositionIdCond == 'lt'">AND t.primary_position_id &lt; #{primaryPositionId}
+			</if>
+			<if test="primaryPositionIdCond == 'le'">AND t.primary_position_id &lt;= #{primaryPositionId}
+			</if>
+			<if test="primaryPositionIdCond == 'gt'">AND t.primary_position_id &gt; #{primaryPositionId}
+			</if>
+			<if test="primaryPositionIdCond == 'ge'">AND t.primary_position_id &gt;= #{primaryPositionId}
+			</if>
+					</if>
+		<if test="primaryPositionIdCond == null and primaryPositionId != null">
+			AND t.primary_position_id = #{primaryPositionId}
+		</if>
+				
+			</sql>
+
+	<select id="selectOne" resultMap="resultMap"
+		parameterType="com.midea.isc.api.param.UserParam">
+		
+		select t.*
+				from auth_user t
+				<include refid="defaultWhereClause" />
+		<include refid="orderClause" />
+		limit 1
+
+			</select>
+
+	<select id="selectList" resultMap="resultMap"
+		parameterType="com.midea.isc.api.param.UserParam">
+		
+		select t.*
+				from auth_user t
+				<include refid="defaultWhereClause" />
+		<include refid="orderClause" />
+		<if test="limitClause != null and limitClause != ''">
+			${limitClause}
+		</if>
+
+			</select>
+
+	<select id="selectCount" resultType="java.lang.Integer"
+		parameterType="com.midea.isc.api.param.UserParam">
+		select count(1) from auth_user t
+				<include refid="defaultWhereClause" />
+	</select>
+
+	<select id="find" resultMap="resultMap"
+		parameterType="com.midea.isc.api.param.UserParam">
+		
+		select t.*
+				from auth_user t
+				<include refid="advancedWhereClause" />
+		<include refid="orderClause" />
+		<if test="limitClause != null and limitClause != ''">
+			${limitClause}
+		</if>
+
+			</select>
+
+	<select id="total" resultType="java.lang.Integer"
+		parameterType="com.midea.isc.api.param.UserParam">
+		select count(1) from auth_user t
+				<include refid="advancedWhereClause" />
+	</select>
+
+	<insert id="insert" parameterType="com.midea.isc.api.model.User"
+		useGeneratedKeys="true" keyProperty="userId">
+		
+				insert into auth_user(user_id,user_name,password,disable_date,full_name,gender,email_address,mobile,nickname,email_alias,timezone,country,language,attribute1,attribute2,attribute3,attribute4,attribute5,created_by,creation_date,last_updated_by,last_update_date,ldap_id,ldap_sync_flag,ldap_sync_dt,extenal_user_flag,user_type,emp_status,emp_num,org_code,enu_name,primary_position_id)
+		 values(#{userId},#{userName},#{password},#{disableDate},#{fullName},#{gender},#{emailAddress},#{mobile},#{nickname},#{emailAlias},#{timezone},#{country},#{language},#{attribute1},#{attribute2},#{attribute3},#{attribute4},#{attribute5},#{createdBy},now(),#{lastUpdatedBy},now(),#{ldapId},#{ldapSyncFlag},#{ldapSyncDt},#{extenalUserFlag},#{userType},#{empStatus},#{empNum},#{orgCode},#{enuName},#{primaryPositionId})
+	</insert>
+
+	<insert id="insertBulk" parameterType="java.util.List"
+		useGeneratedKeys="true" keyProperty="userId">
+		insert into auth_user(user_id,user_name,password,disable_date,full_name,gender,email_address,mobile,nickname,email_alias,timezone,country,language,attribute1,attribute2,attribute3,attribute4,attribute5,created_by,creation_date,last_updated_by,last_update_date,ldap_id,ldap_sync_flag,ldap_sync_dt,extenal_user_flag,user_type,emp_status,emp_num,org_code,enu_name,primary_position_id)
+		 values 
+ <foreach collection="list" item="obj" separator=","> 
+ (#{obj.userId},#{obj.userName},#{obj.password},#{obj.disableDate},#{obj.fullName},#{obj.gender},#{obj.emailAddress},#{obj.mobile},#{obj.nickname},#{obj.emailAlias},#{obj.timezone},#{obj.country},#{obj.language},#{obj.attribute1},#{obj.attribute2},#{obj.attribute3},#{obj.attribute4},#{obj.attribute5},#{obj.createdBy},now(),#{obj.lastUpdatedBy},now(),#{obj.ldapId},#{obj.ldapSyncFlag},#{obj.ldapSyncDt},#{obj.extenalUserFlag},#{obj.userType},#{obj.empStatus},#{obj.empNum},#{obj.orgCode},#{obj.enuName},#{obj.primaryPositionId}) 
+ </foreach>
+	</insert>
+
+	
+	
+	<update id="update" parameterType="com.midea.isc.api.model.User">
+		update auth_user t 		set t.user_name=#{userName}			,t.password=#{password}			,t.disable_date=#{disableDate}			,t.full_name=#{fullName}			,t.gender=#{gender}			,t.email_address=#{emailAddress}			,t.mobile=#{mobile}			,t.nickname=#{nickname}			,t.email_alias=#{emailAlias}			,t.timezone=#{timezone}			,t.country=#{country}			,t.language=#{language}			,t.attribute1=#{attribute1}			,t.attribute2=#{attribute2}			,t.attribute3=#{attribute3}			,t.attribute4=#{attribute4}			,t.attribute5=#{attribute5}			,t.last_updated_by=#{lastUpdatedBy}			,t.last_update_date=now()			,t.ldap_id=#{ldapId}			,t.ldap_sync_flag=#{ldapSyncFlag}			,t.ldap_sync_dt=#{ldapSyncDt}			,t.extenal_user_flag=#{extenalUserFlag}			,t.user_type=#{userType}			,t.emp_status=#{empStatus}			,t.emp_num=#{empNum}			,t.org_code=#{orgCode}			,t.enu_name=#{enuName}			,t.primary_position_id=#{primaryPositionId}		 where t.user_id=#{userId}
+	</update>
+
+	<update id="updateFields" parameterType="com.midea.isc.api.model.User">
+		update auth_user t 		set t.user_id=#{userId}<if test="userName != null">			,t.user_name=#{userName}</if><if test="password != null">			,t.password=#{password}</if><if test="disableDate != null">			,t.disable_date=#{disableDate}</if><if test="fullName != null">			,t.full_name=#{fullName}</if><if test="gender != null">			,t.gender=#{gender}</if><if test="emailAddress != null">			,t.email_address=#{emailAddress}</if><if test="mobile != null">			,t.mobile=#{mobile}</if><if test="nickname != null">			,t.nickname=#{nickname}</if><if test="emailAlias != null">			,t.email_alias=#{emailAlias}</if><if test="timezone != null">			,t.timezone=#{timezone}</if><if test="country != null">			,t.country=#{country}</if><if test="language != null">			,t.language=#{language}</if><if test="attribute1 != null">			,t.attribute1=#{attribute1}</if><if test="attribute2 != null">			,t.attribute2=#{attribute2}</if><if test="attribute3 != null">			,t.attribute3=#{attribute3}</if><if test="attribute4 != null">			,t.attribute4=#{attribute4}</if><if test="attribute5 != null">			,t.attribute5=#{attribute5}</if>			,t.last_updated_by=#{lastUpdatedBy}			,t.last_update_date=now()<if test="ldapId != null">			,t.ldap_id=#{ldapId}</if><if test="ldapSyncFlag != null">			,t.ldap_sync_flag=#{ldapSyncFlag}</if><if test="ldapSyncDt != null">			,t.ldap_sync_dt=#{ldapSyncDt}</if><if test="extenalUserFlag != null">			,t.extenal_user_flag=#{extenalUserFlag}</if><if test="userType != null">			,t.user_type=#{userType}</if><if test="empStatus != null">			,t.emp_status=#{empStatus}</if><if test="empNum != null">			,t.emp_num=#{empNum}</if><if test="orgCode != null">			,t.org_code=#{orgCode}</if><if test="enuName != null">			,t.enu_name=#{enuName}</if><if test="primaryPositionId != null">			,t.primary_position_id=#{primaryPositionId}</if>		 where t.user_id=#{userId}
+	</update>
+
+	<update id="updateByOtsLock" parameterType="com.midea.isc.api.model.User">
+		update auth_user t 		set t.user_name=#{userName}			,t.password=#{password}			,t.disable_date=#{disableDate}			,t.full_name=#{fullName}			,t.gender=#{gender}			,t.email_address=#{emailAddress}			,t.mobile=#{mobile}			,t.nickname=#{nickname}			,t.email_alias=#{emailAlias}			,t.timezone=#{timezone}			,t.country=#{country}			,t.language=#{language}			,t.attribute1=#{attribute1}			,t.attribute2=#{attribute2}			,t.attribute3=#{attribute3}			,t.attribute4=#{attribute4}			,t.attribute5=#{attribute5}			,t.last_updated_by=#{lastUpdatedBy}			,t.last_update_date=now()			,t.ldap_id=#{ldapId}			,t.ldap_sync_flag=#{ldapSyncFlag}			,t.ldap_sync_dt=#{ldapSyncDt}			,t.extenal_user_flag=#{extenalUserFlag}			,t.user_type=#{userType}			,t.emp_status=#{empStatus}			,t.emp_num=#{empNum}			,t.org_code=#{orgCode}			,t.enu_name=#{enuName}			,t.primary_position_id=#{primaryPositionId}		 where t.user_id=#{userId} and t.last_update_date = #{lastUpdateDate}
+	</update>
+
+	<update id="updateFieldsByOtsLock" parameterType="com.midea.isc.api.model.User">
+		update auth_user t 		set t.user_id=#{userId}<if test="userName != null">			,t.user_name=#{userName}</if><if test="password != null">			,t.password=#{password}</if><if test="disableDate != null">			,t.disable_date=#{disableDate}</if><if test="fullName != null">			,t.full_name=#{fullName}</if><if test="gender != null">			,t.gender=#{gender}</if><if test="emailAddress != null">			,t.email_address=#{emailAddress}</if><if test="mobile != null">			,t.mobile=#{mobile}</if><if test="nickname != null">			,t.nickname=#{nickname}</if><if test="emailAlias != null">			,t.email_alias=#{emailAlias}</if><if test="timezone != null">			,t.timezone=#{timezone}</if><if test="country != null">			,t.country=#{country}</if><if test="language != null">			,t.language=#{language}</if><if test="attribute1 != null">			,t.attribute1=#{attribute1}</if><if test="attribute2 != null">			,t.attribute2=#{attribute2}</if><if test="attribute3 != null">			,t.attribute3=#{attribute3}</if><if test="attribute4 != null">			,t.attribute4=#{attribute4}</if><if test="attribute5 != null">			,t.attribute5=#{attribute5}</if>			,t.last_updated_by=#{lastUpdatedBy}			,t.last_update_date=now()<if test="ldapId != null">			,t.ldap_id=#{ldapId}</if><if test="ldapSyncFlag != null">			,t.ldap_sync_flag=#{ldapSyncFlag}</if><if test="ldapSyncDt != null">			,t.ldap_sync_dt=#{ldapSyncDt}</if><if test="extenalUserFlag != null">			,t.extenal_user_flag=#{extenalUserFlag}</if><if test="userType != null">			,t.user_type=#{userType}</if><if test="empStatus != null">			,t.emp_status=#{empStatus}</if><if test="empNum != null">			,t.emp_num=#{empNum}</if><if test="orgCode != null">			,t.org_code=#{orgCode}</if><if test="enuName != null">			,t.enu_name=#{enuName}</if><if test="primaryPositionId != null">			,t.primary_position_id=#{primaryPositionId}</if>		 where t.user_id=#{userId} and t.last_update_date = #{lastUpdateDate}
+	</update>
+
+	<update id="updateBulk" parameterType="java.util.List">
+		<foreach collection="list" separator=";" item="obj"> 	update auth_user t 		set t.user_name=#{obj.userName}			,t.password=#{obj.password}			,t.disable_date=#{obj.disableDate}			,t.full_name=#{obj.fullName}			,t.gender=#{obj.gender}			,t.email_address=#{obj.emailAddress}			,t.mobile=#{obj.mobile}			,t.nickname=#{obj.nickname}			,t.email_alias=#{obj.emailAlias}			,t.timezone=#{obj.timezone}			,t.country=#{obj.country}			,t.language=#{obj.language}			,t.attribute1=#{obj.attribute1}			,t.attribute2=#{obj.attribute2}			,t.attribute3=#{obj.attribute3}			,t.attribute4=#{obj.attribute4}			,t.attribute5=#{obj.attribute5}			,t.last_updated_by=#{obj.lastUpdatedBy}			,t.last_update_date=now()			,t.ldap_id=#{obj.ldapId}			,t.ldap_sync_flag=#{obj.ldapSyncFlag}			,t.ldap_sync_dt=#{obj.ldapSyncDt}			,t.extenal_user_flag=#{obj.extenalUserFlag}			,t.user_type=#{obj.userType}			,t.emp_status=#{obj.empStatus}			,t.emp_num=#{obj.empNum}			,t.org_code=#{obj.orgCode}			,t.enu_name=#{obj.enuName}			,t.primary_position_id=#{obj.primaryPositionId}		 where t.user_id=#{obj.userId} 	 </foreach>
+	</update>
+
+	<update id="updateFieldsBulk" parameterType="java.util.List">
+		<foreach collection="list" separator=";" item="obj"> 	update auth_user t 		set t.user_id=#{obj.userId}<if test="obj.userName != null">			,t.user_name=#{obj.userName}</if><if test="obj.password != null">			,t.password=#{obj.password}</if><if test="obj.disableDate != null">			,t.disable_date=#{obj.disableDate}</if><if test="obj.fullName != null">			,t.full_name=#{obj.fullName}</if><if test="obj.gender != null">			,t.gender=#{obj.gender}</if><if test="obj.emailAddress != null">			,t.email_address=#{obj.emailAddress}</if><if test="obj.mobile != null">			,t.mobile=#{obj.mobile}</if><if test="obj.nickname != null">			,t.nickname=#{obj.nickname}</if><if test="obj.emailAlias != null">			,t.email_alias=#{obj.emailAlias}</if><if test="obj.timezone != null">			,t.timezone=#{obj.timezone}</if><if test="obj.country != null">			,t.country=#{obj.country}</if><if test="obj.language != null">			,t.language=#{obj.language}</if><if test="obj.attribute1 != null">			,t.attribute1=#{obj.attribute1}</if><if test="obj.attribute2 != null">			,t.attribute2=#{obj.attribute2}</if><if test="obj.attribute3 != null">			,t.attribute3=#{obj.attribute3}</if><if test="obj.attribute4 != null">			,t.attribute4=#{obj.attribute4}</if><if test="obj.attribute5 != null">			,t.attribute5=#{obj.attribute5}</if>			,t.last_updated_by=#{obj.lastUpdatedBy}			,t.last_update_date=now()<if test="obj.ldapId != null">			,t.ldap_id=#{obj.ldapId}</if><if test="obj.ldapSyncFlag != null">			,t.ldap_sync_flag=#{obj.ldapSyncFlag}</if><if test="obj.ldapSyncDt != null">			,t.ldap_sync_dt=#{obj.ldapSyncDt}</if><if test="obj.extenalUserFlag != null">			,t.extenal_user_flag=#{obj.extenalUserFlag}</if><if test="obj.userType != null">			,t.user_type=#{obj.userType}</if><if test="obj.empStatus != null">			,t.emp_status=#{obj.empStatus}</if><if test="obj.empNum != null">			,t.emp_num=#{obj.empNum}</if><if test="obj.orgCode != null">			,t.org_code=#{obj.orgCode}</if><if test="obj.enuName != null">			,t.enu_name=#{obj.enuName}</if><if test="obj.primaryPositionId != null">			,t.primary_position_id=#{obj.primaryPositionId}</if>		 where t.user_id=#{obj.userId} 	 </foreach>
+	</update>
+
+	
+	<delete id="delete" parameterType="com.midea.isc.api.model.User">
+		delete t	 from auth_user t 		
+		<include refid="defaultWhereClause" />
+	</delete>
+
+	<delete id="deleteBulk" parameterType="java.util.List">
+		<foreach collection="list" separator=";" item="obj"> 
+	delete t	 from auth_user t 		where t.user_id=#{obj.userId} 	 </foreach>
+	</delete>
+
+	
+</mapper>   

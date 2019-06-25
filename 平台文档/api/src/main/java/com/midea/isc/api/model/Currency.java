@@ -1,0 +1,11 @@
+package com.midea.isc.api.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.midea.isc.common.model.BasicModel;
+
+@JsonIgnoreProperties(value = {
+		"attribute1", "attribute2", "attribute3", "attribute4", "attribute5"} , ignoreUnknown = true)
+public class Currency extends BasicModel {	
+		private java.lang.Integer currencyId;   	private java.lang.String code;   	private java.lang.String symbol;   	private java.lang.String description;   	private java.lang.Integer currencyPrecision;   	private java.lang.String thousandsSeparator;   	private java.lang.String decimalSeparator;   	private java.lang.Integer calculatedPrecision;   	private java.lang.String enabled;   	public java.lang.Integer getCurrencyId() {	    return this.currencyId;	}	public void setCurrencyId(java.lang.Integer currencyId) {	    this.currencyId=currencyId;	}	public java.lang.String getCode() {	    return this.code;	}	public void setCode(java.lang.String code) {	    this.code=code;	}	public java.lang.String getSymbol() {	    return this.symbol;	}	public void setSymbol(java.lang.String symbol) {	    this.symbol=symbol;	}	public java.lang.String getDescription() {	    return this.description;	}	public void setDescription(java.lang.String description) {	    this.description=description;	}	public java.lang.Integer getCurrencyPrecision() {	    return this.currencyPrecision;	}	public void setCurrencyPrecision(java.lang.Integer currencyPrecision) {	    this.currencyPrecision=currencyPrecision;	}	public java.lang.String getThousandsSeparator() {	    return this.thousandsSeparator;	}	public void setThousandsSeparator(java.lang.String thousandsSeparator) {	    this.thousandsSeparator=thousandsSeparator;	}	public java.lang.String getDecimalSeparator() {	    return this.decimalSeparator;	}	public void setDecimalSeparator(java.lang.String decimalSeparator) {	    this.decimalSeparator=decimalSeparator;	}	public java.lang.Integer getCalculatedPrecision() {	    return this.calculatedPrecision;	}	public void setCalculatedPrecision(java.lang.Integer calculatedPrecision) {	    this.calculatedPrecision=calculatedPrecision;	}	public java.lang.String getEnabled() {	    return this.enabled;	}	public void setEnabled(java.lang.String enabled) {	    this.enabled=enabled;	}
+}
+

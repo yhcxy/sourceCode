@@ -1,0 +1,956 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.midea.isc.api.mapper.ApplicationMapper">
+	<resultMap id="resultMap"
+		type="com.midea.isc.api.model.Application">
+				<result column="application" property="application" />
+				<result column="type" property="type" />
+				<result column="name" property="name" />
+				<result column="icon" property="icon" />
+				<result column="url" property="url" />
+				<result column="top_menu_id" property="topMenuId" />
+				<result column="relationship" property="relationship" />
+				<result column="enable_flag" property="enableFlag" />
+				<result column="visible_flag" property="visibleFlag" />
+				<result column="default_sequence" property="defaultSequence" />
+				<result column="auth" property="auth" />
+				<result column="web_root" property="webRoot" />
+				<result column="admin_email" property="adminEmail" />
+				<result column="admin_pwd" property="adminPwd" />
+				<result column="attribute1" property="attribute1" />
+				<result column="attribute2" property="attribute2" />
+				<result column="attribute3" property="attribute3" />
+				<result column="attribute4" property="attribute4" />
+				<result column="attribute5" property="attribute5" />
+				<result column="created_by" property="createdBy" />
+				<result column="creation_date" property="creationDate" />
+				<result column="last_updated_by" property="lastUpdatedBy" />
+				<result column="last_update_date" property="lastUpdateDate" />
+					</resultMap>
+
+	<sql id="orderClause">
+		<if test="orderFields == null or orderFields.size == 0">
+			order by t.application desc
+		</if>
+		<if test="orderFields != null and orderFields.size > 0">
+			order by
+			<foreach collection="orderFields" separator="," index="field"
+				item="direction">
+								<if test="field == 'application'">
+					<choose>
+						<when test="direction =='asc'">
+							t.application asc
+						</when>
+						<otherwise>
+							t.application desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'type'">
+					<choose>
+						<when test="direction =='asc'">
+							t.type asc
+						</when>
+						<otherwise>
+							t.type desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'name'">
+					<choose>
+						<when test="direction =='asc'">
+							t.name asc
+						</when>
+						<otherwise>
+							t.name desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'icon'">
+					<choose>
+						<when test="direction =='asc'">
+							t.icon asc
+						</when>
+						<otherwise>
+							t.icon desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'url'">
+					<choose>
+						<when test="direction =='asc'">
+							t.url asc
+						</when>
+						<otherwise>
+							t.url desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'topMenuId'">
+					<choose>
+						<when test="direction =='asc'">
+							t.top_menu_id asc
+						</when>
+						<otherwise>
+							t.top_menu_id desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'relationship'">
+					<choose>
+						<when test="direction =='asc'">
+							t.relationship asc
+						</when>
+						<otherwise>
+							t.relationship desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'enableFlag'">
+					<choose>
+						<when test="direction =='asc'">
+							t.enable_flag asc
+						</when>
+						<otherwise>
+							t.enable_flag desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'visibleFlag'">
+					<choose>
+						<when test="direction =='asc'">
+							t.visible_flag asc
+						</when>
+						<otherwise>
+							t.visible_flag desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'defaultSequence'">
+					<choose>
+						<when test="direction =='asc'">
+							t.default_sequence asc
+						</when>
+						<otherwise>
+							t.default_sequence desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'auth'">
+					<choose>
+						<when test="direction =='asc'">
+							t.auth asc
+						</when>
+						<otherwise>
+							t.auth desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'webRoot'">
+					<choose>
+						<when test="direction =='asc'">
+							t.web_root asc
+						</when>
+						<otherwise>
+							t.web_root desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'adminEmail'">
+					<choose>
+						<when test="direction =='asc'">
+							t.admin_email asc
+						</when>
+						<otherwise>
+							t.admin_email desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'adminPwd'">
+					<choose>
+						<when test="direction =='asc'">
+							t.admin_pwd asc
+						</when>
+						<otherwise>
+							t.admin_pwd desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'attribute1'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attribute1 asc
+						</when>
+						<otherwise>
+							t.attribute1 desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'attribute2'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attribute2 asc
+						</when>
+						<otherwise>
+							t.attribute2 desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'attribute3'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attribute3 asc
+						</when>
+						<otherwise>
+							t.attribute3 desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'attribute4'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attribute4 asc
+						</when>
+						<otherwise>
+							t.attribute4 desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'attribute5'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attribute5 asc
+						</when>
+						<otherwise>
+							t.attribute5 desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'createdBy'">
+					<choose>
+						<when test="direction =='asc'">
+							t.created_by asc
+						</when>
+						<otherwise>
+							t.created_by desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'creationDate'">
+					<choose>
+						<when test="direction =='asc'">
+							t.creation_date asc
+						</when>
+						<otherwise>
+							t.creation_date desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'lastUpdatedBy'">
+					<choose>
+						<when test="direction =='asc'">
+							t.last_updated_by asc
+						</when>
+						<otherwise>
+							t.last_updated_by desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'lastUpdateDate'">
+					<choose>
+						<when test="direction =='asc'">
+							t.last_update_date asc
+						</when>
+						<otherwise>
+							t.last_update_date desc
+						</otherwise>
+					</choose>
+				</if>
+											</foreach>
+		</if>
+	</sql>
+
+	<sql id="defaultWhereClause">
+		where 1=1
+								<if test="application != null and application != ''">and t.application = #{application}</if>
+								<if test="type != null and type != ''">and t.type = #{type}</if>
+								<if test="name != null and name != ''">and t.name = #{name}</if>
+								<if test="icon != null and icon != ''">and t.icon = #{icon}</if>
+								<if test="url != null and url != ''">and t.url = #{url}</if>
+						<if test="topMenuId != null">and t.top_menu_id = #{topMenuId}</if>
+								<if test="relationship != null and relationship != ''">and t.relationship = #{relationship}</if>
+								<if test="enableFlag != null and enableFlag != ''">and t.enable_flag = #{enableFlag}</if>
+								<if test="visibleFlag != null and visibleFlag != ''">and t.visible_flag = #{visibleFlag}</if>
+						<if test="defaultSequence != null">and t.default_sequence = #{defaultSequence}</if>
+								<if test="auth != null and auth != ''">and t.auth = #{auth}</if>
+								<if test="webRoot != null and webRoot != ''">and t.web_root = #{webRoot}</if>
+								<if test="adminEmail != null and adminEmail != ''">and t.admin_email = #{adminEmail}</if>
+								<if test="adminPwd != null and adminPwd != ''">and t.admin_pwd = #{adminPwd}</if>
+								<if test="attribute1 != null and attribute1 != ''">and t.attribute1 = #{attribute1}</if>
+								<if test="attribute2 != null and attribute2 != ''">and t.attribute2 = #{attribute2}</if>
+								<if test="attribute3 != null and attribute3 != ''">and t.attribute3 = #{attribute3}</if>
+								<if test="attribute4 != null and attribute4 != ''">and t.attribute4 = #{attribute4}</if>
+								<if test="attribute5 != null and attribute5 != ''">and t.attribute5 = #{attribute5}</if>
+								<if test="createdBy != null and createdBy != ''">and t.created_by = #{createdBy}</if>
+						<if test="creationDate != null">and t.creation_date = #{creationDate}</if>
+								<if test="lastUpdatedBy != null and lastUpdatedBy != ''">and t.last_updated_by = #{lastUpdatedBy}</if>
+						<if test="lastUpdateDate != null">and t.last_update_date = #{lastUpdateDate}</if>
+					</sql>
+
+	<sql id="advancedWhereClause">
+		where 1=1
+										<if test="applicationCond != null and applicationCond != '' and application != null and application != ''">
+						<if test="applicationCond == 'eq'">AND t.application =
+				#{application}
+			</if>
+			<if test="applicationCond == 'ne'">AND t.application !=
+				#{application}
+			</if>
+			<if test="applicationCond == 'me'">
+				AND t.application in (
+				<foreach collection="application.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="applicationCond == 'cn'">AND t.application LIKE
+				CONCAT('%',#{application},'%')</if>
+			<if test="applicationCond == 'bw'">AND t.application LIKE
+				CONCAT(#{application},'%')</if>
+			<if test="applicationCond == 'ew'">AND t.application LIKE
+				CONCAT('%',#{application})</if>
+					</if>
+		<if test="applicationCond == null and application != null
+		and application != ''">
+			AND t.application = #{application}
+		</if>
+												<if test="typeCond != null and typeCond != '' and type != null and type != ''">
+						<if test="typeCond == 'eq'">AND t.type =
+				#{type}
+			</if>
+			<if test="typeCond == 'ne'">AND t.type !=
+				#{type}
+			</if>
+			<if test="typeCond == 'me'">
+				AND t.type in (
+				<foreach collection="type.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="typeCond == 'cn'">AND t.type LIKE
+				CONCAT('%',#{type},'%')</if>
+			<if test="typeCond == 'bw'">AND t.type LIKE
+				CONCAT(#{type},'%')</if>
+			<if test="typeCond == 'ew'">AND t.type LIKE
+				CONCAT('%',#{type})</if>
+					</if>
+		<if test="typeCond == null and type != null
+		and type != ''">
+			AND t.type = #{type}
+		</if>
+												<if test="nameCond != null and nameCond != '' and name != null and name != ''">
+						<if test="nameCond == 'eq'">AND t.name =
+				#{name}
+			</if>
+			<if test="nameCond == 'ne'">AND t.name !=
+				#{name}
+			</if>
+			<if test="nameCond == 'me'">
+				AND t.name in (
+				<foreach collection="name.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="nameCond == 'cn'">AND t.name LIKE
+				CONCAT('%',#{name},'%')</if>
+			<if test="nameCond == 'bw'">AND t.name LIKE
+				CONCAT(#{name},'%')</if>
+			<if test="nameCond == 'ew'">AND t.name LIKE
+				CONCAT('%',#{name})</if>
+					</if>
+		<if test="nameCond == null and name != null
+		and name != ''">
+			AND t.name = #{name}
+		</if>
+												<if test="iconCond != null and iconCond != '' and icon != null and icon != ''">
+						<if test="iconCond == 'eq'">AND t.icon =
+				#{icon}
+			</if>
+			<if test="iconCond == 'ne'">AND t.icon !=
+				#{icon}
+			</if>
+			<if test="iconCond == 'me'">
+				AND t.icon in (
+				<foreach collection="icon.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="iconCond == 'cn'">AND t.icon LIKE
+				CONCAT('%',#{icon},'%')</if>
+			<if test="iconCond == 'bw'">AND t.icon LIKE
+				CONCAT(#{icon},'%')</if>
+			<if test="iconCond == 'ew'">AND t.icon LIKE
+				CONCAT('%',#{icon})</if>
+					</if>
+		<if test="iconCond == null and icon != null
+		and icon != ''">
+			AND t.icon = #{icon}
+		</if>
+												<if test="urlCond != null and urlCond != '' and url != null and url != ''">
+						<if test="urlCond == 'eq'">AND t.url =
+				#{url}
+			</if>
+			<if test="urlCond == 'ne'">AND t.url !=
+				#{url}
+			</if>
+			<if test="urlCond == 'me'">
+				AND t.url in (
+				<foreach collection="url.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="urlCond == 'cn'">AND t.url LIKE
+				CONCAT('%',#{url},'%')</if>
+			<if test="urlCond == 'bw'">AND t.url LIKE
+				CONCAT(#{url},'%')</if>
+			<if test="urlCond == 'ew'">AND t.url LIKE
+				CONCAT('%',#{url})</if>
+					</if>
+		<if test="urlCond == null and url != null
+		and url != ''">
+			AND t.url = #{url}
+		</if>
+										<if test="topMenuIdCond != null and topMenuIdCond != '' and topMenuId != null">
+						<if test="topMenuIdCond == 'eq'">AND t.top_menu_id = #{topMenuId}</if>
+			<if test="topMenuIdCond == 'ne'">AND t.top_menu_id != #{topMenuId}
+			</if>
+			<if test="topMenuIdCond == 'lt'">AND t.top_menu_id &lt; #{topMenuId}
+			</if>
+			<if test="topMenuIdCond == 'le'">AND t.top_menu_id &lt;= #{topMenuId}
+			</if>
+			<if test="topMenuIdCond == 'gt'">AND t.top_menu_id &gt; #{topMenuId}
+			</if>
+			<if test="topMenuIdCond == 'ge'">AND t.top_menu_id &gt;= #{topMenuId}
+			</if>
+					</if>
+		<if test="topMenuIdCond == null and topMenuId != null">
+			AND t.top_menu_id = #{topMenuId}
+		</if>
+												<if test="relationshipCond != null and relationshipCond != '' and relationship != null and relationship != ''">
+						<if test="relationshipCond == 'eq'">AND t.relationship =
+				#{relationship}
+			</if>
+			<if test="relationshipCond == 'ne'">AND t.relationship !=
+				#{relationship}
+			</if>
+			<if test="relationshipCond == 'me'">
+				AND t.relationship in (
+				<foreach collection="relationship.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="relationshipCond == 'cn'">AND t.relationship LIKE
+				CONCAT('%',#{relationship},'%')</if>
+			<if test="relationshipCond == 'bw'">AND t.relationship LIKE
+				CONCAT(#{relationship},'%')</if>
+			<if test="relationshipCond == 'ew'">AND t.relationship LIKE
+				CONCAT('%',#{relationship})</if>
+					</if>
+		<if test="relationshipCond == null and relationship != null
+		and relationship != ''">
+			AND t.relationship = #{relationship}
+		</if>
+												<if test="enableFlagCond != null and enableFlagCond != '' and enableFlag != null and enableFlag != ''">
+						<if test="enableFlagCond == 'eq'">AND t.enable_flag =
+				#{enableFlag}
+			</if>
+			<if test="enableFlagCond == 'ne'">AND t.enable_flag !=
+				#{enableFlag}
+			</if>
+			<if test="enableFlagCond == 'me'">
+				AND t.enable_flag in (
+				<foreach collection="enableFlag.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="enableFlagCond == 'cn'">AND t.enable_flag LIKE
+				CONCAT('%',#{enableFlag},'%')</if>
+			<if test="enableFlagCond == 'bw'">AND t.enable_flag LIKE
+				CONCAT(#{enableFlag},'%')</if>
+			<if test="enableFlagCond == 'ew'">AND t.enable_flag LIKE
+				CONCAT('%',#{enableFlag})</if>
+					</if>
+		<if test="enableFlagCond == null and enableFlag != null
+		and enableFlag != ''">
+			AND t.enable_flag = #{enableFlag}
+		</if>
+												<if test="visibleFlagCond != null and visibleFlagCond != '' and visibleFlag != null and visibleFlag != ''">
+						<if test="visibleFlagCond == 'eq'">AND t.visible_flag =
+				#{visibleFlag}
+			</if>
+			<if test="visibleFlagCond == 'ne'">AND t.visible_flag !=
+				#{visibleFlag}
+			</if>
+			<if test="visibleFlagCond == 'me'">
+				AND t.visible_flag in (
+				<foreach collection="visibleFlag.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="visibleFlagCond == 'cn'">AND t.visible_flag LIKE
+				CONCAT('%',#{visibleFlag},'%')</if>
+			<if test="visibleFlagCond == 'bw'">AND t.visible_flag LIKE
+				CONCAT(#{visibleFlag},'%')</if>
+			<if test="visibleFlagCond == 'ew'">AND t.visible_flag LIKE
+				CONCAT('%',#{visibleFlag})</if>
+					</if>
+		<if test="visibleFlagCond == null and visibleFlag != null
+		and visibleFlag != ''">
+			AND t.visible_flag = #{visibleFlag}
+		</if>
+										<if test="defaultSequenceCond != null and defaultSequenceCond != '' and defaultSequence != null">
+						<if test="defaultSequenceCond == 'eq'">AND t.default_sequence = #{defaultSequence}</if>
+			<if test="defaultSequenceCond == 'ne'">AND t.default_sequence != #{defaultSequence}
+			</if>
+			<if test="defaultSequenceCond == 'lt'">AND t.default_sequence &lt; #{defaultSequence}
+			</if>
+			<if test="defaultSequenceCond == 'le'">AND t.default_sequence &lt;= #{defaultSequence}
+			</if>
+			<if test="defaultSequenceCond == 'gt'">AND t.default_sequence &gt; #{defaultSequence}
+			</if>
+			<if test="defaultSequenceCond == 'ge'">AND t.default_sequence &gt;= #{defaultSequence}
+			</if>
+					</if>
+		<if test="defaultSequenceCond == null and defaultSequence != null">
+			AND t.default_sequence = #{defaultSequence}
+		</if>
+												<if test="authCond != null and authCond != '' and auth != null and auth != ''">
+						<if test="authCond == 'eq'">AND t.auth =
+				#{auth}
+			</if>
+			<if test="authCond == 'ne'">AND t.auth !=
+				#{auth}
+			</if>
+			<if test="authCond == 'me'">
+				AND t.auth in (
+				<foreach collection="auth.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="authCond == 'cn'">AND t.auth LIKE
+				CONCAT('%',#{auth},'%')</if>
+			<if test="authCond == 'bw'">AND t.auth LIKE
+				CONCAT(#{auth},'%')</if>
+			<if test="authCond == 'ew'">AND t.auth LIKE
+				CONCAT('%',#{auth})</if>
+					</if>
+		<if test="authCond == null and auth != null
+		and auth != ''">
+			AND t.auth = #{auth}
+		</if>
+												<if test="webRootCond != null and webRootCond != '' and webRoot != null and webRoot != ''">
+						<if test="webRootCond == 'eq'">AND t.web_root =
+				#{webRoot}
+			</if>
+			<if test="webRootCond == 'ne'">AND t.web_root !=
+				#{webRoot}
+			</if>
+			<if test="webRootCond == 'me'">
+				AND t.web_root in (
+				<foreach collection="webRoot.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="webRootCond == 'cn'">AND t.web_root LIKE
+				CONCAT('%',#{webRoot},'%')</if>
+			<if test="webRootCond == 'bw'">AND t.web_root LIKE
+				CONCAT(#{webRoot},'%')</if>
+			<if test="webRootCond == 'ew'">AND t.web_root LIKE
+				CONCAT('%',#{webRoot})</if>
+					</if>
+		<if test="webRootCond == null and webRoot != null
+		and webRoot != ''">
+			AND t.web_root = #{webRoot}
+		</if>
+												<if test="adminEmailCond != null and adminEmailCond != '' and adminEmail != null and adminEmail != ''">
+						<if test="adminEmailCond == 'eq'">AND t.admin_email =
+				#{adminEmail}
+			</if>
+			<if test="adminEmailCond == 'ne'">AND t.admin_email !=
+				#{adminEmail}
+			</if>
+			<if test="adminEmailCond == 'me'">
+				AND t.admin_email in (
+				<foreach collection="adminEmail.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="adminEmailCond == 'cn'">AND t.admin_email LIKE
+				CONCAT('%',#{adminEmail},'%')</if>
+			<if test="adminEmailCond == 'bw'">AND t.admin_email LIKE
+				CONCAT(#{adminEmail},'%')</if>
+			<if test="adminEmailCond == 'ew'">AND t.admin_email LIKE
+				CONCAT('%',#{adminEmail})</if>
+					</if>
+		<if test="adminEmailCond == null and adminEmail != null
+		and adminEmail != ''">
+			AND t.admin_email = #{adminEmail}
+		</if>
+												<if test="adminPwdCond != null and adminPwdCond != '' and adminPwd != null and adminPwd != ''">
+						<if test="adminPwdCond == 'eq'">AND t.admin_pwd =
+				#{adminPwd}
+			</if>
+			<if test="adminPwdCond == 'ne'">AND t.admin_pwd !=
+				#{adminPwd}
+			</if>
+			<if test="adminPwdCond == 'me'">
+				AND t.admin_pwd in (
+				<foreach collection="adminPwd.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="adminPwdCond == 'cn'">AND t.admin_pwd LIKE
+				CONCAT('%',#{adminPwd},'%')</if>
+			<if test="adminPwdCond == 'bw'">AND t.admin_pwd LIKE
+				CONCAT(#{adminPwd},'%')</if>
+			<if test="adminPwdCond == 'ew'">AND t.admin_pwd LIKE
+				CONCAT('%',#{adminPwd})</if>
+					</if>
+		<if test="adminPwdCond == null and adminPwd != null
+		and adminPwd != ''">
+			AND t.admin_pwd = #{adminPwd}
+		</if>
+												<if test="attribute1Cond != null and attribute1Cond != '' and attribute1 != null and attribute1 != ''">
+						<if test="attribute1Cond == 'eq'">AND t.attribute1 =
+				#{attribute1}
+			</if>
+			<if test="attribute1Cond == 'ne'">AND t.attribute1 !=
+				#{attribute1}
+			</if>
+			<if test="attribute1Cond == 'me'">
+				AND t.attribute1 in (
+				<foreach collection="attribute1.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="attribute1Cond == 'cn'">AND t.attribute1 LIKE
+				CONCAT('%',#{attribute1},'%')</if>
+			<if test="attribute1Cond == 'bw'">AND t.attribute1 LIKE
+				CONCAT(#{attribute1},'%')</if>
+			<if test="attribute1Cond == 'ew'">AND t.attribute1 LIKE
+				CONCAT('%',#{attribute1})</if>
+					</if>
+		<if test="attribute1Cond == null and attribute1 != null
+		and attribute1 != ''">
+			AND t.attribute1 = #{attribute1}
+		</if>
+												<if test="attribute2Cond != null and attribute2Cond != '' and attribute2 != null and attribute2 != ''">
+						<if test="attribute2Cond == 'eq'">AND t.attribute2 =
+				#{attribute2}
+			</if>
+			<if test="attribute2Cond == 'ne'">AND t.attribute2 !=
+				#{attribute2}
+			</if>
+			<if test="attribute2Cond == 'me'">
+				AND t.attribute2 in (
+				<foreach collection="attribute2.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="attribute2Cond == 'cn'">AND t.attribute2 LIKE
+				CONCAT('%',#{attribute2},'%')</if>
+			<if test="attribute2Cond == 'bw'">AND t.attribute2 LIKE
+				CONCAT(#{attribute2},'%')</if>
+			<if test="attribute2Cond == 'ew'">AND t.attribute2 LIKE
+				CONCAT('%',#{attribute2})</if>
+					</if>
+		<if test="attribute2Cond == null and attribute2 != null
+		and attribute2 != ''">
+			AND t.attribute2 = #{attribute2}
+		</if>
+												<if test="attribute3Cond != null and attribute3Cond != '' and attribute3 != null and attribute3 != ''">
+						<if test="attribute3Cond == 'eq'">AND t.attribute3 =
+				#{attribute3}
+			</if>
+			<if test="attribute3Cond == 'ne'">AND t.attribute3 !=
+				#{attribute3}
+			</if>
+			<if test="attribute3Cond == 'me'">
+				AND t.attribute3 in (
+				<foreach collection="attribute3.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="attribute3Cond == 'cn'">AND t.attribute3 LIKE
+				CONCAT('%',#{attribute3},'%')</if>
+			<if test="attribute3Cond == 'bw'">AND t.attribute3 LIKE
+				CONCAT(#{attribute3},'%')</if>
+			<if test="attribute3Cond == 'ew'">AND t.attribute3 LIKE
+				CONCAT('%',#{attribute3})</if>
+					</if>
+		<if test="attribute3Cond == null and attribute3 != null
+		and attribute3 != ''">
+			AND t.attribute3 = #{attribute3}
+		</if>
+												<if test="attribute4Cond != null and attribute4Cond != '' and attribute4 != null and attribute4 != ''">
+						<if test="attribute4Cond == 'eq'">AND t.attribute4 =
+				#{attribute4}
+			</if>
+			<if test="attribute4Cond == 'ne'">AND t.attribute4 !=
+				#{attribute4}
+			</if>
+			<if test="attribute4Cond == 'me'">
+				AND t.attribute4 in (
+				<foreach collection="attribute4.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="attribute4Cond == 'cn'">AND t.attribute4 LIKE
+				CONCAT('%',#{attribute4},'%')</if>
+			<if test="attribute4Cond == 'bw'">AND t.attribute4 LIKE
+				CONCAT(#{attribute4},'%')</if>
+			<if test="attribute4Cond == 'ew'">AND t.attribute4 LIKE
+				CONCAT('%',#{attribute4})</if>
+					</if>
+		<if test="attribute4Cond == null and attribute4 != null
+		and attribute4 != ''">
+			AND t.attribute4 = #{attribute4}
+		</if>
+												<if test="attribute5Cond != null and attribute5Cond != '' and attribute5 != null and attribute5 != ''">
+						<if test="attribute5Cond == 'eq'">AND t.attribute5 =
+				#{attribute5}
+			</if>
+			<if test="attribute5Cond == 'ne'">AND t.attribute5 !=
+				#{attribute5}
+			</if>
+			<if test="attribute5Cond == 'me'">
+				AND t.attribute5 in (
+				<foreach collection="attribute5.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="attribute5Cond == 'cn'">AND t.attribute5 LIKE
+				CONCAT('%',#{attribute5},'%')</if>
+			<if test="attribute5Cond == 'bw'">AND t.attribute5 LIKE
+				CONCAT(#{attribute5},'%')</if>
+			<if test="attribute5Cond == 'ew'">AND t.attribute5 LIKE
+				CONCAT('%',#{attribute5})</if>
+					</if>
+		<if test="attribute5Cond == null and attribute5 != null
+		and attribute5 != ''">
+			AND t.attribute5 = #{attribute5}
+		</if>
+												<if test="createdByCond != null and createdByCond != '' and createdBy != null and createdBy != ''">
+						<if test="createdByCond == 'eq'">AND t.created_by =
+				#{createdBy}
+			</if>
+			<if test="createdByCond == 'ne'">AND t.created_by !=
+				#{createdBy}
+			</if>
+			<if test="createdByCond == 'me'">
+				AND t.created_by in (
+				<foreach collection="createdBy.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="createdByCond == 'cn'">AND t.created_by LIKE
+				CONCAT('%',#{createdBy},'%')</if>
+			<if test="createdByCond == 'bw'">AND t.created_by LIKE
+				CONCAT(#{createdBy},'%')</if>
+			<if test="createdByCond == 'ew'">AND t.created_by LIKE
+				CONCAT('%',#{createdBy})</if>
+					</if>
+		<if test="createdByCond == null and createdBy != null
+		and createdBy != ''">
+			AND t.created_by = #{createdBy}
+		</if>
+								<if test="creationDateFrom != null and creationDateTo == null">
+			AND t.creation_date &gt;= #{creationDateFrom}
+		</if>
+		<if test="creationDateFrom == null and creationDateTo != null">
+			AND t.creation_date &lt;= #{creationDateTo}
+		</if>
+		<if test="creationDateFrom != null and creationDateTo != null">
+			AND t.creation_date &gt;= #{creationDateFrom} AND
+			t.creation_date &lt;= #{creationDateTo}
+		</if>
+												<if test="lastUpdatedByCond != null and lastUpdatedByCond != '' and lastUpdatedBy != null and lastUpdatedBy != ''">
+						<if test="lastUpdatedByCond == 'eq'">AND t.last_updated_by =
+				#{lastUpdatedBy}
+			</if>
+			<if test="lastUpdatedByCond == 'ne'">AND t.last_updated_by !=
+				#{lastUpdatedBy}
+			</if>
+			<if test="lastUpdatedByCond == 'me'">
+				AND t.last_updated_by in (
+				<foreach collection="lastUpdatedBy.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="lastUpdatedByCond == 'cn'">AND t.last_updated_by LIKE
+				CONCAT('%',#{lastUpdatedBy},'%')</if>
+			<if test="lastUpdatedByCond == 'bw'">AND t.last_updated_by LIKE
+				CONCAT(#{lastUpdatedBy},'%')</if>
+			<if test="lastUpdatedByCond == 'ew'">AND t.last_updated_by LIKE
+				CONCAT('%',#{lastUpdatedBy})</if>
+					</if>
+		<if test="lastUpdatedByCond == null and lastUpdatedBy != null
+		and lastUpdatedBy != ''">
+			AND t.last_updated_by = #{lastUpdatedBy}
+		</if>
+								<if test="lastUpdateDateFrom != null and lastUpdateDateTo == null">
+			AND t.last_update_date &gt;= #{lastUpdateDateFrom}
+		</if>
+		<if test="lastUpdateDateFrom == null and lastUpdateDateTo != null">
+			AND t.last_update_date &lt;= #{lastUpdateDateTo}
+		</if>
+		<if test="lastUpdateDateFrom != null and lastUpdateDateTo != null">
+			AND t.last_update_date &gt;= #{lastUpdateDateFrom} AND
+			t.last_update_date &lt;= #{lastUpdateDateTo}
+		</if>
+				
+			</sql>
+
+	<select id="selectOne" resultMap="resultMap"
+		parameterType="com.midea.isc.api.param.ApplicationParam">
+		
+		select t.*
+				from sys_application t
+				<include refid="defaultWhereClause" />
+		<include refid="orderClause" />
+		limit 1
+
+			</select>
+
+	<select id="selectList" resultMap="resultMap"
+		parameterType="com.midea.isc.api.param.ApplicationParam">
+		
+		select t.*
+				from sys_application t
+				<include refid="defaultWhereClause" />
+		<include refid="orderClause" />
+		<if test="limitClause != null and limitClause != ''">
+			${limitClause}
+		</if>
+
+			</select>
+
+	<select id="selectCount" resultType="java.lang.Integer"
+		parameterType="com.midea.isc.api.param.ApplicationParam">
+		select count(1) from sys_application t
+				<include refid="defaultWhereClause" />
+	</select>
+
+	<select id="find" resultMap="resultMap"
+		parameterType="com.midea.isc.api.param.ApplicationParam">
+		
+		select t.*
+				from sys_application t
+				<include refid="advancedWhereClause" />
+		<include refid="orderClause" />
+		<if test="limitClause != null and limitClause != ''">
+			${limitClause}
+		</if>
+
+			</select>
+
+	<select id="total" resultType="java.lang.Integer"
+		parameterType="com.midea.isc.api.param.ApplicationParam">
+		select count(1) from sys_application t
+				<include refid="advancedWhereClause" />
+	</select>
+
+	<insert id="insert" parameterType="com.midea.isc.api.model.Application"
+		useGeneratedKeys="true" keyProperty="application">
+		
+				insert into sys_application(application,type,name,icon,url,top_menu_id,relationship,enable_flag,visible_flag,default_sequence,auth,web_root,admin_email,admin_pwd,attribute1,attribute2,attribute3,attribute4,attribute5,created_by,creation_date,last_updated_by,last_update_date)
+		 values(#{application},#{type},#{name},#{icon},#{url},#{topMenuId},#{relationship},#{enableFlag},#{visibleFlag},#{defaultSequence},#{auth},#{webRoot},#{adminEmail},#{adminPwd},#{attribute1},#{attribute2},#{attribute3},#{attribute4},#{attribute5},#{createdBy},now(),#{lastUpdatedBy},now())
+	</insert>
+
+	<insert id="insertBulk" parameterType="java.util.List"
+		useGeneratedKeys="true" keyProperty="application">
+		insert into sys_application(application,type,name,icon,url,top_menu_id,relationship,enable_flag,visible_flag,default_sequence,auth,web_root,admin_email,admin_pwd,attribute1,attribute2,attribute3,attribute4,attribute5,created_by,creation_date,last_updated_by,last_update_date)
+		 values 
+ <foreach collection="list" item="obj" separator=","> 
+ (#{obj.application},#{obj.type},#{obj.name},#{obj.icon},#{obj.url},#{obj.topMenuId},#{obj.relationship},#{obj.enableFlag},#{obj.visibleFlag},#{obj.defaultSequence},#{obj.auth},#{obj.webRoot},#{obj.adminEmail},#{obj.adminPwd},#{obj.attribute1},#{obj.attribute2},#{obj.attribute3},#{obj.attribute4},#{obj.attribute5},#{obj.createdBy},now(),#{obj.lastUpdatedBy},now()) 
+ </foreach>
+	</insert>
+
+	
+	
+	<update id="update" parameterType="com.midea.isc.api.model.Application">
+		update sys_application t 		set t.type=#{type}			,t.name=#{name}			,t.icon=#{icon}			,t.url=#{url}			,t.top_menu_id=#{topMenuId}			,t.relationship=#{relationship}			,t.enable_flag=#{enableFlag}			,t.visible_flag=#{visibleFlag}			,t.default_sequence=#{defaultSequence}			,t.auth=#{auth}			,t.web_root=#{webRoot}			,t.admin_email=#{adminEmail}			,t.admin_pwd=#{adminPwd}			,t.attribute1=#{attribute1}			,t.attribute2=#{attribute2}			,t.attribute3=#{attribute3}			,t.attribute4=#{attribute4}			,t.attribute5=#{attribute5}			,t.last_updated_by=#{lastUpdatedBy}			,t.last_update_date=now()		 where t.application=#{application}
+	</update>
+
+	<update id="updateFields" parameterType="com.midea.isc.api.model.Application">
+		update sys_application t 		set t.application=#{application}<if test="type != null">			,t.type=#{type}</if><if test="name != null">			,t.name=#{name}</if><if test="icon != null">			,t.icon=#{icon}</if><if test="url != null">			,t.url=#{url}</if><if test="topMenuId != null">			,t.top_menu_id=#{topMenuId}</if><if test="relationship != null">			,t.relationship=#{relationship}</if><if test="enableFlag != null">			,t.enable_flag=#{enableFlag}</if><if test="visibleFlag != null">			,t.visible_flag=#{visibleFlag}</if><if test="defaultSequence != null">			,t.default_sequence=#{defaultSequence}</if><if test="auth != null">			,t.auth=#{auth}</if><if test="webRoot != null">			,t.web_root=#{webRoot}</if><if test="adminEmail != null">			,t.admin_email=#{adminEmail}</if><if test="adminPwd != null">			,t.admin_pwd=#{adminPwd}</if><if test="attribute1 != null">			,t.attribute1=#{attribute1}</if><if test="attribute2 != null">			,t.attribute2=#{attribute2}</if><if test="attribute3 != null">			,t.attribute3=#{attribute3}</if><if test="attribute4 != null">			,t.attribute4=#{attribute4}</if><if test="attribute5 != null">			,t.attribute5=#{attribute5}</if>			,t.last_updated_by=#{lastUpdatedBy}			,t.last_update_date=now()		 where t.application=#{application}
+	</update>
+
+	<update id="updateByOtsLock" parameterType="com.midea.isc.api.model.Application">
+		update sys_application t 		set t.type=#{type}			,t.name=#{name}			,t.icon=#{icon}			,t.url=#{url}			,t.top_menu_id=#{topMenuId}			,t.relationship=#{relationship}			,t.enable_flag=#{enableFlag}			,t.visible_flag=#{visibleFlag}			,t.default_sequence=#{defaultSequence}			,t.auth=#{auth}			,t.web_root=#{webRoot}			,t.admin_email=#{adminEmail}			,t.admin_pwd=#{adminPwd}			,t.attribute1=#{attribute1}			,t.attribute2=#{attribute2}			,t.attribute3=#{attribute3}			,t.attribute4=#{attribute4}			,t.attribute5=#{attribute5}			,t.last_updated_by=#{lastUpdatedBy}			,t.last_update_date=now()		 where t.application=#{application} and t.last_update_date = #{lastUpdateDate}
+	</update>
+
+	<update id="updateFieldsByOtsLock" parameterType="com.midea.isc.api.model.Application">
+		update sys_application t 		set t.application=#{application}<if test="type != null">			,t.type=#{type}</if><if test="name != null">			,t.name=#{name}</if><if test="icon != null">			,t.icon=#{icon}</if><if test="url != null">			,t.url=#{url}</if><if test="topMenuId != null">			,t.top_menu_id=#{topMenuId}</if><if test="relationship != null">			,t.relationship=#{relationship}</if><if test="enableFlag != null">			,t.enable_flag=#{enableFlag}</if><if test="visibleFlag != null">			,t.visible_flag=#{visibleFlag}</if><if test="defaultSequence != null">			,t.default_sequence=#{defaultSequence}</if><if test="auth != null">			,t.auth=#{auth}</if><if test="webRoot != null">			,t.web_root=#{webRoot}</if><if test="adminEmail != null">			,t.admin_email=#{adminEmail}</if><if test="adminPwd != null">			,t.admin_pwd=#{adminPwd}</if><if test="attribute1 != null">			,t.attribute1=#{attribute1}</if><if test="attribute2 != null">			,t.attribute2=#{attribute2}</if><if test="attribute3 != null">			,t.attribute3=#{attribute3}</if><if test="attribute4 != null">			,t.attribute4=#{attribute4}</if><if test="attribute5 != null">			,t.attribute5=#{attribute5}</if>			,t.last_updated_by=#{lastUpdatedBy}			,t.last_update_date=now()		 where t.application=#{application} and t.last_update_date = #{lastUpdateDate}
+	</update>
+
+	<update id="updateBulk" parameterType="java.util.List">
+		<foreach collection="list" separator=";" item="obj"> 	update sys_application t 		set t.type=#{obj.type}			,t.name=#{obj.name}			,t.icon=#{obj.icon}			,t.url=#{obj.url}			,t.top_menu_id=#{obj.topMenuId}			,t.relationship=#{obj.relationship}			,t.enable_flag=#{obj.enableFlag}			,t.visible_flag=#{obj.visibleFlag}			,t.default_sequence=#{obj.defaultSequence}			,t.auth=#{obj.auth}			,t.web_root=#{obj.webRoot}			,t.admin_email=#{obj.adminEmail}			,t.admin_pwd=#{obj.adminPwd}			,t.attribute1=#{obj.attribute1}			,t.attribute2=#{obj.attribute2}			,t.attribute3=#{obj.attribute3}			,t.attribute4=#{obj.attribute4}			,t.attribute5=#{obj.attribute5}			,t.last_updated_by=#{obj.lastUpdatedBy}			,t.last_update_date=now()		 where t.application=#{obj.application} 	 </foreach>
+	</update>
+
+	<update id="updateFieldsBulk" parameterType="java.util.List">
+		<foreach collection="list" separator=";" item="obj"> 	update sys_application t 		set t.application=#{obj.application}<if test="obj.type != null">			,t.type=#{obj.type}</if><if test="obj.name != null">			,t.name=#{obj.name}</if><if test="obj.icon != null">			,t.icon=#{obj.icon}</if><if test="obj.url != null">			,t.url=#{obj.url}</if><if test="obj.topMenuId != null">			,t.top_menu_id=#{obj.topMenuId}</if><if test="obj.relationship != null">			,t.relationship=#{obj.relationship}</if><if test="obj.enableFlag != null">			,t.enable_flag=#{obj.enableFlag}</if><if test="obj.visibleFlag != null">			,t.visible_flag=#{obj.visibleFlag}</if><if test="obj.defaultSequence != null">			,t.default_sequence=#{obj.defaultSequence}</if><if test="obj.auth != null">			,t.auth=#{obj.auth}</if><if test="obj.webRoot != null">			,t.web_root=#{obj.webRoot}</if><if test="obj.adminEmail != null">			,t.admin_email=#{obj.adminEmail}</if><if test="obj.adminPwd != null">			,t.admin_pwd=#{obj.adminPwd}</if><if test="obj.attribute1 != null">			,t.attribute1=#{obj.attribute1}</if><if test="obj.attribute2 != null">			,t.attribute2=#{obj.attribute2}</if><if test="obj.attribute3 != null">			,t.attribute3=#{obj.attribute3}</if><if test="obj.attribute4 != null">			,t.attribute4=#{obj.attribute4}</if><if test="obj.attribute5 != null">			,t.attribute5=#{obj.attribute5}</if>			,t.last_updated_by=#{obj.lastUpdatedBy}			,t.last_update_date=now()		 where t.application=#{obj.application} 	 </foreach>
+	</update>
+
+	
+	<delete id="delete" parameterType="com.midea.isc.api.model.Application">
+		delete t	 from sys_application t 		
+		<include refid="defaultWhereClause" />
+	</delete>
+
+	<delete id="deleteBulk" parameterType="java.util.List">
+		<foreach collection="list" separator=";" item="obj"> 
+	delete t	 from sys_application t 		where t.application=#{obj.application} 	 </foreach>
+	</delete>
+
+	
+</mapper>   

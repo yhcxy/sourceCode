@@ -1,0 +1,796 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.midea.isc.api.mapper.MessageMapper">
+	<resultMap id="resultMap"
+		type="com.midea.isc.api.model.Message">
+				<result column="message_id" property="messageId" />
+				<result column="application" property="application" />
+				<result column="module" property="module" />
+				<result column="type" property="type" />
+				<result column="msg_code" property="msgCode" />
+				<result column="auto_disappear" property="autoDisappear" />
+				<result column="remark" property="remark" />
+				<result column="attribute1" property="attribute1" />
+				<result column="attribute2" property="attribute2" />
+				<result column="attribute3" property="attribute3" />
+				<result column="attribute4" property="attribute4" />
+				<result column="attribute5" property="attribute5" />
+				<result column="creation_date" property="creationDate" />
+				<result column="created_by" property="createdBy" />
+				<result column="last_update_date" property="lastUpdateDate" />
+				<result column="last_updated_by" property="lastUpdatedBy" />
+								<result column="msg_content" property="msgContent" />
+					</resultMap>
+
+	<sql id="orderClause">
+		<if test="orderFields == null or orderFields.size == 0">
+			order by t.message_id desc
+		</if>
+		<if test="orderFields != null and orderFields.size > 0">
+			order by
+			<foreach collection="orderFields" separator="," index="field"
+				item="direction">
+								<if test="field == 'messageId'">
+					<choose>
+						<when test="direction =='asc'">
+							t.message_id asc
+						</when>
+						<otherwise>
+							t.message_id desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'application'">
+					<choose>
+						<when test="direction =='asc'">
+							t.application asc
+						</when>
+						<otherwise>
+							t.application desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'module'">
+					<choose>
+						<when test="direction =='asc'">
+							t.module asc
+						</when>
+						<otherwise>
+							t.module desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'type'">
+					<choose>
+						<when test="direction =='asc'">
+							t.type asc
+						</when>
+						<otherwise>
+							t.type desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'msgCode'">
+					<choose>
+						<when test="direction =='asc'">
+							t.msg_code asc
+						</when>
+						<otherwise>
+							t.msg_code desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'autoDisappear'">
+					<choose>
+						<when test="direction =='asc'">
+							t.auto_disappear asc
+						</when>
+						<otherwise>
+							t.auto_disappear desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'remark'">
+					<choose>
+						<when test="direction =='asc'">
+							t.remark asc
+						</when>
+						<otherwise>
+							t.remark desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'attribute1'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attribute1 asc
+						</when>
+						<otherwise>
+							t.attribute1 desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'attribute2'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attribute2 asc
+						</when>
+						<otherwise>
+							t.attribute2 desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'attribute3'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attribute3 asc
+						</when>
+						<otherwise>
+							t.attribute3 desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'attribute4'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attribute4 asc
+						</when>
+						<otherwise>
+							t.attribute4 desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'attribute5'">
+					<choose>
+						<when test="direction =='asc'">
+							t.attribute5 asc
+						</when>
+						<otherwise>
+							t.attribute5 desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'creationDate'">
+					<choose>
+						<when test="direction =='asc'">
+							t.creation_date asc
+						</when>
+						<otherwise>
+							t.creation_date desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'createdBy'">
+					<choose>
+						<when test="direction =='asc'">
+							t.created_by asc
+						</when>
+						<otherwise>
+							t.created_by desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'lastUpdateDate'">
+					<choose>
+						<when test="direction =='asc'">
+							t.last_update_date asc
+						</when>
+						<otherwise>
+							t.last_update_date desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'lastUpdatedBy'">
+					<choose>
+						<when test="direction =='asc'">
+							t.last_updated_by asc
+						</when>
+						<otherwise>
+							t.last_updated_by desc
+						</otherwise>
+					</choose>
+				</if>
+																<if test="field == 'msgContent'">
+					<choose>
+						<when test="direction =='asc'">
+							t.msg_content asc
+						</when>
+						<otherwise>
+							t.msg_content desc
+						</otherwise>
+					</choose>
+				</if>
+											</foreach>
+		</if>
+	</sql>
+
+	<sql id="defaultWhereClause">
+		where 1=1
+						<if test="messageId != null">and t.message_id = #{messageId}</if>
+								<if test="application != null and application != ''">and t.application = #{application}</if>
+								<if test="module != null and module != ''">and t.module = #{module}</if>
+								<if test="type != null and type != ''">and t.type = #{type}</if>
+								<if test="msgCode != null and msgCode != ''">and t.msg_code = #{msgCode}</if>
+								<if test="autoDisappear != null and autoDisappear != ''">and t.auto_disappear = #{autoDisappear}</if>
+								<if test="remark != null and remark != ''">and t.remark = #{remark}</if>
+								<if test="attribute1 != null and attribute1 != ''">and t.attribute1 = #{attribute1}</if>
+								<if test="attribute2 != null and attribute2 != ''">and t.attribute2 = #{attribute2}</if>
+								<if test="attribute3 != null and attribute3 != ''">and t.attribute3 = #{attribute3}</if>
+								<if test="attribute4 != null and attribute4 != ''">and t.attribute4 = #{attribute4}</if>
+								<if test="attribute5 != null and attribute5 != ''">and t.attribute5 = #{attribute5}</if>
+						<if test="creationDate != null">and t.creation_date = #{creationDate}</if>
+								<if test="createdBy != null and createdBy != ''">and t.created_by = #{createdBy}</if>
+						<if test="lastUpdateDate != null">and t.last_update_date = #{lastUpdateDate}</if>
+								<if test="lastUpdatedBy != null and lastUpdatedBy != ''">and t.last_updated_by = #{lastUpdatedBy}</if>
+										<if test="msgContent != null">and tl.msg_content = #{msgContent}</if>
+					</sql>
+
+	<sql id="advancedWhereClause">
+		where 1=1
+								<if test="messageIdCond != null and messageIdCond != '' and messageId != null">
+						<if test="messageIdCond == 'eq'">AND t.message_id = #{messageId}</if>
+			<if test="messageIdCond == 'ne'">AND t.message_id != #{messageId}
+			</if>
+			<if test="messageIdCond == 'lt'">AND t.message_id &lt; #{messageId}
+			</if>
+			<if test="messageIdCond == 'le'">AND t.message_id &lt;= #{messageId}
+			</if>
+			<if test="messageIdCond == 'gt'">AND t.message_id &gt; #{messageId}
+			</if>
+			<if test="messageIdCond == 'ge'">AND t.message_id &gt;= #{messageId}
+			</if>
+					</if>
+		<if test="messageIdCond == null and messageId != null">
+			AND t.message_id = #{messageId}
+		</if>
+												<if test="applicationCond != null and applicationCond != '' and application != null and application != ''">
+						<if test="applicationCond == 'eq'">AND t.application =
+				#{application}
+			</if>
+			<if test="applicationCond == 'ne'">AND t.application !=
+				#{application}
+			</if>
+			<if test="applicationCond == 'me'">
+				AND t.application in (
+				<foreach collection="application.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="applicationCond == 'cn'">AND t.application LIKE
+				CONCAT('%',#{application},'%')</if>
+			<if test="applicationCond == 'bw'">AND t.application LIKE
+				CONCAT(#{application},'%')</if>
+			<if test="applicationCond == 'ew'">AND t.application LIKE
+				CONCAT('%',#{application})</if>
+					</if>
+		<if test="applicationCond == null and application != null
+		and application != ''">
+			AND t.application = #{application}
+		</if>
+												<if test="moduleCond != null and moduleCond != '' and module != null and module != ''">
+						<if test="moduleCond == 'eq'">AND t.module =
+				#{module}
+			</if>
+			<if test="moduleCond == 'ne'">AND t.module !=
+				#{module}
+			</if>
+			<if test="moduleCond == 'me'">
+				AND t.module in (
+				<foreach collection="module.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="moduleCond == 'cn'">AND t.module LIKE
+				CONCAT('%',#{module},'%')</if>
+			<if test="moduleCond == 'bw'">AND t.module LIKE
+				CONCAT(#{module},'%')</if>
+			<if test="moduleCond == 'ew'">AND t.module LIKE
+				CONCAT('%',#{module})</if>
+					</if>
+		<if test="moduleCond == null and module != null
+		and module != ''">
+			AND t.module = #{module}
+		</if>
+												<if test="typeCond != null and typeCond != '' and type != null and type != ''">
+						<if test="typeCond == 'eq'">AND t.type =
+				#{type}
+			</if>
+			<if test="typeCond == 'ne'">AND t.type !=
+				#{type}
+			</if>
+			<if test="typeCond == 'me'">
+				AND t.type in (
+				<foreach collection="type.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="typeCond == 'cn'">AND t.type LIKE
+				CONCAT('%',#{type},'%')</if>
+			<if test="typeCond == 'bw'">AND t.type LIKE
+				CONCAT(#{type},'%')</if>
+			<if test="typeCond == 'ew'">AND t.type LIKE
+				CONCAT('%',#{type})</if>
+					</if>
+		<if test="typeCond == null and type != null
+		and type != ''">
+			AND t.type = #{type}
+		</if>
+												<if test="msgCodeCond != null and msgCodeCond != '' and msgCode != null and msgCode != ''">
+						<if test="msgCodeCond == 'eq'">AND t.msg_code =
+				#{msgCode}
+			</if>
+			<if test="msgCodeCond == 'ne'">AND t.msg_code !=
+				#{msgCode}
+			</if>
+			<if test="msgCodeCond == 'me'">
+				AND t.msg_code in (
+				<foreach collection="msgCode.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="msgCodeCond == 'cn'">AND t.msg_code LIKE
+				CONCAT('%',#{msgCode},'%')</if>
+			<if test="msgCodeCond == 'bw'">AND t.msg_code LIKE
+				CONCAT(#{msgCode},'%')</if>
+			<if test="msgCodeCond == 'ew'">AND t.msg_code LIKE
+				CONCAT('%',#{msgCode})</if>
+					</if>
+		<if test="msgCodeCond == null and msgCode != null
+		and msgCode != ''">
+			AND t.msg_code = #{msgCode}
+		</if>
+												<if test="autoDisappearCond != null and autoDisappearCond != '' and autoDisappear != null and autoDisappear != ''">
+						<if test="autoDisappearCond == 'eq'">AND t.auto_disappear =
+				#{autoDisappear}
+			</if>
+			<if test="autoDisappearCond == 'ne'">AND t.auto_disappear !=
+				#{autoDisappear}
+			</if>
+			<if test="autoDisappearCond == 'me'">
+				AND t.auto_disappear in (
+				<foreach collection="autoDisappear.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="autoDisappearCond == 'cn'">AND t.auto_disappear LIKE
+				CONCAT('%',#{autoDisappear},'%')</if>
+			<if test="autoDisappearCond == 'bw'">AND t.auto_disappear LIKE
+				CONCAT(#{autoDisappear},'%')</if>
+			<if test="autoDisappearCond == 'ew'">AND t.auto_disappear LIKE
+				CONCAT('%',#{autoDisappear})</if>
+					</if>
+		<if test="autoDisappearCond == null and autoDisappear != null
+		and autoDisappear != ''">
+			AND t.auto_disappear = #{autoDisappear}
+		</if>
+												<if test="remarkCond != null and remarkCond != '' and remark != null and remark != ''">
+						<if test="remarkCond == 'eq'">AND t.remark =
+				#{remark}
+			</if>
+			<if test="remarkCond == 'ne'">AND t.remark !=
+				#{remark}
+			</if>
+			<if test="remarkCond == 'me'">
+				AND t.remark in (
+				<foreach collection="remark.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="remarkCond == 'cn'">AND t.remark LIKE
+				CONCAT('%',#{remark},'%')</if>
+			<if test="remarkCond == 'bw'">AND t.remark LIKE
+				CONCAT(#{remark},'%')</if>
+			<if test="remarkCond == 'ew'">AND t.remark LIKE
+				CONCAT('%',#{remark})</if>
+					</if>
+		<if test="remarkCond == null and remark != null
+		and remark != ''">
+			AND t.remark = #{remark}
+		</if>
+												<if test="attribute1Cond != null and attribute1Cond != '' and attribute1 != null and attribute1 != ''">
+						<if test="attribute1Cond == 'eq'">AND t.attribute1 =
+				#{attribute1}
+			</if>
+			<if test="attribute1Cond == 'ne'">AND t.attribute1 !=
+				#{attribute1}
+			</if>
+			<if test="attribute1Cond == 'me'">
+				AND t.attribute1 in (
+				<foreach collection="attribute1.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="attribute1Cond == 'cn'">AND t.attribute1 LIKE
+				CONCAT('%',#{attribute1},'%')</if>
+			<if test="attribute1Cond == 'bw'">AND t.attribute1 LIKE
+				CONCAT(#{attribute1},'%')</if>
+			<if test="attribute1Cond == 'ew'">AND t.attribute1 LIKE
+				CONCAT('%',#{attribute1})</if>
+					</if>
+		<if test="attribute1Cond == null and attribute1 != null
+		and attribute1 != ''">
+			AND t.attribute1 = #{attribute1}
+		</if>
+												<if test="attribute2Cond != null and attribute2Cond != '' and attribute2 != null and attribute2 != ''">
+						<if test="attribute2Cond == 'eq'">AND t.attribute2 =
+				#{attribute2}
+			</if>
+			<if test="attribute2Cond == 'ne'">AND t.attribute2 !=
+				#{attribute2}
+			</if>
+			<if test="attribute2Cond == 'me'">
+				AND t.attribute2 in (
+				<foreach collection="attribute2.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="attribute2Cond == 'cn'">AND t.attribute2 LIKE
+				CONCAT('%',#{attribute2},'%')</if>
+			<if test="attribute2Cond == 'bw'">AND t.attribute2 LIKE
+				CONCAT(#{attribute2},'%')</if>
+			<if test="attribute2Cond == 'ew'">AND t.attribute2 LIKE
+				CONCAT('%',#{attribute2})</if>
+					</if>
+		<if test="attribute2Cond == null and attribute2 != null
+		and attribute2 != ''">
+			AND t.attribute2 = #{attribute2}
+		</if>
+												<if test="attribute3Cond != null and attribute3Cond != '' and attribute3 != null and attribute3 != ''">
+						<if test="attribute3Cond == 'eq'">AND t.attribute3 =
+				#{attribute3}
+			</if>
+			<if test="attribute3Cond == 'ne'">AND t.attribute3 !=
+				#{attribute3}
+			</if>
+			<if test="attribute3Cond == 'me'">
+				AND t.attribute3 in (
+				<foreach collection="attribute3.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="attribute3Cond == 'cn'">AND t.attribute3 LIKE
+				CONCAT('%',#{attribute3},'%')</if>
+			<if test="attribute3Cond == 'bw'">AND t.attribute3 LIKE
+				CONCAT(#{attribute3},'%')</if>
+			<if test="attribute3Cond == 'ew'">AND t.attribute3 LIKE
+				CONCAT('%',#{attribute3})</if>
+					</if>
+		<if test="attribute3Cond == null and attribute3 != null
+		and attribute3 != ''">
+			AND t.attribute3 = #{attribute3}
+		</if>
+												<if test="attribute4Cond != null and attribute4Cond != '' and attribute4 != null and attribute4 != ''">
+						<if test="attribute4Cond == 'eq'">AND t.attribute4 =
+				#{attribute4}
+			</if>
+			<if test="attribute4Cond == 'ne'">AND t.attribute4 !=
+				#{attribute4}
+			</if>
+			<if test="attribute4Cond == 'me'">
+				AND t.attribute4 in (
+				<foreach collection="attribute4.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="attribute4Cond == 'cn'">AND t.attribute4 LIKE
+				CONCAT('%',#{attribute4},'%')</if>
+			<if test="attribute4Cond == 'bw'">AND t.attribute4 LIKE
+				CONCAT(#{attribute4},'%')</if>
+			<if test="attribute4Cond == 'ew'">AND t.attribute4 LIKE
+				CONCAT('%',#{attribute4})</if>
+					</if>
+		<if test="attribute4Cond == null and attribute4 != null
+		and attribute4 != ''">
+			AND t.attribute4 = #{attribute4}
+		</if>
+												<if test="attribute5Cond != null and attribute5Cond != '' and attribute5 != null and attribute5 != ''">
+						<if test="attribute5Cond == 'eq'">AND t.attribute5 =
+				#{attribute5}
+			</if>
+			<if test="attribute5Cond == 'ne'">AND t.attribute5 !=
+				#{attribute5}
+			</if>
+			<if test="attribute5Cond == 'me'">
+				AND t.attribute5 in (
+				<foreach collection="attribute5.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="attribute5Cond == 'cn'">AND t.attribute5 LIKE
+				CONCAT('%',#{attribute5},'%')</if>
+			<if test="attribute5Cond == 'bw'">AND t.attribute5 LIKE
+				CONCAT(#{attribute5},'%')</if>
+			<if test="attribute5Cond == 'ew'">AND t.attribute5 LIKE
+				CONCAT('%',#{attribute5})</if>
+					</if>
+		<if test="attribute5Cond == null and attribute5 != null
+		and attribute5 != ''">
+			AND t.attribute5 = #{attribute5}
+		</if>
+								<if test="creationDateFrom != null and creationDateTo == null">
+			AND t.creation_date &gt;= #{creationDateFrom}
+		</if>
+		<if test="creationDateFrom == null and creationDateTo != null">
+			AND t.creation_date &lt;= #{creationDateTo}
+		</if>
+		<if test="creationDateFrom != null and creationDateTo != null">
+			AND t.creation_date &gt;= #{creationDateFrom} AND
+			t.creation_date &lt;= #{creationDateTo}
+		</if>
+												<if test="createdByCond != null and createdByCond != '' and createdBy != null and createdBy != ''">
+						<if test="createdByCond == 'eq'">AND t.created_by =
+				#{createdBy}
+			</if>
+			<if test="createdByCond == 'ne'">AND t.created_by !=
+				#{createdBy}
+			</if>
+			<if test="createdByCond == 'me'">
+				AND t.created_by in (
+				<foreach collection="createdBy.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="createdByCond == 'cn'">AND t.created_by LIKE
+				CONCAT('%',#{createdBy},'%')</if>
+			<if test="createdByCond == 'bw'">AND t.created_by LIKE
+				CONCAT(#{createdBy},'%')</if>
+			<if test="createdByCond == 'ew'">AND t.created_by LIKE
+				CONCAT('%',#{createdBy})</if>
+					</if>
+		<if test="createdByCond == null and createdBy != null
+		and createdBy != ''">
+			AND t.created_by = #{createdBy}
+		</if>
+								<if test="lastUpdateDateFrom != null and lastUpdateDateTo == null">
+			AND t.last_update_date &gt;= #{lastUpdateDateFrom}
+		</if>
+		<if test="lastUpdateDateFrom == null and lastUpdateDateTo != null">
+			AND t.last_update_date &lt;= #{lastUpdateDateTo}
+		</if>
+		<if test="lastUpdateDateFrom != null and lastUpdateDateTo != null">
+			AND t.last_update_date &gt;= #{lastUpdateDateFrom} AND
+			t.last_update_date &lt;= #{lastUpdateDateTo}
+		</if>
+												<if test="lastUpdatedByCond != null and lastUpdatedByCond != '' and lastUpdatedBy != null and lastUpdatedBy != ''">
+						<if test="lastUpdatedByCond == 'eq'">AND t.last_updated_by =
+				#{lastUpdatedBy}
+			</if>
+			<if test="lastUpdatedByCond == 'ne'">AND t.last_updated_by !=
+				#{lastUpdatedBy}
+			</if>
+			<if test="lastUpdatedByCond == 'me'">
+				AND t.last_updated_by in (
+				<foreach collection="lastUpdatedBy.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="lastUpdatedByCond == 'cn'">AND t.last_updated_by LIKE
+				CONCAT('%',#{lastUpdatedBy},'%')</if>
+			<if test="lastUpdatedByCond == 'bw'">AND t.last_updated_by LIKE
+				CONCAT(#{lastUpdatedBy},'%')</if>
+			<if test="lastUpdatedByCond == 'ew'">AND t.last_updated_by LIKE
+				CONCAT('%',#{lastUpdatedBy})</if>
+					</if>
+		<if test="lastUpdatedByCond == null and lastUpdatedBy != null
+		and lastUpdatedBy != ''">
+			AND t.last_updated_by = #{lastUpdatedBy}
+		</if>
+				
+												<if test="msgContentCond != null and msgContentCond != '' and msgContent != null and msgContent != ''">
+						<if test="msgContentCond == 'eq'">AND tl.msg_content =
+				#{msgContent}
+			</if>
+			<if test="msgContentCond == 'ne'">AND tl.msg_content !=
+				#{msgContent}
+			</if>
+			<if test="msgContentCond == 'me'">
+				AND t.msg_content in (
+				<foreach collection="msgContent.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="msgContentCond == 'cn'">AND tl.msg_content LIKE
+				CONCAT('%',#{msgContent},'%')</if>
+			<if test="msgContentCond == 'bw'">AND tl.msg_content LIKE
+				CONCAT(#{msgContent},'%')</if>
+			<if test="msgContentCond == 'ew'">AND tl.msg_content LIKE
+				CONCAT('%',#{msgContent})</if>
+					</if>
+		<if test="msgContentCond == null and msgContent != null
+		and msgContent != ''">
+			AND tl.msg_content = #{msgContent}
+		</if>
+							</sql>
+
+	<select id="selectOne" resultMap="resultMap"
+		parameterType="com.midea.isc.api.param.MessageParam">
+		
+		select t.*
+				,tl.msg_content
+				from app_message t
+				left join app_message_tl tl on
+		t.message_id=tl.message_id
+		and
+		tl.language=#{profile.__language}
+				<include refid="defaultWhereClause" />
+		<include refid="orderClause" />
+		limit 1
+
+			</select>
+
+	<select id="selectList" resultMap="resultMap"
+		parameterType="com.midea.isc.api.param.MessageParam">
+		
+		select t.*
+				,tl.msg_content
+				from app_message t
+				left join app_message_tl tl on
+		t.message_id=tl.message_id
+		and
+		tl.language=#{profile.__language}
+				<include refid="defaultWhereClause" />
+		<include refid="orderClause" />
+		<if test="limitClause != null and limitClause != ''">
+			${limitClause}
+		</if>
+
+			</select>
+
+	<select id="selectCount" resultType="java.lang.Integer"
+		parameterType="com.midea.isc.api.param.MessageParam">
+		select count(1) from app_message t
+				left join
+		app_message_tl tl on
+		t.message_id=tl.message_id and
+		tl.language=#{profile.__language}
+				<include refid="defaultWhereClause" />
+	</select>
+
+	<select id="find" resultMap="resultMap"
+		parameterType="com.midea.isc.api.param.MessageParam">
+		
+		select t.*
+				,tl.msg_content
+				from app_message t
+				left join app_message_tl tl on
+		t.message_id=tl.message_id
+		and
+		tl.language=#{profile.__language}
+				<include refid="advancedWhereClause" />
+		<include refid="orderClause" />
+		<if test="limitClause != null and limitClause != ''">
+			${limitClause}
+		</if>
+
+			</select>
+
+	<select id="total" resultType="java.lang.Integer"
+		parameterType="com.midea.isc.api.param.MessageParam">
+		select count(1) from app_message t
+				left join
+		app_message_tl tl on
+		t.message_id=tl.message_id and
+		tl.language=#{profile.__language}
+				<include refid="advancedWhereClause" />
+	</select>
+
+	<insert id="insert" parameterType="com.midea.isc.api.model.Message"
+		useGeneratedKeys="true" keyProperty="messageId">
+		
+				insert into app_message(message_id,application,module,type,msg_code,auto_disappear,remark,attribute1,attribute2,attribute3,attribute4,attribute5,creation_date,created_by,last_update_date,last_updated_by)
+		 values(#{messageId},#{application},#{module},#{type},#{msgCode},#{autoDisappear},#{remark},#{attribute1},#{attribute2},#{attribute3},#{attribute4},#{attribute5},now(),#{createdBy},now(),#{lastUpdatedBy})
+	</insert>
+
+	<insert id="insertBulk" parameterType="java.util.List"
+		useGeneratedKeys="true" keyProperty="messageId">
+		insert into app_message(message_id,application,module,type,msg_code,auto_disappear,remark,attribute1,attribute2,attribute3,attribute4,attribute5,creation_date,created_by,last_update_date,last_updated_by)
+		 values 
+ <foreach collection="list" item="obj" separator=","> 
+ (#{obj.messageId},#{obj.application},#{obj.module},#{obj.type},#{obj.msgCode},#{obj.autoDisappear},#{obj.remark},#{obj.attribute1},#{obj.attribute2},#{obj.attribute3},#{obj.attribute4},#{obj.attribute5},now(),#{obj.createdBy},now(),#{obj.lastUpdatedBy}) 
+ </foreach>
+	</insert>
+
+		<insert id="insertTL" parameterType="com.midea.isc.api.model.Message">
+				insert into app_message_tl(message_id,msg_content,language,source_lang,creation_date,created_by,last_update_date,last_updated_by)
+		values
+		<foreach item="lang" collection="profile.languages" separator=",">
+		(#{messageId},#{msgContent},#{lang},#{profile.__language},now(),#{createdBy},now(),#{lastUpdatedBy})
+		</foreach>
+	</insert>
+	
+		<insert id="copySourceLang" parameterType="com.midea.isc.api.model.Message">
+				insert into 		app_message_tl(message_id,msg_content,language,source_lang,creation_date,created_by,last_update_date,last_updated_by)
+		select
+		message_id,msg_content,#{profile.__language},source_lang,creation_date,created_by,last_update_date,last_updated_by
+		from app_message_tl t1
+		where
+		language=source_lang
+		<if test="messageId != null">and message_id=#{messageId}</if>
+		AND NOT EXISTS (
+		SELECT
+		NULL
+		FROM
+		app_message_tl t2
+		WHERE
+		t1.message_id = t2.message_id
+		AND t2.language =
+		#{profile.__language}
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.midea.isc.api.model.Message">
+		update app_message t 		set t.application=#{application}			,t.module=#{module}			,t.type=#{type}			,t.msg_code=#{msgCode}			,t.auto_disappear=#{autoDisappear}			,t.remark=#{remark}			,t.attribute1=#{attribute1}			,t.attribute2=#{attribute2}			,t.attribute3=#{attribute3}			,t.attribute4=#{attribute4}			,t.attribute5=#{attribute5}			,t.last_update_date=now()			,t.last_updated_by=#{lastUpdatedBy}		 where t.message_id=#{messageId}
+	</update>
+
+	<update id="updateFields" parameterType="com.midea.isc.api.model.Message">
+		update app_message t 		set t.message_id=#{messageId}<if test="application != null">			,t.application=#{application}</if><if test="module != null">			,t.module=#{module}</if><if test="type != null">			,t.type=#{type}</if><if test="msgCode != null">			,t.msg_code=#{msgCode}</if><if test="autoDisappear != null">			,t.auto_disappear=#{autoDisappear}</if><if test="remark != null">			,t.remark=#{remark}</if><if test="attribute1 != null">			,t.attribute1=#{attribute1}</if><if test="attribute2 != null">			,t.attribute2=#{attribute2}</if><if test="attribute3 != null">			,t.attribute3=#{attribute3}</if><if test="attribute4 != null">			,t.attribute4=#{attribute4}</if><if test="attribute5 != null">			,t.attribute5=#{attribute5}</if>			,t.last_update_date=now()			,t.last_updated_by=#{lastUpdatedBy}		 where t.message_id=#{messageId}
+	</update>
+
+	<update id="updateByOtsLock" parameterType="com.midea.isc.api.model.Message">
+		update app_message t 		set t.application=#{application}			,t.module=#{module}			,t.type=#{type}			,t.msg_code=#{msgCode}			,t.auto_disappear=#{autoDisappear}			,t.remark=#{remark}			,t.attribute1=#{attribute1}			,t.attribute2=#{attribute2}			,t.attribute3=#{attribute3}			,t.attribute4=#{attribute4}			,t.attribute5=#{attribute5}			,t.last_update_date=now()			,t.last_updated_by=#{lastUpdatedBy}		 where t.message_id=#{messageId} and t.last_update_date = #{lastUpdateDate}
+	</update>
+
+	<update id="updateFieldsByOtsLock" parameterType="com.midea.isc.api.model.Message">
+		update app_message t 		set t.message_id=#{messageId}<if test="application != null">			,t.application=#{application}</if><if test="module != null">			,t.module=#{module}</if><if test="type != null">			,t.type=#{type}</if><if test="msgCode != null">			,t.msg_code=#{msgCode}</if><if test="autoDisappear != null">			,t.auto_disappear=#{autoDisappear}</if><if test="remark != null">			,t.remark=#{remark}</if><if test="attribute1 != null">			,t.attribute1=#{attribute1}</if><if test="attribute2 != null">			,t.attribute2=#{attribute2}</if><if test="attribute3 != null">			,t.attribute3=#{attribute3}</if><if test="attribute4 != null">			,t.attribute4=#{attribute4}</if><if test="attribute5 != null">			,t.attribute5=#{attribute5}</if>			,t.last_update_date=now()			,t.last_updated_by=#{lastUpdatedBy}		 where t.message_id=#{messageId} and t.last_update_date = #{lastUpdateDate}
+	</update>
+
+	<update id="updateBulk" parameterType="java.util.List">
+		<foreach collection="list" separator=";" item="obj"> 	update app_message t 		set t.application=#{obj.application}			,t.module=#{obj.module}			,t.type=#{obj.type}			,t.msg_code=#{obj.msgCode}			,t.auto_disappear=#{obj.autoDisappear}			,t.remark=#{obj.remark}			,t.attribute1=#{obj.attribute1}			,t.attribute2=#{obj.attribute2}			,t.attribute3=#{obj.attribute3}			,t.attribute4=#{obj.attribute4}			,t.attribute5=#{obj.attribute5}			,t.last_update_date=now()			,t.last_updated_by=#{obj.lastUpdatedBy}		 where t.message_id=#{obj.messageId} 	 </foreach>
+	</update>
+
+	<update id="updateFieldsBulk" parameterType="java.util.List">
+		<foreach collection="list" separator=";" item="obj"> 	update app_message t 		set t.message_id=#{obj.messageId}<if test="obj.application != null">			,t.application=#{obj.application}</if><if test="obj.module != null">			,t.module=#{obj.module}</if><if test="obj.type != null">			,t.type=#{obj.type}</if><if test="obj.msgCode != null">			,t.msg_code=#{obj.msgCode}</if><if test="obj.autoDisappear != null">			,t.auto_disappear=#{obj.autoDisappear}</if><if test="obj.remark != null">			,t.remark=#{obj.remark}</if><if test="obj.attribute1 != null">			,t.attribute1=#{obj.attribute1}</if><if test="obj.attribute2 != null">			,t.attribute2=#{obj.attribute2}</if><if test="obj.attribute3 != null">			,t.attribute3=#{obj.attribute3}</if><if test="obj.attribute4 != null">			,t.attribute4=#{obj.attribute4}</if><if test="obj.attribute5 != null">			,t.attribute5=#{obj.attribute5}</if>			,t.last_update_date=now()			,t.last_updated_by=#{obj.lastUpdatedBy}		 where t.message_id=#{obj.messageId} 	 </foreach>
+	</update>
+
+		<update id="updateTL" parameterType="com.midea.isc.api.model.Message">
+		update app_message_tl		set msg_content=#{msgContent},last_update_date=now(),last_updated_by=#{lastUpdatedBy}		 where language=#{profile.__language} and message_id=#{messageId}
+	</update>
+
+	<update id="updateFieldsTL" parameterType="com.midea.isc.api.model.Message">
+		update app_message_tl		set message_id=#{messageId}<if test="msgContent != null">,msg_content=#{msgContent}</if>,last_update_date=now(),last_updated_by=#{lastUpdatedBy}		 where language=#{profile.__language} and message_id=#{messageId}
+	</update>
+	
+	<delete id="delete" parameterType="com.midea.isc.api.model.Message">
+		delete t,tl	 from app_message t 
+		left join app_message_tl tl on t.message_id=tl.message_id		
+		<include refid="defaultWhereClause" />
+	</delete>
+
+	<delete id="deleteBulk" parameterType="java.util.List">
+		<foreach collection="list" separator=";" item="obj"> 
+	delete t,tl	 from app_message t 
+		left join app_message_tl tl on t.message_id=tl.message_id		where t.message_id=#{obj.messageId} 	 </foreach>
+	</delete>
+
+	
+</mapper>   

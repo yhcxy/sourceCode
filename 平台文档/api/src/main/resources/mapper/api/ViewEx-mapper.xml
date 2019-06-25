@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.midea.isc.api.mapper.ViewMapper">
+	<resultMap id="vo" type="com.midea.isc.api.vo.ViewVo" extends="resultMap">
+		<collection property="layouts" ofType="com.midea.isc.api.model.ViewLayout">
+			<id column="l_layout_id" property="layoutId"/>
+			<result column="l_view_id" property="viewId" />
+			<result column="l_column_name" property="columnName" />
+			<result column="l_filterable" property="filterable" />
+			<result column="l_sortable" property="sortable" />
+			<result column="l_fixed" property="fixed" />
+			<result column="l_column_width" property="columnWidth" />
+			<result column="l_seq" property="seq" />
+			<result column="l_created_by" property="createdBy" />
+			<result column="l_creation_date" property="creationDate" />
+			<result column="l_last_updated_by" property="lastUpdatedBy" />
+			<result column="l_last_update_time" property="lastUpdateTime" />
+		</collection>
+
+		<collection property="filters" ofType="com.midea.isc.api.model.ViewFilter">
+			<id column="f_filter_id" property="filterId" />
+			<result column="f_view_id" property="viewId" />
+			<result column="f_column_name" property="columnName" />
+			<result column="f_filter_condition" property="filterCondition" />
+			<result column="f_filter_value" property="filterValue" />
+			<result column="f_create_by" property="createBy" />
+			<result column="f_creation_date" property="creationDate" />
+			<result column="f_last_updated_by" property="lastUpdatedBy" />
+			<result column="f_last_update_date" property="lastUpdateDate" />
+		</collection>
+	</resultMap>
+
+	<select id="getOne" resultMap="vo" parameterType="com.midea.isc.api.model.View">
+		select v.*,l.layout_id as l_layout_id,
+			l.column_name as l_column_name, l.filterable as l_filterable,
+			l.fixed as l_fixed, l.sortable as l_sortable,
+			l.column_width as l_column_width,l.seq as l_seq,
+			f.filter_id as f_filter_id, f.view_id as f_view_id,
+			f.column_name as f_column_name, f.filter_condition as f_filter_condition,
+			 f.filter_value as f_filter_value
+		from app_view v left join app_view_layout l on v.view_id = l.view_id and v.view_id = #{viewId} and (v.login_id = #{profile.__userName} or app_share= 'Y')
+		left join app_view_filter f on v.view_id = f.view_id
+		order by l.seq asc
+	</select>
+
+	<select id="getDefault" resultType="String" parameterType="com.midea.isc.api.model.View">
+		select default_flag
+		from app_view v
+		<where>
+			page_id = #{pageId}
+			and grid_id = #{gridId}
+			<if test="null != loginId">
+				and login_id = #{loginId}
+			</if>
+			<if test="null != viewId">
+				and view_id = #{viewId}
+			</if>
+			<if test="null != viewName">
+				and view_name = #{viewName}
+			</if>
+		</where>
+	</select>
+</mapper>

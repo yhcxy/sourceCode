@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.midea.isc.api.mapper.ViewFilterMapper">
+	<resultMap id="resultMap"
+		type="com.midea.isc.api.model.ViewFilter">
+				<result column="filter_id" property="filterId" />
+				<result column="view_id" property="viewId" />
+				<result column="column_name" property="columnName" />
+				<result column="filter_condition" property="filterCondition" />
+				<result column="filter_value" property="filterValue" />
+				<result column="created_by" property="createdBy" />
+				<result column="creation_date" property="creationDate" />
+				<result column="last_updated_by" property="lastUpdatedBy" />
+				<result column="last_update_date" property="lastUpdateDate" />
+					</resultMap>
+
+	<sql id="orderClause">
+		<if test="orderFields == null or orderFields.size == 0">
+			order by t.filter_id desc
+		</if>
+		<if test="orderFields != null and orderFields.size > 0">
+			order by
+			<foreach collection="orderFields" separator="," index="field"
+				item="direction">
+								<if test="field == 'filterId'">
+					<choose>
+						<when test="direction =='asc'">
+							t.filter_id asc
+						</when>
+						<otherwise>
+							t.filter_id desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'viewId'">
+					<choose>
+						<when test="direction =='asc'">
+							t.view_id asc
+						</when>
+						<otherwise>
+							t.view_id desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'columnName'">
+					<choose>
+						<when test="direction =='asc'">
+							t.column_name asc
+						</when>
+						<otherwise>
+							t.column_name desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'filterCondition'">
+					<choose>
+						<when test="direction =='asc'">
+							t.filter_condition asc
+						</when>
+						<otherwise>
+							t.filter_condition desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'filterValue'">
+					<choose>
+						<when test="direction =='asc'">
+							t.filter_value asc
+						</when>
+						<otherwise>
+							t.filter_value desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'createdBy'">
+					<choose>
+						<when test="direction =='asc'">
+							t.created_by asc
+						</when>
+						<otherwise>
+							t.created_by desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'creationDate'">
+					<choose>
+						<when test="direction =='asc'">
+							t.creation_date asc
+						</when>
+						<otherwise>
+							t.creation_date desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'lastUpdatedBy'">
+					<choose>
+						<when test="direction =='asc'">
+							t.last_updated_by asc
+						</when>
+						<otherwise>
+							t.last_updated_by desc
+						</otherwise>
+					</choose>
+				</if>
+								<if test="field == 'lastUpdateDate'">
+					<choose>
+						<when test="direction =='asc'">
+							t.last_update_date asc
+						</when>
+						<otherwise>
+							t.last_update_date desc
+						</otherwise>
+					</choose>
+				</if>
+											</foreach>
+		</if>
+	</sql>
+
+	<sql id="defaultWhereClause">
+		where 1=1 
+						<if test="filterId != null">and t.filter_id = #{filterId}</if>
+						<if test="viewId != null">and t.view_id = #{viewId}</if>
+								<if test="columnName != null and columnName != ''">and t.column_name = #{columnName}</if>
+								<if test="filterCondition != null and filterCondition != ''">and t.filter_condition = #{filterCondition}</if>
+								<if test="filterValue != null and filterValue != ''">and t.filter_value = #{filterValue}</if>
+								<if test="createdBy != null and createdBy != ''">and t.created_by = #{createdBy}</if>
+						<if test="creationDate != null">and t.creation_date = #{creationDate}</if>
+								<if test="lastUpdatedBy != null and lastUpdatedBy != ''">and t.last_updated_by = #{lastUpdatedBy}</if>
+						<if test="lastUpdateDate != null">and t.last_update_date = #{lastUpdateDate}</if>
+					</sql>
+
+	<sql id="advancedWhereClause">
+		where 1=1 
+								<if test="filterIdCond != null and filterIdCond != '' and filterId != null">
+						<if test="filterIdCond == 'eq'">AND t.filter_id = #{filterId}</if>
+			<if test="filterIdCond == 'ne'">AND t.filter_id != #{filterId}
+			</if>
+			<if test="filterIdCond == 'lt'">AND t.filter_id &lt; #{filterId}
+			</if>
+			<if test="filterIdCond == 'le'">AND t.filter_id &lt;= #{filterId}
+			</if>
+			<if test="filterIdCond == 'gt'">AND t.filter_id &gt; #{filterId}
+			</if>
+			<if test="filterIdCond == 'ge'">AND t.filter_id &gt;= #{filterId}
+			</if>
+					</if>
+		<if test="filterIdCond == null and filterId != null">
+			AND t.filter_id = #{filterId}
+		</if>
+										<if test="viewIdCond != null and viewIdCond != '' and viewId != null">
+						<if test="viewIdCond == 'eq'">AND t.view_id = #{viewId}</if>
+			<if test="viewIdCond == 'ne'">AND t.view_id != #{viewId}
+			</if>
+			<if test="viewIdCond == 'lt'">AND t.view_id &lt; #{viewId}
+			</if>
+			<if test="viewIdCond == 'le'">AND t.view_id &lt;= #{viewId}
+			</if>
+			<if test="viewIdCond == 'gt'">AND t.view_id &gt; #{viewId}
+			</if>
+			<if test="viewIdCond == 'ge'">AND t.view_id &gt;= #{viewId}
+			</if>
+					</if>
+		<if test="viewIdCond == null and viewId != null">
+			AND t.view_id = #{viewId}
+		</if>
+												<if test="columnNameCond != null and columnNameCond != '' and columnName != null and columnName != ''">
+						<if test="columnNameCond == 'eq'">AND t.column_name =
+				#{columnName}
+			</if>
+			<if test="columnNameCond == 'ne'">AND t.column_name !=
+				#{columnName}
+			</if>
+			<if test="columnNameCond == 'me'">
+				AND t.column_name in (
+				<foreach collection="columnName.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="columnNameCond == 'cn'">AND t.column_name LIKE
+				CONCAT('%',#{columnName},'%')</if>
+			<if test="columnNameCond == 'bw'">AND t.column_name LIKE
+				CONCAT(#{columnName},'%')</if>
+			<if test="columnNameCond == 'ew'">AND t.column_name LIKE
+				CONCAT('%',#{columnName})</if>
+					</if>
+		<if test="columnNameCond == null and columnName != null
+		and columnName != ''">
+			AND t.column_name = #{columnName}
+		</if>
+												<if test="filterConditionCond != null and filterConditionCond != '' and filterCondition != null and filterCondition != ''">
+						<if test="filterConditionCond == 'eq'">AND t.filter_condition =
+				#{filterCondition}
+			</if>
+			<if test="filterConditionCond == 'ne'">AND t.filter_condition !=
+				#{filterCondition}
+			</if>
+			<if test="filterConditionCond == 'me'">
+				AND t.filter_condition in (
+				<foreach collection="filterCondition.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="filterConditionCond == 'cn'">AND t.filter_condition LIKE
+				CONCAT('%',#{filterCondition},'%')</if>
+			<if test="filterConditionCond == 'bw'">AND t.filter_condition LIKE
+				CONCAT(#{filterCondition},'%')</if>
+			<if test="filterConditionCond == 'ew'">AND t.filter_condition LIKE
+				CONCAT('%',#{filterCondition})</if>
+					</if>
+		<if test="filterConditionCond == null and filterCondition != null
+		and filterCondition != ''">
+			AND t.filter_condition = #{filterCondition}
+		</if>
+												<if test="filterValueCond != null and filterValueCond != '' and filterValue != null and filterValue != ''">
+						<if test="filterValueCond == 'eq'">AND t.filter_value =
+				#{filterValue}
+			</if>
+			<if test="filterValueCond == 'ne'">AND t.filter_value !=
+				#{filterValue}
+			</if>
+			<if test="filterValueCond == 'me'">
+				AND t.filter_value in (
+				<foreach collection="filterValue.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="filterValueCond == 'cn'">AND t.filter_value LIKE
+				CONCAT('%',#{filterValue},'%')</if>
+			<if test="filterValueCond == 'bw'">AND t.filter_value LIKE
+				CONCAT(#{filterValue},'%')</if>
+			<if test="filterValueCond == 'ew'">AND t.filter_value LIKE
+				CONCAT('%',#{filterValue})</if>
+					</if>
+		<if test="filterValueCond == null and filterValue != null
+		and filterValue != ''">
+			AND t.filter_value = #{filterValue}
+		</if>
+												<if test="createdByCond != null and createdByCond != '' and createdBy != null and createdBy != ''">
+						<if test="createdByCond == 'eq'">AND t.created_by =
+				#{createdBy}
+			</if>
+			<if test="createdByCond == 'ne'">AND t.created_by !=
+				#{createdBy}
+			</if>
+			<if test="createdByCond == 'me'">
+				AND t.created_by in (
+				<foreach collection="createdBy.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="createdByCond == 'cn'">AND t.created_by LIKE
+				CONCAT('%',#{createdBy},'%')</if>
+			<if test="createdByCond == 'bw'">AND t.created_by LIKE
+				CONCAT(#{createdBy},'%')</if>
+			<if test="createdByCond == 'ew'">AND t.created_by LIKE
+				CONCAT('%',#{createdBy})</if>
+					</if>
+		<if test="createdByCond == null and createdBy != null
+		and createdBy != ''">
+			AND t.created_by = #{createdBy}
+		</if>
+								<if test="creationDateFrom != null and creationDateTo == null">
+			AND t.creation_date &gt;= #{creationDateFrom}
+		</if>
+		<if test="creationDateFrom == null and creationDateTo != null">
+			AND t.creation_date &lt;= #{creationDateTo}
+		</if>
+		<if test="creationDateFrom != null and creationDateTo != null">
+			AND t.creation_date &gt;= #{creationDateFrom} AND
+			t.creation_date &lt;= #{creationDateTo}
+		</if>
+												<if test="lastUpdatedByCond != null and lastUpdatedByCond != '' and lastUpdatedBy != null and lastUpdatedBy != ''">
+						<if test="lastUpdatedByCond == 'eq'">AND t.last_updated_by =
+				#{lastUpdatedBy}
+			</if>
+			<if test="lastUpdatedByCond == 'ne'">AND t.last_updated_by !=
+				#{lastUpdatedBy}
+			</if>
+			<if test="lastUpdatedByCond == 'me'">
+				AND t.last_updated_by in (
+				<foreach collection="lastUpdatedBy.split(',')" item="item" index="index"
+					separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<if test="lastUpdatedByCond == 'cn'">AND t.last_updated_by LIKE
+				CONCAT('%',#{lastUpdatedBy},'%')</if>
+			<if test="lastUpdatedByCond == 'bw'">AND t.last_updated_by LIKE
+				CONCAT(#{lastUpdatedBy},'%')</if>
+			<if test="lastUpdatedByCond == 'ew'">AND t.last_updated_by LIKE
+				CONCAT('%',#{lastUpdatedBy})</if>
+					</if>
+		<if test="lastUpdatedByCond == null and lastUpdatedBy != null
+		and lastUpdatedBy != ''">
+			AND t.last_updated_by = #{lastUpdatedBy}
+		</if>
+								<if test="lastUpdateDateFrom != null and lastUpdateDateTo == null">
+			AND t.last_update_date &gt;= #{lastUpdateDateFrom}
+		</if>
+		<if test="lastUpdateDateFrom == null and lastUpdateDateTo != null">
+			AND t.last_update_date &lt;= #{lastUpdateDateTo}
+		</if>
+		<if test="lastUpdateDateFrom != null and lastUpdateDateTo != null">
+			AND t.last_update_date &gt;= #{lastUpdateDateFrom} AND
+			t.last_update_date &lt;= #{lastUpdateDateTo}
+		</if>
+				
+			</sql>
+
+	<select id="selectOne" resultMap="resultMap"
+		parameterType="com.midea.isc.api.param.ViewFilterParam">
+		
+		select t.*
+				from app_view_filter t
+				<include refid="defaultWhereClause" />
+		<include refid="orderClause" />
+		limit 1
+
+			</select>
+
+	<select id="selectList" resultMap="resultMap"
+		parameterType="com.midea.isc.api.param.ViewFilterParam">
+		
+		select t.*
+				from app_view_filter t
+				<include refid="defaultWhereClause" />
+		<include refid="orderClause" />
+		<if test="limitClause != null and limitClause != ''">
+			${limitClause}
+		</if>
+
+			</select>
+
+	<select id="selectCount" resultType="java.lang.Integer"
+		parameterType="com.midea.isc.api.param.ViewFilterParam">
+		select count(1) from app_view_filter t
+				<include refid="defaultWhereClause" />
+	</select>
+
+	<select id="find" resultMap="resultMap"
+		parameterType="com.midea.isc.api.param.ViewFilterParam">
+		
+		select t.*
+				from app_view_filter t
+				<include refid="advancedWhereClause" />
+		<include refid="orderClause" />
+		<if test="limitClause != null and limitClause != ''">
+			${limitClause}
+		</if>
+
+			</select>
+
+	<select id="total" resultType="java.lang.Integer"
+		parameterType="com.midea.isc.api.param.ViewFilterParam">
+		select count(1) from app_view_filter t
+				<include refid="advancedWhereClause" />
+	</select>
+
+	<insert id="insert" parameterType="com.midea.isc.api.model.ViewFilter"
+		useGeneratedKeys="true" keyProperty="filterId">
+		
+				insert into app_view_filter(filter_id,view_id,column_name,filter_condition,filter_value,created_by,creation_date,last_updated_by,last_update_date)
+		 values(#{filterId},#{viewId},#{columnName},#{filterCondition},#{filterValue},#{createdBy},now(),#{lastUpdatedBy},now())
+	</insert>
+
+	<insert id="insertBulk" parameterType="java.util.List"
+		useGeneratedKeys="true" keyProperty="filterId">
+		insert into app_view_filter(filter_id,view_id,column_name,filter_condition,filter_value,created_by,creation_date,last_updated_by,last_update_date)
+		 values 
+ <foreach collection="list" item="obj" separator=","> 
+ (#{obj.filterId},#{obj.viewId},#{obj.columnName},#{obj.filterCondition},#{obj.filterValue},#{obj.createdBy},now(),#{obj.lastUpdatedBy},now()) 
+ </foreach>
+	</insert>
+
+	
+	
+	<update id="update" parameterType="com.midea.isc.api.model.ViewFilter">
+		update app_view_filter t 		set t.view_id=#{viewId}			,t.column_name=#{columnName}			,t.filter_condition=#{filterCondition}			,t.filter_value=#{filterValue}			,t.last_updated_by=#{lastUpdatedBy}			,t.last_update_date=now()		 where t.filter_id=#{filterId}
+	</update>
+
+	<update id="updateFields" parameterType="com.midea.isc.api.model.ViewFilter">
+		update app_view_filter t 		set t.filter_id=#{filterId}<if test="viewId != null">			,t.view_id=#{viewId}</if><if test="columnName != null">			,t.column_name=#{columnName}</if><if test="filterCondition != null">			,t.filter_condition=#{filterCondition}</if><if test="filterValue != null">			,t.filter_value=#{filterValue}</if>			,t.last_updated_by=#{lastUpdatedBy}			,t.last_update_date=now()		 where t.filter_id=#{filterId}
+	</update>
+
+	<update id="updateByOtsLock" parameterType="com.midea.isc.api.model.ViewFilter">
+		update app_view_filter t 		set t.view_id=#{viewId}			,t.column_name=#{columnName}			,t.filter_condition=#{filterCondition}			,t.filter_value=#{filterValue}			,t.last_updated_by=#{lastUpdatedBy}			,t.last_update_date=now()		 where t.filter_id=#{filterId} and t.last_update_date = #{lastUpdateDate}
+	</update>
+
+	<update id="updateFieldsByOtsLock" parameterType="com.midea.isc.api.model.ViewFilter">
+		update app_view_filter t 		set t.filter_id=#{filterId}<if test="viewId != null">			,t.view_id=#{viewId}</if><if test="columnName != null">			,t.column_name=#{columnName}</if><if test="filterCondition != null">			,t.filter_condition=#{filterCondition}</if><if test="filterValue != null">			,t.filter_value=#{filterValue}</if>			,t.last_updated_by=#{lastUpdatedBy}			,t.last_update_date=now()		 where t.filter_id=#{filterId} and t.last_update_date = #{lastUpdateDate}
+	</update>
+
+	<update id="updateBulk" parameterType="java.util.List">
+		<foreach collection="list" separator=";" item="obj"> 	update app_view_filter t 		set t.view_id=#{obj.viewId}			,t.column_name=#{obj.columnName}			,t.filter_condition=#{obj.filterCondition}			,t.filter_value=#{obj.filterValue}			,t.last_updated_by=#{obj.lastUpdatedBy}			,t.last_update_date=now()		 where t.filter_id=#{obj.filterId} 	 </foreach>
+	</update>
+
+	<update id="updateFieldsBulk" parameterType="java.util.List">
+		<foreach collection="list" separator=";" item="obj"> 	update app_view_filter t 		set t.filter_id=#{obj.filterId}<if test="obj.viewId != null">			,t.view_id=#{obj.viewId}</if><if test="obj.columnName != null">			,t.column_name=#{obj.columnName}</if><if test="obj.filterCondition != null">			,t.filter_condition=#{obj.filterCondition}</if><if test="obj.filterValue != null">			,t.filter_value=#{obj.filterValue}</if>			,t.last_updated_by=#{obj.lastUpdatedBy}			,t.last_update_date=now()		 where t.filter_id=#{obj.filterId} 	 </foreach>
+	</update>
+
+	
+	<delete id="delete" parameterType="com.midea.isc.api.model.ViewFilter">
+		delete t	 from app_view_filter t 		
+		<include refid="defaultWhereClause" />
+	</delete>
+
+	<delete id="deleteBulk" parameterType="java.util.List">
+		<foreach collection="list" separator=";" item="obj"> 
+	delete t	 from app_view_filter t 		where t.filter_id=#{obj.filterId} 	 </foreach>
+	</delete>
+
+	
+</mapper>   
