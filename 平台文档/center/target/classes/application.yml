@@ -1,0 +1,26 @@
+server:
+  port: 9000
+
+spring:
+  application:
+        name: isc-center
+        
+#logging.path=/apps/logs/center/
+logging:
+    path: /apps/logs/center/
+
+#register-with-eureka,fetch-registry两个属性在连本机需要设置为false，集群时才设置为true
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}:${spring.application.name}
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    serviceUrl:
+      defaultZone: ${config.slave:http://localhost:9000/eureka/}
+  server:
+    #开启自我保护模式
+    enable-self-preservation: true
+    #清理无效节点,默认60*1000毫秒,即60秒
+    eviction-interval-timer-in-ms: 60000

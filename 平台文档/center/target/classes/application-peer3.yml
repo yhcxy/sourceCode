@@ -1,0 +1,18 @@
+server:
+  port: 9103
+
+spring:
+  profiles: peer3
+  application:
+        name: isc-center
+
+#logging.path=/logs/center/
+logging:
+    path: D:\logs\center\
+    
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    serviceUrl:
+      defaultZone: ${config.slave:http://localhost:9000/eureka/}
